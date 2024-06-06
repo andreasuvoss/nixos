@@ -1,0 +1,47 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_symbol\
+$git_status\
+$git_metrics\
+$fill\
+$helm\
+$kubernetes\
+$nodejs\
+$rust\
+$jobs\
+$line_break\
+$character\
+"""
+
+add_newline = false
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+# success_symbol = '[➜](green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+error_symbol = '[➜](bold red)' 
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[fill]
+symbol = ' '
+
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+
+[nodejs]
+format = '[$symbol($version )]($style)'
+
+[helm]
+format = '[$symbol($version )]($style)'
+
+[kubernetes]
+format = '[$symbol\[$namespace\] $context](blue) '
+disabled = false

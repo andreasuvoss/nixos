@@ -1,0 +1,32 @@
+set visualbell
+set noerrorbells # save my sanity please
+
+set commentary
+autocmd FileType cs setlocal commentstring=//\ %s
+set clipboard+=unnamedplus
+" set clipboard+=ideaput
+
+:set relativenumber
+:set number 
+let mapleader=","
+
+" Not sure about this
+nnoremap <C-z> :action ToggleDistractionFreeMode<CR>
+
+
+nnoremap <leader>ff :action SearchEverywhere<CR>
+nnoremap <leader>lg :action FindInPath<CR>
+nnoremap gI :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gr :action ShowUsages<CR>
+" nnoremap gcc :action CommentByLineComment<CR>
+nnoremap <leader>lf :action ReformatCode<CR>
+" Git blame toggle
+nnoremap <leader>gb :action Annotate<CR>
+
+nnoremap <leader>rr :action Rerun<CR>
+nnoremap H :action Back<CR>
+nnoremap L :action Forward<CR>
+
+vnoremap < <gv
+vnoremap > >gv
