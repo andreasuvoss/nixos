@@ -1,6 +1,6 @@
 { lib, pkgs, nixpkgs, ... }:
 let
-  username = "andreasvoss";
+  username = "nixos";
 in
 {
   imports = [
@@ -18,6 +18,9 @@ in
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (_: true);
+  home.packages = with pkgs; [
+    wl-clipboard
+  ];
   home = {
     # packages = with pkgs; [
     #   # megasync

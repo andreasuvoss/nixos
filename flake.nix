@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main"; 
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -10,7 +14,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixos-wsl, ... }@inputs:
   let
     lib = nixpkgs.lib;
     user = "andreasvoss";
@@ -34,9 +38,10 @@
       };
       wsl = nixpkgs.lib.nixosSystem {
         inherit system;
-          modules = [
-            ./hosts/wsl/configuration.nix
-          ];
+        modules = [
+	  nixos-wsl.nixosModules.wsl
+          ./hosts/wsl/configuration.nix
+        ];
       };
     };
     homeConfigurations = {
@@ -46,6 +51,13 @@
 	    modules = [ 
           ./home.nix
           ./modules/home
+        ];
+      };
+      nixos = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        # extraSpecialArgs = { inherit inputs; };
+	    modules = [ 
+          ./hosts/wsl/home.nix
         ];
       };
     };
