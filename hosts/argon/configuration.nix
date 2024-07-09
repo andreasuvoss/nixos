@@ -14,12 +14,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Screensharing and stuff
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ 
-    # pkgs.xdg-desktop-portal-gtk 
-    pkgs.xdg-desktop-portal-hyprland
-    pkgs.xdg-desktop-portal-wlr
-  ];
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ 
+      # pkgs.xdg-desktop-portal-gtk 
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-wlr
+    ];
+  };
 
   virtualisation.libvirtd.enable = true;
   virtualisation.podman.enable = true;
@@ -58,7 +61,7 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
   services.xserver.excludePackages = [ pkgs.xterm ]; 
   services.gnome.core-utilities.enable = false;
   services.gnome.rygel.enable = false;
@@ -144,8 +147,8 @@
   # };
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "andreasvoss";
+  # services.displayManager.autoLogin.enable = true;
+  # services.displayManager.autoLogin.user = "andreasvoss";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -7,6 +7,10 @@
   ];
 
   dconf.settings = {
+    # "org/gnome/desktop/applications/terminal" = {
+    #   exec = "alacritty";
+    #   exec-arg  = "";
+    # };
     "org/nemo/preferences" = {
       date-font-choice = "system-mono";
       date-format = "iso";

@@ -10,7 +10,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, ... }@inputs:
   let
     lib = nixpkgs.lib;
     user = "andreasvoss";
@@ -32,10 +32,17 @@
             ./modules/nixos/locale.nix
           ];
       };
+      wsl = nixpkgs.lib.nixosSystem {
+        inherit system;
+          modules = [
+            ./hosts/wsl/configuration.nix
+          ];
+      };
     };
     homeConfigurations = {
       andreasvoss = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = { inherit inputs; };
 	    modules = [ 
           ./home.nix
           ./modules/home

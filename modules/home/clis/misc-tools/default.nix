@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     jq
+    ripgrep
     yq
     bat
     tree-sitter

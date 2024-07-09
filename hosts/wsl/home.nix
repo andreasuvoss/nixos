@@ -1,8 +1,20 @@
-{ lib, pkgs, nixpkgs, inputs, ... }:
+{ lib, pkgs, nixpkgs, ... }:
 let
   username = "andreasvoss";
 in
 {
+  imports = [
+    ./../../modules/home/clis/starship
+    ./../../modules/home/clis/git
+    ./../../modules/home/clis/tmux
+    ./../../modules/home/clis/zsh
+    ./../../modules/home/clis/swappy
+    ./../../modules/home/clis/yazi
+    ./../../modules/home/clis/tlrc
+    ./../../modules/home/clis/misc-tools
+    ./../../modules/home/clis/nvim
+    ./../../modules/home/dev-tools
+  ];
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (_: true);
@@ -15,23 +27,12 @@ in
 
     stateVersion = "24.05";
 
-    # TODO: Remove this later
+
     file = {
-      "testfile.json" = {
-        text = builtins.toJSON inputs;
-        executable = false;
-      };
       # ".config/alacritty/alacritty.toml".source = ./dotfiles2/alacritty/.config/alacritty/alacritty.toml;
       #".config/alacritty/dracula.toml".source = ./dotfiles2/alacritty/.config/alacritty/dracula.toml;
       # ".config/alacritty/alacritty.toml".source = ./dotfiles2/alacritty/.config/alacritty/alacritty.toml;
     };
 
   };
-  # programs.zsh = {
-  #   enable = true;
-  #   autosuggestion.enable = true;
-  #   syntaxHighlighting.enable = true;
-  #   enableCompletion = true;
-  #   inherit shellAliases;
-  # };
 }

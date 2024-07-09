@@ -16,7 +16,7 @@
       ./clis/tmux
       ./clis/zsh
       ./clis/swappy
-      # ./clis/yazi
+      ./clis/yazi
       ./clis/tlrc
       ./clis/misc-tools
       ./clis/nvim

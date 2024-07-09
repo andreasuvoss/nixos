@@ -1,25 +1,40 @@
 # NixOS dotfiles
 
 ## Installation
+First we need to clone this repository, since a plain Nix installation does not contain git, we can clone the repository
+by entering a Nix shell with git. You will also need this shell while building the system since flakes need git to work.
+
+```sh
+nix-shell -p git
+```
+
 Copy your hardware configuration into the host folder for the host you want to install.
 
 ```sh
 cp /etc/nixos/hardware-configuration.nix ./hosts/<HOST>
 ```
 
-enable flakes temporarily (they will be enabled permanently after the OS has been rebuilt).
+enable flakes in the default configuration `/etc/nixos/configuration.nix` by adding the following setting and
+rebuilding.
 
-```sh
-nix --experimental-features 'nix-command flakes'
+```nix
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
 ```
 
-Rebuild NixOS
+rebuild NixOS from the standard configuration
+
+```sh
+sudo nixos-rebuild switch
+```
+
+Now we can rebuild NixOS from the flake
 
 ```sh
 sudo nixos-rebuild switch --flake .#<HOST>
 ```
 
-Rebuild Home Manager
+after rebuilding the DE might crash, as we have removed it and there is currently no terminal emulator as that will be
+installed by home manager. `CTRL+ALT+F1` can send you the terminal only environment from where you can run home manager
 
 ```sh
 home-manager --flake .#<USER>
@@ -46,7 +61,10 @@ TODO
 4. Done! Clean up by runninng `sudo umount win-boot/EFI`.
 
 ## Secure boot
-I probably wont do secure boot at this point, as it is not supported without jumping through a lot of hoops.
+If I find the time I might have a look at this article going through how to enabled secure boot with full disk
+encryption.
+
+https://jnsgr.uk/2024/04/nixos-secure-boot-tpm-fde/
 
 ## Troubleshooting
 
