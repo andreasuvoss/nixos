@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main"; 
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,10 +39,10 @@
       };
       wsl = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [
-	  nixos-wsl.nixosModules.wsl
-          ./hosts/wsl/configuration.nix
-        ];
+          modules = [
+             nixos-wsl.nixosModules.wsl
+            ./hosts/wsl/configuration.nix
+          ];
       };
     };
     homeConfigurations = {
