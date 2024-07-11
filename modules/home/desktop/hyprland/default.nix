@@ -1,6 +1,7 @@
 {pkgs, ...}:
 {
   home.packages = with pkgs; [
+    gnome.seahorse
     sway-audio-idle-inhibit
     wl-clipboard
     nwg-displays

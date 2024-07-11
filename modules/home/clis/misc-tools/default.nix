@@ -6,6 +6,7 @@
 # in
 {
   home.packages = with pkgs; [
+    ueberzugpp
     jq
     ripgrep
     yq

@@ -13,14 +13,17 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Screensharing and stuff
+  services.gnome.gnome-keyring.enable = true;
+
+  # Screensharing and stuff + portal for gnome-keyring
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ 
-      # pkgs.xdg-desktop-portal-gtk 
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-wlr
+    extraPortals = with pkgs; [ 
+      xdg-desktop-portal
+      xdg-desktop-portal-gtk 
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-wlr
     ];
   };
 
@@ -38,39 +41,15 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  # time.timeZone = "Europe/Copenhagen";
-  #
-  # # Select internationalisation properties.
-  # i18n.defaultLocale = "en_DK.UTF-8";
-  #
-  # i18n.extraLocaleSettings = {
-  #   LC_ADDRESS = "da_DK.UTF-8";
-  #   LC_IDENTIFICATION = "da_DK.UTF-8";
-  #   LC_MEASUREMENT = "da_DK.UTF-8";
-  #   LC_MONETARY = "da_DK.UTF-8";
-  #   LC_NAME = "da_DK.UTF-8";
-  #   LC_NUMERIC = "da_DK.UTF-8";
-  #   LC_PAPER = "da_DK.UTF-8";
-  #   LC_TELEPHONE = "da_DK.UTF-8";
-  #   LC_TIME = "da_DK.UTF-8";
-  # };
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.gnome.enable = false;
   services.xserver.excludePackages = [ pkgs.xterm ]; 
   services.gnome.core-utilities.enable = false;
   services.gnome.rygel.enable = false;
-
-  # Configure keymap in X11
-  # services.xserver.xkb = {
-  #   layout = "us";
-  #   variant = "altgr-intl";
-  # };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -118,37 +97,17 @@
 
   services.spice-vdagentd.enable = true;
     
-
   # Install hyprland
   programs.hyprland = {
     enable = true;
-    #xwayland.enable = true;
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # fonts.packages = with pkgs; [
-  #   noto-fonts
-  #   noto-fonts-cjk
-  #   noto-fonts-emoji
-  #   liberation_ttf
-  #   fira-code
-  #   fira-code-symbols
-  #   mplus-outline-fonts.githubRelease
-  #   dina-font
-  #   proggyfonts
-  #   (nerdfonts.override { fonts = [ "JetBrainsMono" ] ; })
-  # ];
-  # qt = {
-  #   enable = true;
-  #   platformTheme = "gnome";
-  #   style = "adwaita-dark";
-  # };
-
   # Enable automatic login for the user.
-  # services.displayManager.autoLogin.enable = true;
-  # services.displayManager.autoLogin.user = "andreasvoss";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "andreasvoss";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
