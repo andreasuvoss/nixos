@@ -77,6 +77,8 @@
           p.tree-sitter-lua
           p.tree-sitter-json
           p.tree-sitter-comment
+          p.tree-sitter-markdown
+          p.tree-sitter-c-sharp
         ]));
         config = toLuaFile ./plugins/treesitter.lua;
       }
