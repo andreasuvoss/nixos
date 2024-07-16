@@ -13,6 +13,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+
   services.gnome.gnome-keyring.enable = true;
 
   # Screensharing and stuff + portal for gnome-keyring
@@ -56,6 +57,21 @@
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
+
+  # Gaming settings
+  # https://youtu.be/qlfm3MEbqYA?si=SjIg2ab0Ka5N20Bs&t=336
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+  programs.gamemode.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+  services.xserver.videoDrivers = ["amdgpu"];
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -88,7 +104,6 @@
 
   programs.zsh.enable = true;
   programs.git.enable = true;
-  programs.steam.enable = true;
 
   # environment.sessionVariables = {
   #   WLR_RENDERER_ALLOW_SOFTWARE = "1";
@@ -109,9 +124,40 @@
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "andreasvoss";
 
+  # Use the decryption passphrase to also unlock the gnome-keyring
+  boot.initrd.systemd.enable = true;
+  security.pam.services = {
+    gdm-autologin.text = ''
+      auth      requisite     pam_nologin.so
+
+      auth      required      pam_succeed_if.so uid >= 1000 quiet
+      auth      optional      ${pkgs.gnome.gdm}/lib/security/pam_gdm.so
+      auth      optional      ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
+      auth      required      pam_permit.so
+
+      account   sufficient    pam_unix.so
+
+      password  requisite     pam_unix.so nullok yescrypt
+
+      session   optional      pam_keyinit.so revoke
+      session   include       login
+    '';
+  };
+
+  # While the below does work I have to input the password twice during boot, which is not what I want.
+  # security.pam.services.common-password.text = ''
+  #     password  optional      ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so use_authtok
+  # '';
+  # environment.etc.crypttab = {
+  #   enable = true;
+  #   text = ''
+  #     cryptdata UUID=e39638af-b324-4588-91fc-5fead80aad81 none luks,keyscript=decrypt_keyctl
+  #   '';
+  # };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ home-manager ];
+  environment.systemPackages = with pkgs; [ home-manager mangohud ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

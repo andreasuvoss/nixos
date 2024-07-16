@@ -11,6 +11,7 @@
       ./apps/bitwarden
       # ./apps/google-chrome
       ./apps/spotify
+      ./clis/az-cred-provider
       ./clis/starship
       ./clis/git
       ./clis/tmux

@@ -3,7 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
-    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main"; 
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,11 +16,16 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixos-wsl, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-master, nixos-wsl, ... }@inputs:
   let
     lib = nixpkgs.lib;
     user = "andreasvoss";
     system = "x86_64-linux";
+    # nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
+    #   name = "nixos-nixpkgs-316386";
+    #   src = nixpkgs;
+    #   patches = [ ./modules/home/clis/misc-tools/nixos-nixpkgs-316386.patch ];
+    # };
     pkgs = import nixpkgs { inherit system; };
   in {
     nixosConfigurations = {
@@ -48,7 +54,17 @@
     homeConfigurations = {
       andreasvoss = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { 
+          pkgs-unstable = import nixpkgs-unstable {
+            config.allowUnfree = true;
+            inherit system;
+          };
+          pkgs-master = import nixpkgs-master {
+            config.allowUnfree = true;
+            inherit system;
+          };
+          inherit inputs;
+        };
 	    modules = [ 
           ./home.nix
           ./modules/home

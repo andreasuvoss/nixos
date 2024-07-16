@@ -1,10 +1,6 @@
-{ pkgs, lib, ... }:
-# let
-#   inherit (lib) mkIf isDerivation;
-#   inherit (builtins) filter attrValues;
-#   azure-cli-ext = pkgs.azure-cli.withExtensions (filter (item: isDerivation item) (attrValues pkgs.azure-cli-extensions));
-# in
+{ pkgs, pkgs-master, lib, ... }:
 {
+  services.ssh-agent.enable = true;
   home.packages = with pkgs; [
     ueberzugpp
     jq
@@ -21,7 +17,11 @@
     ripgrep
     stow
     gparted
-    # azure-cli-ext
-    azure-cli
+    tlrc
+    pkgs-master.azure-cli # When my commit gets merged to master install the extension
+    # (pkgs-master.azure-cli.withExtensions [ azure-cli.extensions.application-insights ])
+    # Can't get the patch to work
+    # (pkgs-master.azure-cli.overrideAttrs (old: {
+    #   patches = [ ./nixos-nixpkgs-316386.patch ]; }))
   ];
 }

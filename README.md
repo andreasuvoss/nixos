@@ -52,8 +52,8 @@ TODO
 * Rider with configuration and plugins
 * ~~Fix XDG-portals such that the entire GNOME DE is not required for some applications to function (I'm looking at you
   Bitwarden)~~ ✓
-* Pack Azure Artifacts Credential Provider (https://github.com/microsoft/artifacts-credprovider)
-* Pack Azure-CLI plugin app-insights
+* ~~Pack Azure Artifacts Credential Provider (https://github.com/microsoft/artifacts-credprovider)~~ (✓)
+* Pack Azure-CLI plugin app-insights (✓)
 
 ## Adding Windows 11 to systemd-boot menu
 1. Identify the Windows boot partition using `sudo blkid | grep vfat` or `lsbkl`. In my case the partition was 100M in
