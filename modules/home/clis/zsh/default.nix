@@ -4,7 +4,6 @@ let
     cat = "bat -P -n";
     ii = "xdg-open";
     nrb = "nixos-rebuild switch --flake .";
-    tldr = "tlrc";
   };
 in
 {

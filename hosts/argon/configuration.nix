@@ -14,7 +14,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
 
-  services.gnome.gnome-keyring.enable = true;
 
   # Screensharing and stuff + portal for gnome-keyring
   xdg.portal = {
@@ -157,7 +156,11 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ home-manager mangohud ];
+  # TODO: Modularize this
+
+  services.gnome.gnome-keyring.enable = true;
+  environment.systemPackages = with pkgs; [ home-manager mangohud libsecret ];
+  services.dbus.packages = [ pkgs.gnome.seahorse ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

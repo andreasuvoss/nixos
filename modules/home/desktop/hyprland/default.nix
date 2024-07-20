@@ -1,7 +1,23 @@
 {pkgs, ...}:
 {
+  home.sessionVariables = {
+    SSH_AUTH_SOCK = "\${XDG_RUNTIME_DIR}/keyring/ssh";
+    SSH_ASKPASS = "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
+  };
+  systemd.user.services.gnome-keyring =
+  {
+    Unit = {
+      Description = "GNOME Keyring";
+      PartOf = [ "graphical-session-pre.target" ];
+    };
+    Service = {
+      ExecStart = "/run/wrappers/bin/gnome-keyring-daemon --start --foreground";
+      Restart = "on-abort";
+    };
+    Install = { WantedBy = [ "graphical-session-pre.target" ]; };
+  };
+
   home.packages = with pkgs; [
-    gnome.seahorse
     sway-audio-idle-inhibit
     wl-clipboard
     nwg-displays
@@ -10,6 +26,7 @@
   ];
 
   # Workaround systemd for restarting sway-audio-idle-inhibit in case it crashes
+  # TODO: Refactor this to restart on abort
   systemd.user.services.keep-saii-alive = {
     Unit = {
       Description = "Keep sway-audio-idle-inhibit alive";
