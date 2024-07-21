@@ -13,7 +13,11 @@
     # <nixos-wsl/modules>
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  networking.hostName = "wsl";
+
   wsl.enable = true;
+  # If I ever decide to change the username: https://nix-community.github.io/NixOS-WSL/how-to/change-username.html
   wsl.defaultUser = "nixos";
 
   environment.shells = with pkgs; [ zsh ];

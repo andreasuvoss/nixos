@@ -76,6 +76,17 @@
 	    modules = [ 
           ./hosts/wsl/home.nix
         ];
+        extraSpecialArgs = { 
+          pkgs-unstable = import nixpkgs-unstable {
+            config.allowUnfree = true;
+            inherit system;
+          };
+          pkgs-master = import nixpkgs-master {
+            config.allowUnfree = true;
+            inherit system;
+          };
+          inherit inputs;
+        };
       };
     };
   };
