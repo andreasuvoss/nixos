@@ -17,6 +17,9 @@
     stow
     gparted
     tlrc
-    (pkgs-master.azure-cli.withExtensions [ pkgs-master.azure-cli.extensions.application-insights ])
+    (pkgs-master.azure-cli.withExtensions [
+      pkgs-master.azure-cli.extensions.application-insights 
+      pkgs-master.azure-cli.extensions.azure-devops
+    ])
   ];
 }
