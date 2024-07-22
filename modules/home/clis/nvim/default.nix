@@ -1,5 +1,26 @@
 { pkgs, ... }:
+let
+  bicepLanguageServer = pkgs.stdenv.mkDerivation rec {
+    pname = "bicep-langserver";
+    version = "0.29.45";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/Azure/bicep/releases/download/v${version}/bicep-langserver.zip";
+      sha256 = "sha256-xJMOCuzES7DpcHiQjlPdkIlFV1m7yHWMSSQJKt5eaDA";
+    };
+
+    buildInputs = [ pkgs.unzip ];
+
+    unpackPhase = "unzip $src -d $out";
+    installPhase = ''
+      mkdir -p $out/bin
+      cp -r * $out/bin
+    '';
+
+  };
+in
 {
+
   programs.neovim = 
   let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
@@ -17,7 +38,10 @@
       nodePackages.volar
       nil
       gopls
+      bicepLanguageServer
     ];
+    
+
     extraLuaConfig = ''
       ${builtins.readFile ./settings.lua}
       ${builtins.readFile ./keybindings.lua}
@@ -99,4 +123,5 @@
       # (fromGitHub "HEAD" "lambdalisue/suda.vim")
     ];
   };
+  home.sessionVariables.BICEP_LANGSERVER = "${bicepLanguageServer}/Bicep.LangServer.dll";
 }
