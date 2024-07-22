@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 {
-  home.packages = with pkgs; [
-    freetube
+  home.packages = [
+    pkgs-unstable.freetube
   ];
 }

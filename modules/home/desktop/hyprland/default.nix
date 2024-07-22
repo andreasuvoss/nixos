@@ -14,7 +14,7 @@
       ExecStart = "/run/wrappers/bin/gnome-keyring-daemon --start --foreground";
       Restart = "on-abort";
     };
-    Install = { WantedBy = [ "graphical-session-pre.target" ]; };
+    Install.WantedBy = [ "graphical-session-pre.target" ];
   };
 
   home.packages = with pkgs; [
@@ -26,7 +26,6 @@
   ];
 
   # Workaround systemd for restarting sway-audio-idle-inhibit in case it crashes
-  # TODO: Refactor this to restart on abort
   systemd.user.services.keep-saii-alive = {
     Unit = {
       Description = "Keep sway-audio-idle-inhibit alive";
@@ -39,8 +38,7 @@
     };
     Install.WantedBy = [ "default.target" ];
   };
-  
-  
+
   systemd.user.timers.keep-saii-alive = {
     Unit = {
       Description = "Keep sway-audio-idle-inhibit alive";
@@ -66,8 +64,9 @@
     exec-once = [
       # "exec sway-audio-idle-inhibit" - this is run via service
       "swaybg --color 000000" # at some point maybe look into swww
-      "waybar & swaync"
-      "lxqt-policykit-agent"
+      "waybar"
+      "sleep 1; swaync"
+      "sleep 1; exec lxqt-policykit-agent"
       "discord --start-minimized"
       "sleep 1; Enpass -minimize"
       "steam %U -nochatui -nofriendsui -silent"

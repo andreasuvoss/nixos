@@ -66,13 +66,11 @@
           inherit inputs;
         };
 	    modules = [ 
-          ./home.nix
-          ./modules/home
+          ./hosts/argon/home.nix
         ];
       };
       nixos = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        # extraSpecialArgs = { inherit inputs; };
 	    modules = [ 
           ./hosts/wsl/home.nix
         ];

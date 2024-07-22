@@ -22,10 +22,19 @@ in
         DisplayBookmarksToolbar = "never";
         DisplayMenuBar = "default-off";
         SearchBar = "unified";
+        SearchEngines = {
+          Default = "Startpage";
+          PreventInstalls = true;
+        };
         ExtensionSettings = {
           "*".installation_mode = "blocked";
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+            installation_mode = "force_installed";
+            default_area = "menupanel";
+          };
+          "{20fc2e06-e3e4-4b2b-812b-ab431220cada}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/startpage-private-search/latest.xpi";
             installation_mode = "force_installed";
             default_area = "menupanel";
           };
@@ -63,6 +72,8 @@ in
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
           "browser.newtabpage.enabled" = false;
           "browser.bookmarks.defaultLocation" = "unifiled_____";
+          "browser.search.defaultenginename" = "Startpage";
+          "browser.search.order.1" = "Startpage";
         };
       };
     };
