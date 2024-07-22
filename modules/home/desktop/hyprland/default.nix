@@ -66,9 +66,9 @@
       "swaybg --color 000000" # at some point maybe look into swww
       "waybar"
       "sleep 1; swaync"
-      "sleep 1; exec lxqt-policykit-agent"
+      "sleep 1; exec lxqt-policykit-agent" # something is not right with this authentication agent
       "discord --start-minimized"
-      "sleep 1; Enpass -minimize"
+      "sleep 1; signal-desktop"
       "steam %U -nochatui -nofriendsui -silent"
       "exec swayidle -w timeout 180 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 300 '$lock' before-sleep '$lock'"
       "sleep 1; megasync"
@@ -147,14 +147,6 @@
       "size 500 200, title:^(Authentication Required)$"
       "dimaround, title:^(Authentication Required)$"
       "dimaround, title:^(Authorization Failed)$"
-
-      # Until I swap it out for Bitwarden or 1Password
-      # ... alright it is still almost unusable on hyprland.
-      "float, title:^(Enpass Assistant)$"
-      "center, title:^(Enpass Assistant)$"
-      "dimaround, title:^(Enpass Assistant)$"
-      "stayfocused, title:^(Enpass Assistant)$"
-      "forceinput, title:^(Enpass Assistant)$"
 
       "float, title:^(Save Document\?)$"
       "center, title:^(Save Document\?)$"

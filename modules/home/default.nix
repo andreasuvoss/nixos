@@ -9,6 +9,7 @@
       ./apps/libreoffice
       ./apps/discord
       ./apps/bitwarden
+      ./apps/signal
       # ./apps/google-chrome
       ./apps/spotify
       ./clis/az-cred-provider

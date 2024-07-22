@@ -152,7 +152,6 @@
     bat
     jq
     tree-sitter
-    enpass
     flameshot
     starship
     zellij
