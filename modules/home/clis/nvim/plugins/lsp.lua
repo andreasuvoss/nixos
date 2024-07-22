@@ -94,4 +94,16 @@ require 'lspconfig'.volar.setup {
     filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
 }
 
+
+-- TODO: Install the LSP and configure it here
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bicep
+-- https://github.com/Azure/bicep/releases
+-- bicep_lsp_bin = ''
+-- require 'lspconfig'.bicep.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { "dotnet", bicep_lsp_bin },
+--     filetypes = { 'bicep' }
+-- }
+
 -- TODO: Enable more language servers

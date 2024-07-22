@@ -79,6 +79,16 @@
           p.tree-sitter-comment
           p.tree-sitter-markdown
           p.tree-sitter-c-sharp
+          (pkgs.tree-sitter.buildGrammar {
+            language = "bicep";
+            version = "0092c7d";
+            src = pkgs.fetchFromGitHub {
+              owner = "tree-sitter-grammars";
+              repo = "tree-sitter-bicep";
+              rev = "0092c7d1bd6bb22ce0a6f78497d50ea2b87f19c0";
+              hash = "sha256-jj1ccJQOX8oBx1XVKzI53B1sveq5kNADc2DB8bJhsf4=";
+            };
+          })
         ]));
         config = toLuaFile ./plugins/treesitter.lua;
       }
