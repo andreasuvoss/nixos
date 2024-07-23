@@ -22,6 +22,7 @@
       ./clis/tlrc
       ./clis/misc-tools
       ./clis/nvim
+      ./clis/gum.nix
       ./desktop
       ./dev-tools
     ];

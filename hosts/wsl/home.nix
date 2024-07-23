@@ -13,6 +13,7 @@ in
     ./../../modules/home/clis/tlrc
     ./../../modules/home/clis/misc-tools
     ./../../modules/home/clis/nvim
+    ./../../modules/home/clis/gum.nix
     ./../../modules/home/dev-tools
   ];
   programs.home-manager.enable = true;
