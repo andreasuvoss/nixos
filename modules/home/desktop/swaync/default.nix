@@ -1,24 +1,20 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 let
   json = builtins.readFile ./config.json;
   style = builtins.readFile ./style.css;
 in
 {
-  services.swaync = {
-    enable = true;
-    settings = builtins.fromJSON json;
-    style = style;
+  options = {
+    swaync.enable = lib.mkEnableOption "enable swaync";
   };
-  home.packages = with pkgs; [
-    libnotify
-  ];
-  # home.file.".config/swaync/style.css" = {
-  #   text = builtins.readFile ./style.css;
-  #   executable = false;
-  # };
-  # home.file.".config/swaync/config.json" = {
-  #   text = builtins.readFile ./config.json;
-  #   executable = false;
-  # };
-
+  config = lib.mkIf config.swaync.enable {
+    home.packages = with pkgs; [
+      libnotify
+    ];
+    services.swaync = {
+      enable = true;
+      settings = builtins.fromJSON json;
+      style = style;
+    };
+  };
 }

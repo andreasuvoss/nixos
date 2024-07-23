@@ -1,6 +1,11 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs, pkgs-unstable, lib, config, ... }:
 {
-  home.packages = [
-    pkgs-unstable.freetube
-  ];
+  options = {
+    freetube.enable = lib.mkEnableOption "enable freetube";
+  };
+  config = lib.mkIf config.freetube.enable {
+    home.packages = [
+      pkgs-unstable.freetube
+    ];
+  };
 }

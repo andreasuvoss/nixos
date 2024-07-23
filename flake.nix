@@ -65,10 +65,11 @@
           };
           inherit inputs;
         };
-	    modules = [ 
+	      modules = [ 
           ./hosts/argon/home.nix
         ];
       };
+
       nixos = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 	    modules = [ 

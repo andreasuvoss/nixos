@@ -1,9 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 {
-  home.packages = with pkgs; [
-    megasync
-  ];
-
-  # This is started from Hyprland such that it only starts after the WM has loaded
-  # services.megasync.enable = true;
+  options = {
+    megasync.enable = lib.mkEnableOption "enable megasync";
+  };
+  config = lib.mkIf config.megasync.enable {
+    home.packages = with pkgs; [
+      megasync
+    ];
+  };
 }

@@ -1,10 +1,15 @@
-{...}:
+{ lib, config, ... }:
 let 
-  config = builtins.readFile ./alacritty.toml;
+  cfg = builtins.readFile ./alacritty.toml;
 in
 {
-  programs.alacritty = {
-    enable = true;
-    settings = builtins.fromTOML config;
+  options = {
+    alacritty.enable = lib.mkEnableOption "enables alacritty";
+  };
+  config = lib.mkIf config.alacritty.enable {
+    programs.alacritty = {
+      enable = true;
+      settings = builtins.fromTOML cfg;
+    };
   };
 }

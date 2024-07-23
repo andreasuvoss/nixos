@@ -1,34 +1,40 @@
-{ pkgs, lib, ... }:{
-  fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [
-    ffmpeg
-    pavucontrol
-
-    # FONTS
-    google-fonts
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    # proggyfonts
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ] ; })
-  ];
-  # imports = lib.filesystem.listFilesRecursive ;
+{ lib, config, ... }:{
+  # This sort of input would be cool but I do not think I can make it work in my config
+  # imports = lib.filesystem.listFilesRecursive ./.; 
+  
   imports = [
     ./dconf
+    ./fonts.nix
+    ./gnome-keyring.nix
     ./gtk
     ./hyprland
     ./nemo
-    ./waybar
     ./screenshot
+    ./swaybg
     ./swayidle
     ./swaylock
-    ./swaybg
     ./swaync
+    ./utility.nix
+    ./waybar
     ./wlogout
   ];
+  options = {
+    desktop.enable = lib.mkEnableOption "enables desktop";
+  };
+  config = lib.mkIf config.desktop.enable {
+    dconf-theme.enable = true;
+    desktop-utility.enable = true;
+    fonts.enable = true;
+    gnome-keyring.ssh.enable = true;
+    gtk-theme.enable = true;
+    hyprland.enable = true;
+    nemo.enable = true;
+    screenshot.enable = true;
+    swaybg.enable = true;
+    swayidle.enable = true;
+    swaylock.enable = true;
+    swaync.enable = true;
+    waybar.enable = true;
+    wlogout.enable = true;
+  };
 }

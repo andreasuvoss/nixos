@@ -1,4 +1,4 @@
-{...}:
+{ lib, config, ... }:
 let
   shellAliases = {
     cat = "bat -P -n";
@@ -7,13 +7,18 @@ let
   };
 in
 {
-  programs.zsh = {
-    enable = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    enableCompletion = true;
-    initExtra = builtins.readFile ./config.zsh;
-    envExtra = "export BAT_THEME=\"Dracula\"";
-    inherit shellAliases;
+  options = {
+    zsh.enable = lib.mkEnableOption "enable zsh" ;
+  };
+  config = lib.mkIf config.zsh.enable {
+    programs.zsh = {
+      enable = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+      enableCompletion = true;
+      initExtra = builtins.readFile ./config.zsh;
+      envExtra = "export BAT_THEME=\"Dracula\"";
+      inherit shellAliases;
+    };
   };
 }

@@ -1,6 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 {
-  home.packages = with pkgs; [
-    gthumb
-  ];
+  options = {
+    gthumb.enable = lib.mkEnableOption "enable gthumb";
+  };
+  config = lib.mkIf config.gthumb.enable {
+    home.packages = with pkgs; [
+      gthumb
+    ];
+  };
 }

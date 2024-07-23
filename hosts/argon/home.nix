@@ -15,4 +15,18 @@ in
 
     stateVersion = "24.05";
   };
+
+  # Desktop
+  desktop.enable = true;
+
+  # CLIS
+  clis.enable = true;
+
+  # Apps
+  apps.enable = true;
+
+  # Development tools
+  dotnet.enable = true;
+  rust.enable = true;
+  golang.enable = true;
 }

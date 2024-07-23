@@ -1,9 +1,11 @@
-{ pkgs, ... }:
-let
-  # settings = builtins.readFile ./config.json;
-in
+{ pkgs, lib, config, ... }:
 {
-  home.packages = with pkgs; [
-    swaybg
-  ];
+  options = {
+    swaybg.enable = lib.mkEnableOption "enable swaybg";
+  };
+  config = lib.mkIf config.swaybg.enable {
+    home.packages = with pkgs; [
+      swaybg
+    ];
+  };
 }

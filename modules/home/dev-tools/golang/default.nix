@@ -1,6 +1,11 @@
-{ pkgs, ...}:
+{ pkgs, lib, config, ...}:
 {
-  home.packages = with pkgs; [
-    go
-  ];
+  options = {
+    golang.enable = lib.mkEnableOption "enable golang";
+  };
+  config = lib.mkIf config.golang.enable {
+    home.packages = with pkgs; [
+      go
+    ];
+  };
 }

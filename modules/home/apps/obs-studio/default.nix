@@ -1,6 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 {
-  home.packages = with pkgs; [
-    obs-studio
-  ];
+  options = {
+    obs-studio.enable = lib.mkEnableOption "enables obs-studio";
+  };
+  config = lib.mkIf config.obs-studio.enable {
+    home.packages = with pkgs; [
+      obs-studio
+    ];
+  };
+
 }
