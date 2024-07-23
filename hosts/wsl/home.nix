@@ -19,8 +19,14 @@ in
     stateVersion = "24.05";
   };
 
+  # Desktop
+  desktop.enable = false;
+
   # CLIS
   clis.enable = true;
+
+  # Apps
+  apps.enable = false;
 
   # Development tools
   dotnet.enable = true;
