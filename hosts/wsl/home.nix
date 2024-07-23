@@ -11,6 +11,7 @@ in
   nixpkgs.config.allowUnfreePredicate = (_: true);
   home.packages = with pkgs; [
     wl-clipboard
+    dconf
   ];
   home = {
     inherit username;
