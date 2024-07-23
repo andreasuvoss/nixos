@@ -3,6 +3,7 @@
     ./az-cred-provider
     ./starship
     ./git
+    ./gum.nix
     ./tmux
     ./zsh
     ./yazi
@@ -16,6 +17,7 @@
   config = lib.mkIf config.clis.enable {
     az-cred-provider.enable = true;
     git.enable = true;
+    gum.enable = true;
     misc.enable = true;
     nvim.enable = true;
     starship.enable = true;

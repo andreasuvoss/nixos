@@ -1,6 +1,11 @@
-{pkgs, ...}:
+{ pkgs, lib, config, ... }:
 {
-  home.packages = with pkgs; [
-    gum
-  ];
+  options = {
+    gum.enable = lib.mkEnableOption "enable gum" ;
+  };
+  config = lib.mkIf config.gum.enable {
+    home.packages = with pkgs; [
+      gum
+    ];
+  };
 }
