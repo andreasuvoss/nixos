@@ -5,7 +5,6 @@
   };
   config = lib.mkIf config.misc.enable {
     home.packages = with pkgs; [
-      ueberzugpp
       jq
       ripgrep
       yq
