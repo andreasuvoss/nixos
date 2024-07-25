@@ -33,14 +33,12 @@
         inherit system;
           modules = [
             ./hosts/argon-vm/configuration.nix
-            ./modules/nixos/locale.nix
           ];
       };
       argon = nixpkgs.lib.nixosSystem {
         inherit system;
           modules = [
             ./hosts/argon/configuration.nix
-            ./modules/nixos/locale.nix
           ];
       };
       wsl = nixpkgs.lib.nixosSystem {

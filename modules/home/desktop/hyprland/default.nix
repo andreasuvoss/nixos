@@ -17,7 +17,7 @@
         ",highrr,auto,auto"
       ];
       "$mainMod" = "SUPER";
-      "$terminal" = "alacritty";
+      "$terminal" = "kitty";
       "$fileManager" = "nemo";
       "$menu" = "wofi --show drun";
       "$lock" = "swaylock";

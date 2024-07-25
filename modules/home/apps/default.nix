@@ -8,6 +8,7 @@
     ./freetube.nix
     ./google-chrome
     ./gthumb.nix
+    ./kitty
     ./libreoffice
     ./megasync.nix
     ./obs-studio
@@ -27,10 +28,12 @@
     freetube.enable = true;
     google-chrome.enable = false;
     gthumb.enable = true;
+    kitty.enable = true;
     libreoffice.enable = true;
     megasync.enable = true;
     obs-studio.enable = true;
     rider.enable = true;
     signal.enable = true;
+    spotify.enable = true;
   };
 }
