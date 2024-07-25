@@ -40,6 +40,24 @@ installed by home manager. `CTRL+ALT+F1` can send you the terminal only environm
 home-manager --flake .#<USER>
 ```
 
+## Generations
+When working on NixOS it can take a few generations to get it right. To list all NixOS generation the following script
+can be run as sudo
+
+```sh
+sudo nix-env --profile /nix/var/nix/profiles/system --list-generation
+```
+
+other flags can be passed to clean out the older generations. In case you do not pass a profile the home manager
+generations will be listed
+
+```sh
+nix-env --list-generation
+```
+
+<!-- ### Rolling back to a previous generation -->
+
+
 ## What does this flake contain
 TODO
 
