@@ -17,6 +17,7 @@
       fastfetch
       taskwarrior3
       ripgrep
+      htop
       stow
       gparted
       (pkgs-master.azure-cli.withExtensions [
