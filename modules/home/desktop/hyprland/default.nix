@@ -134,6 +134,7 @@
         "$mainMod, C, togglefloating"
         "$mainMod, X, killactive"
         "$mainMod, C, centerwindow"
+        "$mainMod, N, exec, swaync-client -t -sw"
         "ALT, SPACE, exec, $menu"
 
         "$mainMod, H, movefocus, l"

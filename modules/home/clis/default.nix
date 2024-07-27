@@ -11,6 +11,7 @@
     ./gum
     ./htop
     ./jq
+    ./lazygit
     ./nodejs
     ./nvim
     ./ripgrep
@@ -38,6 +39,8 @@
     gparted.enable = false;
     gum.enable = true;
     htop.enable = true;
+    jq.enable = true;
+    lazygit.enable = true;
     nodejs.enable = true;
     nvim.enable = true;
     ripgrep.enable = true;

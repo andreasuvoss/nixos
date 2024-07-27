@@ -63,6 +63,7 @@
 }
 
 .notification-row .notification-background .notification.critical {
+  background: #ff5555;
   /* Critical Priority Notification */
 }
 
@@ -262,7 +263,8 @@
   /* The Control Center which contains the old notifications + widgets */
   background: @cc-bg;
   color: @text-color;
-  border-radius: 2px;
+  border-radius: 0px;
+  border-left: 1px solid #000;
 }
 
 .control-center .control-center-list-placeholder {
@@ -368,9 +370,11 @@
   padding: 8px;
   padding: 16px;
   margin: 16px 20px;
-  background-color: @mpris-album-art-overlay;
+  /* background-color: @mpris-album-art-overlay; */
+  background-color: @cc-bg;
   border-radius: 12px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75); */
+  box-shadow: none;
 }
 
 .widget-mpris .widget-mpris-player button:hover {
@@ -380,7 +384,8 @@
 
 .widget-mpris .widget-mpris-player .widget-mpris-album-art {
   border-radius: 12px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75); */
+  box-shadow: none;
 }
 
 .widget-mpris .widget-mpris-player .widget-mpris-title {
@@ -426,10 +431,39 @@
 }
 
 /* Menubar widget */
+
+.widget-menubar {
+  margin: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  background: @noti-bg;
+}
+
+
 .widget-menubar > box > .menu-button-bar > button {
   border: none;
-  background: transparent;
+  /* background: transparent; */
+  background: @cc-bg;
 }
+
+
+.widget-menubar > box > .menu-button-bar > button:hover {
+  border: none;
+  /* background: transparent; */
+  background: @noti-bg-hover;
+}
+
+.power-buttons{
+  margin-top: 8px;
+}
+
+.powermode-buttons{
+  margin-top: 8px;
+}
+
+/* .power-buttons { */
+/*   background: #000; */
+/* } */
 
 /* .AnyName { Name defined in config after #
   background-color: @noti-bg;
@@ -455,20 +489,25 @@
 /* Volume widget */
 .widget-volume {
   background-color: @noti-bg;
-  padding: 8px;
+  padding: 16px;
   margin: 8px;
   border-radius: 12px;
 }
 
 .widget-volume > box > button {
-  background: transparent;
+  background: @cc-bg;
+  border: none;
+}
+
+.widget-volume > box > button:hover {
+  background: @noti-bg-hover;
   border: none;
 }
 
 .per-app-volume {
   background-color: @noti-bg-alt;
   padding: 4px 8px 8px 8px;
-  margin: 0px 8px 8px 8px;
+  margin: 0px 8px 8px 16px;
   border-radius: 12px;
 }
 

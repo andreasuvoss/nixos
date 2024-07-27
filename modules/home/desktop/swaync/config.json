@@ -48,12 +48,12 @@
     }
   },
   "widgets": [
-    "mpris",
-    "volume",
     "inhibitors",
     "title",
-    "dnd",
-    "notifications"
+    "notifications",
+    "menubar#label",
+    "mpris",
+    "volume"
   ],
   "widget-config": {
     "inhibitors": {
@@ -66,9 +66,6 @@
       "clear-all-button": true,
       "button-text": "Clear All"
     },
-    "dnd": {
-      "text": "Do Not Disturb"
-    },
     "label": {
       "max-lines": 5,
       "text": "Label Text"
@@ -76,6 +73,34 @@
     "mpris": {
       "image-size": 96,
       "image-radius": 12
+    },
+    "menubar#label":{
+      "menu#power-buttons": {
+        "label": "", 
+        "position": "right",
+        "actions": [ 
+          {
+            "label": "  Reboot",
+            "command": "systemctl reboot"
+          },
+          {
+            "label": "  Reboot into Windows",
+            "command": "systemctl reboot --boot-loader-entry=auto-windows"
+          },
+          {
+            "label": "  Lock",
+            "command": "swaylock -f -c 000000"
+          },
+          {
+            "label": "  Logout",
+            "command": "hyprctl dispatch exit"
+          },
+          {
+            "label": "  Shut down",
+            "command": "systemctl poweroff"
+          }
+        ]
+      }
     },
     "buttons-grid": {
       "actions": [
@@ -87,6 +112,12 @@
           "update_command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
         }
       ]
+    },
+    "volume": {
+      "label":"  ",
+      "show-per-app": true,
+      "show-per-app-icon": true,
+      "show-per-app-label":true
     }
   }
 }
