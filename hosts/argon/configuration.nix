@@ -1,5 +1,4 @@
-{ config, pkgs, inputs, lib, ... }:
-{
+{ config, pkgs, inputs, lib, ... }: {
   imports =
     [ 
       ./hardware-configuration.nix
@@ -12,7 +11,7 @@
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
 
-# Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.andreasvoss = {
     isNormalUser = true;
     description = "Andreas Voss";
@@ -43,6 +42,11 @@
 
   # Enable the gnome-keyring for Hyprland with auto unlock from decryption passphrase
   gnome-keyring.enable = true;
+
+  # Enable network shares
+  network-shares.enable = true;
+
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

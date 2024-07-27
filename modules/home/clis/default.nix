@@ -3,7 +3,7 @@
     ./az-cred-provider
     ./starship
     ./git
-    ./gum.nix
+    ./gum
     ./tmux
     ./zsh
     ./yazi

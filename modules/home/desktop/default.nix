@@ -4,8 +4,8 @@
   
   imports = [
     ./dconf
-    ./fonts.nix
-    ./gnome-keyring.nix
+    ./fonts
+    ./gnome-keyring
     ./gtk
     ./hyprland
     ./nemo
@@ -14,7 +14,7 @@
     ./swayidle
     ./swaylock
     ./swaync
-    ./utility.nix
+    ./utility
     ./waybar
     ./wlogout
   ];

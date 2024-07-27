@@ -5,16 +5,17 @@
     ./bitwarden
     ./discord
     ./firefox
-    ./freetube.nix
+    ./freetube
     ./google-chrome
-    ./gthumb.nix
+    ./gthumb
     ./kitty
     ./libreoffice
-    ./megasync.nix
+    ./megasync
     ./obs-studio
     ./rider
     ./signal
     ./spotify
+    ./vlc
   ];
 
   options = {
@@ -35,5 +36,6 @@
     rider.enable = true;
     signal.enable = true;
     spotify.enable = true;
+    vlc.enable = true;
   };
 }
