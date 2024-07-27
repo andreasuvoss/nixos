@@ -13,8 +13,6 @@
         user.signingkey = "/home/andreasvoss/.ssh/id_rsa.pub";
         gpg.format = "ssh";
         commit.gpgsign = true;
-        # TODO: GPG Signing
-        # This signing stuff is still work in progress
       };
     };
   };
