@@ -7,6 +7,7 @@
     ./fastfetch
     ./gcc
     ./git
+    ./glow
     ./gparted
     ./gum
     ./htop
@@ -37,6 +38,7 @@
     curl.enable = true;
     fastfetch.enable = true;
     git.enable = true;
+    glow.enable = true;
     gparted.enable = false;
     gum.enable = true;
     htop.enable = true;

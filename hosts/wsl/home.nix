@@ -25,6 +25,7 @@ in
 
   # CLIS
   clis.enable = true;
+  zsh.ssh-agent.enable = false;
 
   # Apps
   apps.enable = false;
