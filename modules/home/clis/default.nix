@@ -22,6 +22,7 @@
     ./tmux
     ./tree
     ./tree-sitter
+    ./unzip
     ./yazi
     ./yq
     ./zsh
@@ -51,6 +52,7 @@
     tmux.enable = true;
     tree.enable = true;
     tree-sitter.enable = true;
+    unzip.enable = true;
     yazi.enable = true;
     yq.enable = true;
     zsh.enable = true;

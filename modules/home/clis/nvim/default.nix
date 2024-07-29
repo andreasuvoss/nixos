@@ -41,6 +41,7 @@ in
         nodePackages.volar
         nil
         gopls
+        docker-compose-language-service
         bicepLanguageServer
       ];
       
@@ -106,6 +107,7 @@ in
             p.tree-sitter-comment
             p.tree-sitter-markdown
             p.tree-sitter-c-sharp
+            p.tree-sitter-yaml
             (pkgs.tree-sitter.buildGrammar {
               language = "bicep";
               version = "0092c7d";

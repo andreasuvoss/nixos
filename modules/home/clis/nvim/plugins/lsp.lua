@@ -94,6 +94,10 @@ require 'lspconfig'.volar.setup {
     filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
 }
 
+require 'lspconfig'.docker_compose_language_service.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
 
 -- TODO: Install the LSP and configure it here
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bicep
