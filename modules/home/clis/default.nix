@@ -10,7 +10,7 @@
     ./glow
     ./gparted
     ./gum
-    ./htop
+    ./btop
     ./jq
     ./keychain
     ./lazygit
@@ -37,13 +37,13 @@
     az-cred-provider.enable = true;
     azure-cli.enable = true;
     bat.enable = true;
+    btop.enable = true;
     curl.enable = true;
     fastfetch.enable = true;
     git.enable = true;
     glow.enable = true;
     gparted.enable = false;
     gum.enable = true;
-    htop.enable = true;
     jq.enable = true;
     # keychain.enable = false;
     lazygit.enable = true;

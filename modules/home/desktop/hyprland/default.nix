@@ -101,6 +101,10 @@
       };
 
       windowrulev2 = [
+        # Steam
+        "float, title:^(Friends List)$"
+        "float, class:^(steam)$"
+
         "float, title:^(Authentication Required)$"
         "center, title:^(Authentication Required)$"
         "size 500 200, title:^(Authentication Required)$"
