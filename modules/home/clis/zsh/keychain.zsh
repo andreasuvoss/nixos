@@ -1,2 +1,2 @@
 
-eval $(keychain --eval id_rsa)
+eval $(keychain --eval --agents ssh -q --noask id_rsa)
