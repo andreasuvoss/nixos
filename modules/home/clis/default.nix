@@ -25,6 +25,7 @@
     ./tree
     ./tree-sitter
     ./unzip
+    ./vhs
     ./yazi
     ./yq
     ./zsh
@@ -57,6 +58,7 @@
     tree.enable = true;
     tree-sitter.enable = true;
     unzip.enable = true;
+    vhs.enable = false;
     yazi.enable = true;
     yq.enable = true;
     zsh.enable = true;
