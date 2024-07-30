@@ -17,7 +17,7 @@ in
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
-      initExtra = builtins.readFile ./config.zsh + (if config.zsh.ssh-agent.enable then builtins.readFile ./ssh-agent.zsh else "");
+      initExtra = builtins.readFile ./config.zsh + (if config.zsh.ssh-agent.enable then builtins.readFile ./keychain.zsh else "");
       envExtra = "export BAT_THEME=\"Dracula\"";
       inherit shellAliases;
     };

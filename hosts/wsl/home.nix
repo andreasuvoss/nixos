@@ -25,7 +25,8 @@ in
 
   # CLIS
   clis.enable = true;
-  zsh.ssh-agent.enable = true;
+  zsh.ssh-agent.enable = false;
+  keychain.enable = true;
 
   # Apps
   apps.enable = false;

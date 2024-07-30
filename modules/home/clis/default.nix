@@ -12,6 +12,7 @@
     ./gum
     ./htop
     ./jq
+    ./keychain
     ./lazygit
     ./nodejs
     ./nvim
@@ -43,6 +44,7 @@
     gum.enable = true;
     htop.enable = true;
     jq.enable = true;
+    # keychain.enable = false;
     lazygit.enable = true;
     nodejs.enable = true;
     nvim.enable = true;
