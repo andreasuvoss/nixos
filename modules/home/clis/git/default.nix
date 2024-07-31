@@ -13,6 +13,7 @@
         user.signingkey = "~/.ssh/id_rsa.pub";
         gpg.format = "ssh";
         commit.gpgsign = true;
+        rerere.enabled = true;
       };
     };
   };
