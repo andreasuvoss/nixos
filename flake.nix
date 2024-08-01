@@ -41,6 +41,12 @@
             ./hosts/argon/configuration.nix
           ];
       };
+      osmium = nixpkgs.lib.nixosSystem {
+        inherit system;
+          modules = [
+            ./hosts/osmium/configuration.nix
+          ];
+      };
       wsl = nixpkgs.lib.nixosSystem {
         inherit system;
           modules = [
@@ -70,9 +76,6 @@
 
       nixos = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-	    modules = [ 
-          ./hosts/wsl/home.nix
-        ];
         extraSpecialArgs = { 
           pkgs-unstable = import nixpkgs-unstable {
             config.allowUnfree = true;
@@ -84,6 +87,9 @@
           };
           inherit inputs;
         };
+	      modules = [ 
+          ./hosts/wsl/home.nix
+        ];
       };
     };
   };
