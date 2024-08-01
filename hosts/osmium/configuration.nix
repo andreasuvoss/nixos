@@ -24,10 +24,6 @@
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # boot.initrd.systemd.enable = true;
-
-  # Enables the desktop module
-  desktop.enable = false;
 
   # Enables virtualization
   virtualization.enable = true;
@@ -45,7 +41,8 @@
         ];
         extraOptions = [
           "--network=host"  
-          # "--device=/dev/ttyACM0" #conbee goes here
+          "--cap-add=CAP_NET_RAW"
+          "--device=/dev/ttyACM0"
         ];
       };
     };
@@ -53,6 +50,7 @@
 
   # Network configuration
   networking.hostName = "osmium";
+  networking.firewall.allowedTCPPorts = [ 8123 ];
 
   # Enable the OpenSSH deamon
   services.openssh.enable = true;
