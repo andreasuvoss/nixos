@@ -56,8 +56,8 @@
 
   # Enable the OpenSSH deamon
   services.openssh.enable = true;
-  settings.PasswordAuthentication = false;
-  settings.KbdInteractiveAuthentication = false;
+  services.openssh.settings.PasswordAuthentication = false;
+  services.openssh.settings.KbdInteractiveAuthentication = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
