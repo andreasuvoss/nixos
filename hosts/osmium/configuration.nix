@@ -27,15 +27,37 @@
   # boot.initrd.systemd.enable = true;
 
   # Enables the desktop module
-  desktop.enable = true;
+  desktop.enable = false;
 
   # Enables virtualization
   virtualization.enable = true;
 
-  # Network configuration
-  networking.hostName = "osmium"; # Define your hostname.
+  virtualisation.oci-containers = {
+    backend = "podman";
+    containers = {
+      home-assistant = {
+        image = "homeassistant/home-assistant:latest";
+        volumes = [
+          "/home/andreasvoss/apps/home-assistant:/config"
+        ];
+        ports = [
+          "8123:8123"
+        ];
+        extraOptions = [
+          "--network=host"  
+          # "--device=/dev/ttyACM0" #conbee goes here
+        ];
+      };
+    };
+  };
 
+  # Network configuration
+  networking.hostName = "osmium";
+
+  # Enable the OpenSSH deamon
   services.openssh.enable = true;
+  settings.PasswordAuthentication = false;
+  settings.KbdInteractiveAuthentication = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
