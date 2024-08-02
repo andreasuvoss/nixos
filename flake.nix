@@ -27,6 +27,7 @@
     #   patches = [ ./modules/home/clis/misc-tools/nixos-nixpkgs-316386.patch ];
     # };
     pkgs = import nixpkgs { inherit system; };
+    hostname = builtins.getEnv "HOSTNAME";
   in {
     nixosConfigurations = {
       argon-vm = nixpkgs.lib.nixosSystem {
@@ -56,7 +57,7 @@
       };
     };
     homeConfigurations = {
-      andreasvoss = home-manager.lib.homeManagerConfiguration {
+      "andreasvoss@argon" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { 
           pkgs-unstable = import nixpkgs-unstable {
@@ -71,6 +72,25 @@
         };
 	      modules = [ 
           ./hosts/argon/home.nix
+        ];
+      };
+
+
+      "andreasvoss@osmium" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { 
+          pkgs-unstable = import nixpkgs-unstable {
+            config.allowUnfree = true;
+            inherit system;
+          };
+          pkgs-master = import nixpkgs-master {
+            config.allowUnfree = true;
+            inherit system;
+          };
+          inherit inputs;
+        };
+	      modules = [ 
+          ./hosts/osmium/home.nix
         ];
       };
 
