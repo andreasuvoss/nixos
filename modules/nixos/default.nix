@@ -5,7 +5,6 @@
     ./gaming.nix
     ./gnome-keyring.nix
     ./locale.nix
-    ./network-shares.nix
     ./sound.nix
     ./virtualization.nix
   ];

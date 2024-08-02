@@ -19,6 +19,9 @@
       ];
     };
 
+    # Mount USB drives
+    services.udisks2.enable = true;
+
     # Enable WM and DM
     programs.hyprland.enable = true;
     services.xserver.displayManager.gdm.enable = true;

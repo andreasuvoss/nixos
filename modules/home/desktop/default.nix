@@ -14,6 +14,7 @@
     ./swayidle
     ./swaylock
     ./swaync
+    ./udiskie
     ./utility
     ./waybar
     ./wlogout
@@ -34,6 +35,7 @@
     swayidle.enable = true;
     swaylock.enable = true;
     swaync.enable = true;
+    udiskie.enable = true;
     waybar.enable = true;
     wlogout.enable = true;
   };
