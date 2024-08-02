@@ -34,7 +34,7 @@
       home-assistant = {
         image = "homeassistant/home-assistant:latest";
         volumes = [
-          "/home/andreasvoss/apps/home-assistant:/config"
+          "/home/andreasvoss/apps/homeassistant:/config"
         ];
         ports = [
           "8123:8123"
@@ -50,7 +50,11 @@
 
   # Network configuration
   networking.hostName = "osmium";
-  networking.firewall.allowedTCPPorts = [ 8123 ];
+  networking.firewall.allowedTCPPorts = [ 8123 1400 ];
+  networking.firewall.allowedUDPPorts = [ 1900 5353 ];
+  #networking.firewall.enable = false;
+
+  #networking.firewall.allowedTCPPorts = [ 8123 1400 ];
 
   # Enable the OpenSSH deamon
   services.openssh.enable = true;
