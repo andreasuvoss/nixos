@@ -24,6 +24,7 @@
     ./tmux
     ./tree
     ./tree-sitter
+    ./udisks
     ./unzip
     ./vhs
     ./yazi
@@ -57,6 +58,7 @@
     tmux.enable = true;
     tree.enable = true;
     tree-sitter.enable = true;
+    udisks.enable = true;
     unzip.enable = true;
     vhs.enable = false;
     yazi.enable = true;
