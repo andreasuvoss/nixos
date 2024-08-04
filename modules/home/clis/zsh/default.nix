@@ -16,7 +16,11 @@ in
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
-      initExtra = builtins.readFile ./config.zsh + (if config.keychain.enable then builtins.readFile ./keychain.zsh else "");
+      # initExtra = builtins.readFile ./config.zsh + (if config.keychain.enable then builtins.readFile ./keychain.zsh else "");
+      initExtra = builtins.readFile ./config.zsh + (if config.keychain.enable then ''
+        eval $(keychain --eval --agents ssh -q ${config.keychain.keyfile})
+      ''
+      else "");
       envExtra = "export BAT_THEME=\"Dracula\"";
       inherit shellAliases;
     };

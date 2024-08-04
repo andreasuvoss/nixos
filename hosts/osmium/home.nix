@@ -22,6 +22,8 @@ in
   # CLIS
   clis.enable = true;
   keychain.enable = true;
+  keychain.keyfile = "id_ed25519";
+  git.signingkey = "id_ed25519.pub";
 
   # Apps
   apps.enable = false;

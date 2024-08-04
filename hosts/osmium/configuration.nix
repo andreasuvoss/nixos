@@ -45,16 +45,32 @@
           "--device=/dev/ttyACM0"
         ];
       };
+      pihole = {
+        image = "pihole/pihole:latest";
+        volumes = [
+          "/home/andreasvoss/apps/pihole/pihole:/etc/pihole"
+          "/home/andreasvoss/apps/pihole/dnsmasq.d:/etc/dnsmasq.d"
+        ];
+        ports = [
+          "53:53/tcp"
+          "53:53/udp"
+          "8010:80/tcp"
+        ];
+        environment = {
+          TZ = "Europe/Copenhagen";
+        };
+        # extraOptions = [
+        # ];
+      };
     };
+
   };
 
   # Network configuration
   networking.hostName = "osmium";
-  networking.firewall.allowedTCPPorts = [ 8123 1400 ];
-  networking.firewall.allowedUDPPorts = [ 1900 5353 ];
+  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 ];
+  networking.firewall.allowedUDPPorts = [ 1900 5353 53 ];
   #networking.firewall.enable = false;
-
-  #networking.firewall.allowedTCPPorts = [ 8123 1400 ];
 
   # Enable the OpenSSH deamon
   services.openssh.enable = true;
