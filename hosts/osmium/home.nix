@@ -25,6 +25,14 @@ in
   keychain.keyfile = "id_ed25519";
   git.signingkey = "id_ed25519.pub";
 
+  # Disable stuff I do not need here
+  az-cred-provider.enable = lib.mkForce false;
+  azure-cli.enable = lib.mkForce false;
+  nodejs.enable = lib.mkForce false;
+  taskwarrior.enable = lib.mkForce false;
+  tldr.enable = lib.mkForce false;
+  tmux.enable = lib.mkForce false;
+
   # Apps
   apps.enable = false;
 }
