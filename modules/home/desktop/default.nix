@@ -8,7 +8,6 @@
     ./gnome-keyring
     ./gtk
     ./hyprland
-    ./nemo
     ./screenshot
     ./swaybg
     ./swayidle
@@ -29,7 +28,6 @@
     gnome-keyring.ssh.enable = true;
     gtk-theme.enable = true;
     hyprland.enable = true;
-    nemo.enable = true;
     screenshot.enable = true;
     swaybg.enable = true;
     swayidle.enable = true;

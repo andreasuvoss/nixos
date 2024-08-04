@@ -18,7 +18,7 @@
       ];
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
-      "$fileManager" = "nemo";
+      "$fileManager" = "yazi";
       "$menu" = "wofi --show drun";
       "$lock" = "swaylock";
       exec-once = [
@@ -133,7 +133,7 @@
         "$mainMod, Q, exec, $terminal"
         "$mainMod, M, exec, sleep 0.1; hyprctl dispatch dpms off; $lock"
         "$mainMod, ESCAPE, exec, pgrep -U $USER wlogout >/dev/null || exec wlogout -b 6 -s -R 1500 -L 1500 -T 600 -B 600" # I wonder how this looks on a smaller display..
-        "$mainMod, E, exec, $fileManager"
+        # "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating"
         "$mainMod, C, togglefloating"
         "$mainMod, X, killactive"
