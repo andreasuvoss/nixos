@@ -20,7 +20,7 @@
     };
 
     # Mount USB drives
-    services.udisks2.enable = true;
+    services.udisks2.enable = false; # Does not autologin to ssh-agent with this
 
     # Enable WM and DM
     programs.hyprland.enable = true;

@@ -35,7 +35,7 @@
     swayidle.enable = true;
     swaylock.enable = true;
     swaync.enable = true;
-    udiskie.enable = true;
+    udiskie.enable = false; # Does not autologin to ssh-agent with this
     waybar.enable = true;
     wlogout.enable = true;
   };
