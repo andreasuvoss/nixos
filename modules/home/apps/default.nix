@@ -6,6 +6,7 @@
     ./discord
     ./firefox
     ./freetube
+    ./gimp
     ./google-chrome
     ./gthumb
     ./kitty
@@ -27,6 +28,7 @@
     discord.enable = true;
     firefox.enable = true;
     freetube.enable = true;
+    gimp.enable = true;
     google-chrome.enable = false;
     gthumb.enable = true;
     kitty.enable = true;
