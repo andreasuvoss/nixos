@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main"; 
@@ -16,18 +15,12 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-master, nixos-wsl, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixos-wsl, ... }@inputs:
   let
     lib = nixpkgs.lib;
     user = "andreasvoss";
     system = "x86_64-linux";
-    # nixpkgs-patched = (import nixpkgs { inherit system; }).applyPatches {
-    #   name = "nixos-nixpkgs-316386";
-    #   src = nixpkgs;
-    #   patches = [ ./modules/home/clis/misc-tools/nixos-nixpkgs-316386.patch ];
-    # };
     pkgs = import nixpkgs { inherit system; };
-    hostname = builtins.getEnv "HOSTNAME";
   in {
     nixosConfigurations = {
       argon-vm = nixpkgs.lib.nixosSystem {
@@ -64,10 +57,6 @@
             config.allowUnfree = true;
             inherit system;
           };
-          pkgs-master = import nixpkgs-master {
-            config.allowUnfree = true;
-            inherit system;
-          };
           inherit inputs;
         };
 	      modules = [ 
@@ -83,10 +72,6 @@
             config.allowUnfree = true;
             inherit system;
           };
-          pkgs-master = import nixpkgs-master {
-            config.allowUnfree = true;
-            inherit system;
-          };
           inherit inputs;
         };
 	      modules = [ 
@@ -98,10 +83,6 @@
         inherit pkgs;
         extraSpecialArgs = { 
           pkgs-unstable = import nixpkgs-unstable {
-            config.allowUnfree = true;
-            inherit system;
-          };
-          pkgs-master = import nixpkgs-master {
             config.allowUnfree = true;
             inherit system;
           };
