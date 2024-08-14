@@ -11,6 +11,7 @@
   config = lib.mkIf config.git.enable {
     programs.git = {
       enable = true;  
+      delta.enable = true;
       userName = "Andreas Voss";
       userEmail = "andreas@anvo.dk";
       extraConfig = {
@@ -19,6 +20,8 @@
         gpg.format = "ssh";
         commit.gpgsign = true;
         rerere.enabled = true;
+        delta.line-numbers = true;
+        delta.side-by-side = true;
       };
     };
   };

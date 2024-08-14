@@ -41,7 +41,7 @@ home-manager --flake .#<USER>
 ```
 
 ## Generations
-When working on NixOS it can take a few generations to get it right. To list all NixOS generation the following script
+When working on NixOS it can take a few generations to get it right. To list all NixOS generation the following command 
 can be run as sudo
 
 ```sh
@@ -58,20 +58,17 @@ nix-env --list-generation
 <!-- ### Rolling back to a previous generation -->
 
 
-## What does this flake contain
-TODO
-
 ## What is left to do?
 * ~~Migrate neovim configuration from regular dotfiles to Nix Home Manager~~ ✓
 * ~~Ensure full disk encryption works~~ ✓
-* Get the repository ready for multi-host configurations (✓)
-* `ssh-agent` and GPG - preferable with auto authentication / decryption either from Bitwarden or system login
+* ~~Get the repository ready for multi-host configurations~~ ✓
+* ~~`ssh-agent` and GPG - preferable with auto authentication / decryption either from Bitwarden or system login~~ ✓
 * Secret management with `sops-nix`
 * Rider with configuration and plugins
 * ~~Fix XDG-portals such that the entire GNOME DE is not required for some applications to function (I'm looking at you
   Bitwarden)~~ ✓
-* ~~Pack Azure Artifacts Credential Provider (https://github.com/microsoft/artifacts-credprovider)~~ (✓)
-* Pack Azure-CLI plugin app-insights (✓)
+* ~~Pack Azure Artifacts Credential Provider (https://github.com/microsoft/artifacts-credprovider)~~ ✓
+* ~~Pack Azure-CLI plugin app-insights~~ ✓
 
 ## Adding Windows 11 to systemd-boot menu
 1. Identify the Windows boot partition using `sudo blkid | grep vfat` or `lsbkl`. In my case the partition was 100M in
