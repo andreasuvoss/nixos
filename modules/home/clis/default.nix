@@ -10,6 +10,7 @@
     ./glow
     ./gparted
     ./gum
+    ./iperf
     ./btop
     ./jq
     ./keychain
@@ -45,6 +46,7 @@
     glow.enable = true;
     gparted.enable = false;
     gum.enable = true;
+    iperf.enable = true;
     jq.enable = true;
     # keychain.enable = false;
     lazygit.enable = true;
