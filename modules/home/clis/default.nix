@@ -3,8 +3,10 @@
     ./az-cred-provider
     ./azure-cli
     ./bat
+    ./bicep
     ./curl
     ./fastfetch
+    ./fzf
     ./gcc
     ./git
     ./glow
@@ -30,6 +32,7 @@
     ./vhs
     ./yazi
     ./yq
+    ./zoxide
     ./zsh
   ];
   options = {
@@ -39,9 +42,11 @@
     az-cred-provider.enable = true;
     azure-cli.enable = true;
     bat.enable = true;
+    bicep.enable = true;
     btop.enable = true;
     curl.enable = true;
     fastfetch.enable = true;
+    fzf.enable = true;
     git.enable = true;
     glow.enable = true;
     gparted.enable = false;
@@ -65,6 +70,7 @@
     vhs.enable = false;
     yazi.enable = true;
     yq.enable = true;
+    zoxide.enable = true;
     zsh.enable = true;
   };
 }

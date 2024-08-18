@@ -105,6 +105,12 @@
         "float, title:^(Friends List)$"
         "float, class:^(steam)$"
 
+        # MEGA
+        "float, class:^(MEGAsync)$"
+        "stayfocused, class:^(MEGAsync)$"
+        "forceinput, class:^(MEGAsync)$"
+        "dimaround, class:^(MEGAsync)$"
+
         "float, title:^(Authentication Required)$"
         "center, title:^(Authentication Required)$"
         "size 500 200, title:^(Authentication Required)$"

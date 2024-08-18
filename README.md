@@ -94,3 +94,19 @@ watching videos, having to move my mouse every 180 seconds.
 
 The standby / disconnect of a monitor also makes Hyprland go to an empty workspace when the monitor wakes back up.
 
+### `bicep` with the `az` CLI
+When trying to deploy a `.bicep` file without any extra configuration, the error
+
+```
+Could not start dynamically linked executable: /home/<USER>/.azure/bin/bicep
+NixOS cannot run dynamically linked executables intended for generic
+linux environments out of the box. For more information, see:
+https://nix.dev/permalink/stub-ld
+```
+will most likely pop up. To work around this set the Azure config to use Bicep from path:
+
+```sh
+az config set bicep.use_binary_from_path=True
+```
+
+This could be part of my configuration, but I will work on this some other day I reckon

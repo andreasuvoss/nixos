@@ -31,9 +31,25 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.cmd [[autocmd FileType markdown set tw=120 wrap]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.bicep set filetype=bicep ]]
+vim.cmd [[autocmd FileType bicep setlocal commentstring=//\ %s]]
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "nix",
+	command = "setlocal shiftwidth=2 tabstop=2"
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "yml",
+	command = "setlocal shiftwidth=2 tabstop=2"
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "yaml",
+	command = "setlocal shiftwidth=2 tabstop=2"
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "bicep",
 	command = "setlocal shiftwidth=2 tabstop=2"
 })
 -- vim.opt.autoindent = true
