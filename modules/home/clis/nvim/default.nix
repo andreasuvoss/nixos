@@ -79,13 +79,17 @@ in
           config = toLuaFile ./plugins/gitsigns.lua;
         }
         {
+          plugin = undotree;
+          # config = toLuaFile ./plugins/lualine.lua;
+        }
+        {
           plugin = lualine-nvim;
           config = toLuaFile ./plugins/lualine.lua;
         }
-        {
-          plugin = neo-tree-nvim;
-          config = toLuaFile ./plugins/neo-tree.lua;
-        }
+        # {
+        #   plugin = neo-tree-nvim;
+        #   config = toLuaFile ./plugins/neo-tree.lua;
+        # }
         {
           plugin = oil-nvim;
           config = toLuaFile ./plugins/oil.lua;

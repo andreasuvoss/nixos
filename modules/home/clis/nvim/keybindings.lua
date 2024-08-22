@@ -38,14 +38,12 @@ map("x", "<leader>p", "\"_dP")
 map("n", "<leader>d", "\"_d")
 map("v", "<leader>d", "\"_d")
 
--- Magic
+-- Magic (takes word under cursor and makes you able to replace it throughout the file)
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>")
 
 -- Custom keybinds
---map("n", "<C-t>", ":NeoTreeFocusToggle<CR>")
-map("n", "<leader>e", ":Neotree<CR>")
-map("n", "<C-z>", ":Neotree toggle<CR>")
+map("n", "<leader>e", ":UndotreeToggle<CR>")
 map("n", "<leader>ff", ":Telescope find_files<CR>")
 map("n", "<leader>lg", ":Telescope live_grep<CR>")
 map("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
