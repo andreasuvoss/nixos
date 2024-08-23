@@ -25,6 +25,9 @@ in
   # Apps
   apps.enable = true;
 
+  # Scripts
+  scripts.enable = true;
+
   # Development tools
   dotnet.enable = true;
   rust.enable = true;

@@ -4,6 +4,7 @@
     ./clis
     ./dev-tools
     ./desktop
+    ./scripts
   ];
 
   xdg.userDirs = {
