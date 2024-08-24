@@ -27,6 +27,9 @@ in
   clis.enable = true;
   keychain.enable = true;
 
+  # Scripts
+  scripts.enable = true;
+
   # Apps
   apps.enable = false;
 

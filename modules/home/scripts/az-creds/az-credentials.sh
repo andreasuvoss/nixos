@@ -12,14 +12,13 @@ done
 
 gum spin --spinner dot --title "Checking if you are logged in" -- az account get-access-token
 
-if [ $? -eq 0 ] 
-then 
+if [ $? -eq 0 ]; then 
     gum spin --spinner dot --title "You are already logged in" -- sleep 1
     sleep 0.5
 else 
     gum spin --spinner dot --title "You are not logged in, running 'az login'" -- sleep 1
     sleep 0.5
-    az login
+    az login > /dev/null
 fi
 
 # The following command gets a maximum of 100 applications the '--all' flag can be added to the 'az' command if you 
@@ -34,7 +33,7 @@ APP_ID=$(gum spin --spinner dot --title "Getting the application id for ${APP_DI
 RESPONSE=$(gum spin --spinner dot --title "Getting access token for ${APP_DISPLAY_NAME}" -- az account get-access-token --resource $APP_ID)
 TOKEN=$(echo $RESPONSE | jq .accessToken -r)
 
-if [[ ! -z "$TOKEN" ]]; then echo "Could not get token for app '$APP_DISPLAY_NAME' with resource id '$APP_ID'"; exit 1; fi
+if [[ -z "$TOKEN" ]]; then echo "Could not get token for app '$APP_DISPLAY_NAME' with resource id '$APP_ID'"; exit 1; fi
 
 if ! command -v wl-copy &> /dev/null; then
     echo 'Here is your token: '
