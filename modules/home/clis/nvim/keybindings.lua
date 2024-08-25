@@ -62,3 +62,13 @@ map("v", "<Tab>", ">gv")
 
 map("n", "<S-Tab>", "<<_")
 map("n", "<Tab>", ">>_")
+
+-- Debugging
+map("n", "<leader>b", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>")
+map("n", "<leader>B", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+map("n", "<leader>c", "<Cmd>lua require'dap'.continue()<CR>")
+map("n", "<leader>si", "<Cmd>lua require'dap'.step_into()<CR>")
+map("n", "<leader>so", "<Cmd>lua require'dap'.step_over()<CR>")
+map("n", "<leader>su", "<Cmd>lua require'dap'.step_out()<CR>")
+map("n", "<leader>t", "<Cmd>lua require'dap'.disconnect({ terminateDebuggee = true })<CR>")
+

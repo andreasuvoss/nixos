@@ -80,7 +80,19 @@ in
         }
         {
           plugin = undotree;
-          # config = toLuaFile ./plugins/lualine.lua;
+        }
+        {
+          plugin = which-key-nvim;
+        }
+        {
+          plugin = nvim-dap-virtual-text;
+        }
+        {
+          plugin = nvim-dap-ui;
+        }
+        {
+          plugin = nvim-dap;
+          config = toLuaFile ./plugins/dap.lua;
         }
         {
           plugin = lualine-nvim;

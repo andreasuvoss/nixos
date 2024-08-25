@@ -5,6 +5,7 @@
   };
   config = lib.mkIf config.dotnet.enable {
     home.packages = with pkgs; [
+      netcoredbg
       (with dotnetCorePackages; combinePackages [
         sdk_7_0_3xx
         sdk_8_0_2xx

@@ -19,6 +19,15 @@ nnoremap <leader>lg :action FindInPath<CR>
 nnoremap gI :action GotoImplementation<CR>
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gr :action ShowUsages<CR>
+
+" TODO: Check if this works properly
+nnoremap <leader>c :action Debugger.ResumeThread
+nnoremap <leader>si :action StepInto
+nnoremap <leader>so :action StepOver
+nnoremap <leader>sO :action StepOut
+nnoremap <leader>t :action Stop
+nnoremap <leader>dbg :action Debug
+
 " nnoremap gcc :action CommentByLineComment<CR>
 nnoremap <leader>lf :action ReformatCode<CR>
 " Git blame toggle
