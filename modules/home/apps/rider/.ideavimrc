@@ -21,12 +21,12 @@ nnoremap gd :action GotoDeclaration<CR>
 nnoremap gr :action ShowUsages<CR>
 
 " TODO: Check if this works properly
-nnoremap <leader>c :action Debugger.ResumeThread
-nnoremap <leader>si :action StepInto
-nnoremap <leader>so :action StepOver
-nnoremap <leader>sO :action StepOut
-nnoremap <leader>t :action Stop
-nnoremap <leader>dbg :action Debug
+nnoremap <leader>c :action Debugger.ResumeThread<CR>
+nnoremap <leader>si :action StepInto<CR>
+nnoremap <leader>so :action StepOver<CR>
+nnoremap <leader>sO :action StepOut<CR>
+nnoremap <leader>t :action Stop<CR>
+nnoremap <leader>dbg :action Debug<CR>
 
 " nnoremap gcc :action CommentByLineComment<CR>
 nnoremap <leader>lf :action ReformatCode<CR>
