@@ -7,6 +7,7 @@
     programs.fzf = {
       enable = true;
       enableZshIntegration = config.zsh.enable;
+      defaultCommand = "fd --type f --color=always";
     };
   };
 }

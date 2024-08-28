@@ -4,6 +4,7 @@ let
     cat = "bat -P -n";
     ii = "xdg-open";
     nrb = "nixos-rebuild switch --flake .";
+    bfzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
   };
 in
 {

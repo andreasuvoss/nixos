@@ -6,6 +6,7 @@
     ./bicep
     ./curl
     ./fastfetch
+    ./fd
     ./fzf
     ./gcc
     ./git
@@ -46,6 +47,7 @@
     btop.enable = true;
     curl.enable = true;
     fastfetch.enable = true;
+    fd.enable = true;
     fzf.enable = true;
     git.enable = true;
     glow.enable = true;
