@@ -122,6 +122,7 @@ in
             p.tree-sitter-json
             p.tree-sitter-comment
             p.tree-sitter-markdown
+            p.tree-sitter-markdown-inline
             p.tree-sitter-c-sharp
             p.tree-sitter-yaml
             (pkgs.tree-sitter.buildGrammar {

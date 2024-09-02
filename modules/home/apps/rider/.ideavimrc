@@ -21,7 +21,8 @@ nnoremap gd :action GotoDeclaration<CR>
 nnoremap gr :action ShowUsages<CR>
 
 " TODO: Check if this works properly
-nnoremap <leader>c :action Debugger.ResumeThread<CR>
+nnoremap <leader>c :action Resume<CR>
+nnoremap <leader>b :action ToggleLineBreakpoint<CR>
 nnoremap <leader>si :action StepInto<CR>
 nnoremap <leader>so :action StepOver<CR>
 nnoremap <leader>sO :action StepOut<CR>
