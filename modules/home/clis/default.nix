@@ -21,6 +21,7 @@
     ./nodejs
     ./nvim
     ./ripgrep
+    ./smassh
     ./starship
     ./stow
     ./taskwarrior
@@ -60,6 +61,7 @@
     nodejs.enable = true;
     nvim.enable = true;
     ripgrep.enable = true;
+    smassh.enable = true;
     starship.enable = true;
     stow.enable = false;
     taskwarrior.enable = true;
