@@ -13,11 +13,9 @@ done
 gum spin --spinner dot --title "Checking if you are logged in" -- az account get-access-token
 
 if [ $? -eq 0 ]; then 
-    gum spin --spinner dot --title "You are already logged in" -- sleep 1
-    sleep 0.5
+    gum spin --spinner dot --title "You are already logged in" -- sleep 0.2
 else 
-    gum spin --spinner dot --title "You are not logged in, running 'az login'" -- sleep 1
-    sleep 0.5
+    gum spin --spinner dot --title "You are not logged in, running 'az login'" -- sleep 0.2
     az login > /dev/null
 fi
 
@@ -26,7 +24,8 @@ fi
 if ! command -v fzf &> /dev/null; then
     APP_DISPLAY_NAME=$(gum spin --spinner dot --title "Fetching BCs..." -- az ad app list --filter "startswith(displayName,'$APP_PREFIX')" | jq '.[].displayName' -r | gum choose --height 20 --header "Choose the application")
 else
-    APP_DISPLAY_NAME=$(gum spin --spinner dot --title "Fetching BCs..." -- az ad app list --filter "startswith(displayName,'$APP_PREFIX')" | jq '.[].displayName' -r | fzf)
+    APPS=$(gum spin --spinner dot --title "Fetching BCs..." -- az ad app list --filter "startswith(displayName,'$APP_PREFIX')")
+    APP_DISPLAY_NAME=$(echo $APPS | jq '.[].displayName' -r | fzf)
 fi
 
 APP_ID=$(gum spin --spinner dot --title "Getting the application id for ${APP_DISPLAY_NAME}" -- az ad app list --display-name $APP_DISPLAY_NAME | jq '.[0].appId' -r)
