@@ -33,6 +33,7 @@ in
       enable = true;
       defaultEditor = true;
       extraPackages = with pkgs; [
+        nixfmt-rfc-style
         # LSPs
         lua-language-server
         csharp-ls
@@ -60,6 +61,7 @@ in
         cmp-nvim-lsp
         cmp_luasnip
         # TODO: https://github.com/folke/lazydev.nvim
+        # TODO: https://github.com/stevearc/conform.nvim
         luasnip
       
         nvim-web-devicons
