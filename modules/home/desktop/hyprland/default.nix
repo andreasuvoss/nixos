@@ -2,6 +2,13 @@
 {
   options = {
     hyprland.enable = lib.mkEnableOption "enable hyprland";
+    hyprland.natural_scroll = lib.mkOption {
+      default = false;
+    };
+    hyprland.wlogout.command = lib.mkOption {
+      default = "wlogout -b 6 -s -R 1500 -L 1500 -T 600 -B 600";
+      description = "command to run when opening wlogout";
+    };
   };
   config = lib.mkIf config.hyprland.enable {
     home.packages = with pkgs; [
@@ -14,13 +21,17 @@
     wayland.windowManager.hyprland.enable = true;
     wayland.windowManager.hyprland.settings = {
       monitor = [
-        ",highrr,auto,auto"
+        # ",highrr,auto,auto"
+        # "eDP-1,highrr,auto,auto"
+        "eDP-1,2880x1800@120.0,0x0,1.5"
+        "Unknown-1,disable"
       ];
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "yazi";
       "$menu" = "wofi --show drun";
       "$lock" = "swaylock";
+      "$wlogoutCmd" = config.hyprland.wlogout.command;
       exec-once = [
         "swaybg --color 000000" # at some point maybe look into swww
         "waybar"
@@ -45,6 +56,7 @@
           sensitivity = -0.5;
           accel_profile = "flat";
           force_no_accel = true;
+          touchpad.natural_scroll = config.hyprland.natural_scroll;
       };
       general = {
         gaps_in = 2;
@@ -138,7 +150,7 @@
       bind = [
         "$mainMod, Q, exec, $terminal"
         "$mainMod, M, exec, sleep 0.1; hyprctl dispatch dpms off; $lock"
-        "$mainMod, ESCAPE, exec, pgrep -U $USER wlogout >/dev/null || exec wlogout -b 6 -s -R 1500 -L 1500 -T 600 -B 600" # I wonder how this looks on a smaller display..
+        "$mainMod, ESCAPE, exec, pgrep -U $USER wlogout >/dev/null || exec $wlogoutCmd" # I wonder how this looks on a smaller display..
         # "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating"
         "$mainMod, C, togglefloating"
@@ -183,6 +195,13 @@
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
+      ];
+      binde = [
+        ", XF86MonBrightnessUp , exec, brightnessctl set 5%+"
+        ", XF86MonBrightnessDown , exec, brightnessctl set 5%-"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
     };
   };

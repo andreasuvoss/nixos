@@ -2,7 +2,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ../../modules/nixos
+     ../../modules/nixos
     ];
 
   # NixOS
@@ -11,11 +11,22 @@
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
 
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = 1;
+  };
+
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
+  '';
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.andreasvoss = {
     isNormalUser = true;
     description = "Andreas Voss";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "video" ];
+    openssh.authorizedKeys.keys = [
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTDEi9qjl+MWFW53lLn280+DXvnEUfmoQd2IdR6GQoTQNnb0vrEUaDqPF1M1TNMa3zTj4zN5+SpTcKE69FKlrVW7jBoSN82g/6gc3tb8j2QXjYkKh6/fqIWQdMKvM1DsK7O5g3rFdQbUN+sb3RovZvns4wsZJCMsZFASkBJnYbQ5GZ2fYtxFk75JjRWm4kroByu/tka5wmO9K9oIzH2/D1/9Se3NbAZtxjAUyjtE5GY2yU3LYbfdG+VvlSuyVE9JDuk2Cepls5HFwXmoYn4NAwd7izuOwCsc95bdSw0Ju3t1TDeCxo7YSTx0hxkjVt0xi6mZZThyvAhXzUCUBxUhET andreasvoss@argon"
+    ];
   };
 
   # Bootloader
@@ -24,8 +35,12 @@
   # TODO: Throw in gnome-keyring if not enabled
   # boot.initrd.systemd.enable = true;
 
+  services.openssh.enable = true;
+  services.openssh.settings.PasswordAuthentication = false;
+  services.openssh.settings.KbdInteractiveAuthentication = false;
+
   # Enables the desktop module
-  desktop.enable = false;
+  desktop.enable = true;
 
   # Enables virtualization
   virtualization.enable = false;
@@ -41,7 +56,7 @@
   sound-config.enable = true;
 
   # Enable the gnome-keyring for Hyprland with auto unlock from decryption passphrase
-  gnome-keyring.enable = false;
+  gnome-keyring.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

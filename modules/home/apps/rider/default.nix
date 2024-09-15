@@ -1,12 +1,13 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs-unstable,
+  lib,
+  config,
+  ...
+}:
 let
   riderVersion = "Rider2024.1";
 in
 {
-  # home.file.".ideavimrc" = {
-  #   text = builtins.readFile ./.ideavimrc;
-  #   executable = false;
-  # };
   # home.file.".config/JetBrains/${riderVersion}/options/editor-font.xml" = {
   #   text = builtins.readFile ./options/editor-font.xml;
   #   executable = false;
@@ -29,7 +30,11 @@ in
     rider.enable = lib.mkEnableOption "enable rider";
   };
   config = lib.mkIf config.rider.enable {
-    home.packages = with pkgs; [
+    home.file.".ideavimrc" = {
+      text = builtins.readFile ./.ideavimrc;
+      executable = false;
+    };
+    home.packages = with pkgs-unstable; [
       (jetbrains.plugins.addPlugins jetbrains.rider [
         "ideavim"
         (pkgs.stdenv.mkDerivation {
