@@ -24,6 +24,16 @@
   # TODO: Throw in gnome-keyring if not enabled
   # boot.initrd.systemd.enable = true;
 
+  # Dynamic linkers
+  # TODO: Might try to get this to work later
+  # programs.nix-ld.enable = true;
+  # environment.sessionVariables = {
+  #   # NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
+  #   #   pkgs.stdenv.cc.cc
+  #   # ];
+  #   NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
+  # };
+
   # Enables the desktop module
   desktop.enable = true;
 
