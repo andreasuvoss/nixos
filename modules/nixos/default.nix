@@ -1,5 +1,6 @@
 # TODO: Modularize the NixOS configuration
-{ pkgs, config, ... }:{
+{ pkgs, config, ... }:
+{
   imports = [
     ./desktop.nix
     ./gaming.nix
@@ -11,6 +12,10 @@
   config = {
     # Enable zsh
     environment.shells = with pkgs; [ zsh ];
+
+    # NFS shares
+    # environment.systemPackages = with pkgs; [ nfs-utils libnfs ];
+
     users.defaultUserShell = pkgs.zsh;
     programs.zsh.enable = true;
 

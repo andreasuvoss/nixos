@@ -29,6 +29,9 @@ zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
+bindkey "^?" backward-delete-char
+eval "$(direnv hook zsh)"
+
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"

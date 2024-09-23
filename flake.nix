@@ -30,6 +30,17 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
+      devShells."x86_64-linux".default = pkgs.mkShell {
+        packages = [
+          pkgs.netcoredbg
+          # pkgs.dotnetCorePackages.sdk_8_0_2xx
+          (with pkgs.dotnetCorePackages; combinePackages [
+            sdk_7_0_3xx
+            sdk_8_0_2xx
+            sdk_9_0 
+          ])
+       ];
+      };
       nixosConfigurations = {
         argon-vm = nixpkgs.lib.nixosSystem {
           inherit system;
