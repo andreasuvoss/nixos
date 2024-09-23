@@ -11,6 +11,7 @@ $fill\
 $helm\
 $kubernetes\
 $nodejs\
+$azure\
 $rust\
 $jobs\
 $line_break\
@@ -45,3 +46,9 @@ format = '[$symbol($version )]($style)'
 [kubernetes]
 format = '[$symbol\[$namespace\] $context](blue) '
 disabled = false
+
+[azure]
+disabled = false
+format = 'on [$symbol($subscription)]($style) '
+symbol = '󰠅 '
+style = 'blue bold'

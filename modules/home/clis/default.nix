@@ -25,6 +25,7 @@
     ./starship
     ./stow
     ./taskwarrior
+    ./timewarrior
     ./tldr
     ./tmux
     ./tree
@@ -65,6 +66,7 @@
     starship.enable = true;
     stow.enable = false;
     taskwarrior.enable = true;
+    timewarrior.enable = true;
     tldr.enable = true;
     tmux.enable = true;
     tree.enable = true;
