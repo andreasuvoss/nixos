@@ -20,9 +20,7 @@
     "usbhid"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ 
-    # "nfs"
-  ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 

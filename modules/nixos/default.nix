@@ -14,7 +14,7 @@
     environment.shells = with pkgs; [ zsh ];
 
     # NFS shares
-    # environment.systemPackages = with pkgs; [ nfs-utils libnfs ];
+    environment.systemPackages = with pkgs; [ nfs-utils ];
 
     users.defaultUserShell = pkgs.zsh;
     programs.zsh.enable = true;
@@ -23,6 +23,6 @@
     programs.git.enable = true;
 
     # Enable flatpaks
-    services.flatpak.enable = true;
+    services.flatpak.enable = false;
   };
 }
