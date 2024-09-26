@@ -22,6 +22,7 @@
     ./nvim
     ./ripgrep
     ./smassh
+    ./sshfs
     ./starship
     ./stow
     ./taskwarrior
@@ -63,6 +64,7 @@
     nvim.enable = true;
     ripgrep.enable = true;
     smassh.enable = true;
+    sshfs.enable = true;
     starship.enable = true;
     stow.enable = false;
     taskwarrior.enable = true;
