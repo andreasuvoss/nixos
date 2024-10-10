@@ -12,6 +12,9 @@
   config = {
     # Enable zsh
     environment.shells = with pkgs; [ zsh ];
+    
+    # Tailscale
+    services.tailscale.enable = true;
 
     # NFS shares
     environment.systemPackages = with pkgs; [ nfs-utils ];
