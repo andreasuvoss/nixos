@@ -27,6 +27,11 @@ in
   desktop.enable = true;
   hyprland.wlogout.command = "wlogout -b 6 -s -R 300 -L 300 -T 500 -B 500";
   hyprland.natural_scroll = true;
+  hyprland.monitor = [
+    # "eDP-1,highrr,auto,auto"
+    "eDP-1,2880x1800@120.0,0x0,1.5"
+    "Unknown-1,disable"
+  ];
 
   # CLIS
   clis.enable = true;

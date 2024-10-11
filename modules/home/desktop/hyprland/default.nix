@@ -9,28 +9,68 @@
       default = "wlogout -b 6 -s -R 1500 -L 1500 -T 600 -B 600";
       description = "command to run when opening wlogout";
     };
+    hyprland.monitor = lib.mkOption {
+      default = [
+        ",highrr,auto,auto"
+      ];
+      description = "hyprland monitor setup";
+    };
   };
   config = lib.mkIf config.hyprland.enable {
     home.packages = with pkgs; [
       wl-clipboard
       xclip
       nwg-displays
-      lxqt.lxqt-policykit
-      wofi
+      lxqt.lxqt-policykit # fix the policykit
     ];
+
+    programs.tofi = {
+      enable = true;
+      settings = {
+        font = "JetBrainsMono Nerd Font";
+        font-size = 10;
+
+        border-width = 1;
+        border-color = "#ff79c6"; # pink
+        # border-color = "#bd93f9"; # purple
+        # border-color = "#ffb86c"; # orange
+        corner-radius = 5;
+        outline-width = 0;
+        num-results = 12;
+        width = 700;
+        height = 350;
+
+        # prompt-text = "run: ";
+        # text-color = "#cad3f5";
+        # prompt-color = "#ed8796";
+        # background-color = "#24273a";
+        #
+        #
+        # selection-color = "#eed49f";
+        # selection-background = "#000000";
+        background-color = "#282a36";
+        text-color = "#f8f8f2";
+        input-color = "#ff79c6";
+        clip-to-padding = false;
+        
+        default-result-background= "#282a36";
+        default-result-background-padding = "4, -1";
+        result-spacing = 8;
+        selection-color = "#50fa7b";
+        selection-background-padding = "4, -1";
+        selection-background = "#44475a";
+        # selection-match-color = "#8be9fd"; # this results in weird behaviour
+      };
+    };
 
     wayland.windowManager.hyprland.enable = true;
     wayland.windowManager.hyprland.settings = {
-      monitor = [
-        # ",highrr,auto,auto"
-        # "eDP-1,highrr,auto,auto"
-        "eDP-1,2880x1800@120.0,0x0,1.5"
-        "Unknown-1,disable"
-      ];
+      monitor = config.hyprland.monitor;
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "yazi";
-      "$menu" = "wofi --show drun";
+      # "$menu" = "wofi --show drun";
+      "$menu" = "tofi-drun | xargs hyprctl dispatch exec --";
       "$lock" = "swaylock";
       "$wlogoutCmd" = config.hyprland.wlogout.command;
       exec-once = [
