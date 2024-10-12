@@ -38,6 +38,7 @@ in
 
   # Apps
   apps.enable = true;
+  firefox.workExtensions = true;
 
   # Scripts
   scripts.enable = false;

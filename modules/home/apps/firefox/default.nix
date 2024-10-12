@@ -12,8 +12,13 @@ in
 {
   options = {
     firefox.enable = lib.mkEnableOption "enables firefox";
+    firefox.workExtensions = lib.mkEnableOption "enables extensions used for work";
   };
   config = lib.mkIf config.firefox.enable {
+    home.file.".mozilla/firefox/anvo/chrome" = {
+        source = ./chrome;
+        recursive = true;
+    };
     programs.firefox = {
       enable = true;
       package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
@@ -57,6 +62,21 @@ in
               installation_mode = "force_installed";
               default_area = "navbar";
             };
+            "{3c078156-979c-498b-8990-85f7987dd929}" = {
+              install_url = "https://addons.mozilla.org/firefox/downloads/latest/sidebery/latest.xpi";
+              installation_mode = "force_installed";
+              default_area = "navbar";
+            };
+            "{0fbf0ce4-d020-4eb2-a833-0d4f2aadc895}" = lib.mkIf config.firefox.workExtensions {
+              install_url = "https://addons.mozilla.org/firefox/downloads/latest/level_up_for_d365_power_apps/latest.xpi";
+              installation_mode = "force_installed";
+              default_area = "navbar";
+            };
+            "ATBC@EasonWong" = {
+              install_url = "https://addons.mozilla.org/firefox/downloads/latest/adaptive-tab-bar-colour/latest.xpi";
+              installation_mode = "force_installed";
+              default_area = "menupanel";
+            };
             # "{d634138d-c276-4fc8-924b-40a0ea21d284}" = {
             #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/1password-x-password-manager/latest.xpi";
             #   installation_mode = "force_installed";
@@ -74,6 +94,10 @@ in
             "browser.bookmarks.defaultLocation" = "unifiled_____";
             "browser.search.defaultenginename" = "Startpage";
             "browser.search.order.1" = "Startpage";
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+            "layers.acceleration.force-enabled" = true;
+            "gfx.webrender.all" = true;
+            "svg.context-properties.content.enabled" = true;
           };
         };
       };
