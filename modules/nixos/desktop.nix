@@ -12,12 +12,7 @@ in
 
     environment.systemPackages = with pkgs; [
       greetd.tuigreet
-      # libsecret # needed for keyring?
     ];
-
-    # TODO: Does this need to be enabled?
-    # Enable the X11 windowing system. 
-    # services.xserver.enable = true;
 
     # Screensharing and stuff + portal for gnome-keyring
     xdg.portal = {
@@ -42,11 +37,8 @@ in
 
     services.gnome.gnome-keyring.enable = true;
     services.dbus.packages = [ pkgs.gnome.seahorse ];
-    # Use the decryption passphrase to also unlock the gnome-keyring
+    # Use the decryption passphrase to also unlock the gnome-keyring (which is currently broken with greetd)
     boot.initrd.systemd.enable = true;
-    # security.pam.services.greetd = {
-    #   enableGnomeKeyring = true;
-    # };
 
     services.greetd = {
       enable = true;
@@ -56,7 +48,7 @@ in
           user = "${username}";
         };
         default_session = {
-          command = "${tuigreet} --greeting 'enter the mainframe' --asterisks --remember --remember-user-session --time --cmd ${session} --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'";
+          command = "${tuigreet} --greeting 'enter the mainframe' --asterisks --remember --remember-user-session --time --cmd ${session}";
           user = "greeter";
         };
       };
