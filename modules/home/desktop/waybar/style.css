@@ -106,6 +106,7 @@ window#waybar.chromium {
     color: #fff;
 }
 
+
 #window,
 #workspaces {
     margin: 0 4px;
@@ -122,6 +123,7 @@ window#waybar.chromium {
 }
 
 #clock {
+    /* background-color: #282a36; */
     background-color: #000000;
     color: white;
 }
@@ -173,16 +175,22 @@ label:focus {
 }
 
 #network {
+    /* background-color: #282a36; */
     background-color: #000000;
+    /* border: 1px solid #282a36; */
     color:white;
-
 }
 
+/* #hardware { */
+/*     border: 1px solid #282a36; */
+/* } */
+
 #network.disconnected {
-    background-color: #f53c3c;
+    background-color: #ff5555;
 }
 
 #pulseaudio {
+    /* background-color: #282a36; */
     background-color: #000000;
     color: #ffffff;
 }
@@ -215,16 +223,17 @@ label:focus {
 }
 
 #tray {
-    background-color: #2980b9;
+    background-color: #282a36;
+    padding: 5px 10px;
 }
 
 #idle_inhibitor {
     padding-right: 16px;
-    background-color: #2d3436;
+    background-color: #282a36;
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
+    background-color: #f1fa8c;
     color: #2d3436;
 }
 
