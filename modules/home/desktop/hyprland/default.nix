@@ -21,7 +21,7 @@
       wl-clipboard
       xclip
       nwg-displays
-      lxqt.lxqt-policykit # fix the policykit
+      lxqt.lxqt-policykit
     ];
 
     programs.tofi = {
@@ -69,7 +69,6 @@
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "yazi";
-      # "$menu" = "wofi --show drun";
       "$menu" = "tofi-drun | xargs hyprctl dispatch exec --";
       "$lock" = "swaylock";
       "$wlogoutCmd" = config.hyprland.wlogout.command;
@@ -77,7 +76,7 @@
         "swaybg --color 000000" # at some point maybe look into swww
         "waybar"
         "sleep 1; swaync"
-        "sleep 1; exec lxqt-policykit-agent" # something is not right with this authentication agent
+        "sleep 1; exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
         "discord --start-minimized"
         "sleep 1; signal-desktop"
         "steam %U -nochatui -nofriendsui -silent"

@@ -58,7 +58,7 @@
   sound-config.enable = true;
 
   # Enable the gnome-keyring for Hyprland with auto unlock from decryption passphrase
-  gnome-keyring.enable = true;
+  gnome-keyring.enable = false; # now part of desktop
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

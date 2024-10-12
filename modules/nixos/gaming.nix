@@ -7,6 +7,7 @@
     # https://youtu.be/qlfm3MEbqYA?si=SjIg2ab0Ka5N20Bs&t=336
     environment.systemPackages = with pkgs; [
       protonup
+      mangohud
       wowup-cf
     ];
 

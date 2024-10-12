@@ -17,7 +17,7 @@
     services.tailscale.enable = true;
 
     # NFS shares
-    environment.systemPackages = with pkgs; [ nfs-utils ];
+    environment.systemPackages = with pkgs; [ nfs-utils home-manager ];
 
     users.defaultUserShell = pkgs.zsh;
     programs.zsh.enable = true;
