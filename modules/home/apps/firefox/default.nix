@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs-unstable, lib, config, ... }:
 let 
   lock-false = {
     Value = false;
@@ -15,13 +15,18 @@ in
     firefox.workExtensions = lib.mkEnableOption "enables extensions used for work";
   };
   config = lib.mkIf config.firefox.enable {
+    # Thanks https://github.com/scientiac/scifox !
     home.file.".mozilla/firefox/anvo/chrome" = {
+        source = ./chrome;
+        recursive = true;
+    };
+    home.file.".mozilla/firefox/work/chrome" = {
         source = ./chrome;
         recursive = true;
     };
     programs.firefox = {
       enable = true;
-      package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+      package = pkgs-unstable.wrapFirefox pkgs-unstable.firefox-unwrapped {
         extraPolicies = {
           DisableTelemetry = true;
           ExtensionUpdate = true;
@@ -50,7 +55,7 @@ in
             "addon@darkreader.org" = {
               install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
               installation_mode = "force_installed";
-              default_area = "navbar";
+              default_area = "menupanel";
             };
             "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
               install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
@@ -60,7 +65,7 @@ in
             "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
               install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
               installation_mode = "force_installed";
-              default_area = "navbar";
+              default_area = "menupanel";
             };
             "{3c078156-979c-498b-8990-85f7987dd929}" = {
               install_url = "https://addons.mozilla.org/firefox/downloads/latest/sidebery/latest.xpi";
@@ -70,7 +75,7 @@ in
             "{0fbf0ce4-d020-4eb2-a833-0d4f2aadc895}" = lib.mkIf config.firefox.workExtensions {
               install_url = "https://addons.mozilla.org/firefox/downloads/latest/level_up_for_d365_power_apps/latest.xpi";
               installation_mode = "force_installed";
-              default_area = "navbar";
+              default_area = "menupanel";
             };
             "ATBC@EasonWong" = {
               install_url = "https://addons.mozilla.org/firefox/downloads/latest/adaptive-tab-bar-colour/latest.xpi";
@@ -105,7 +110,12 @@ in
         anvo = {
           id = 0;
           name = "anvo";
-          isDefault = true;
+          isDefault = ! config.firefox.workExtensions; # Make this the default profile in case this is personal machine
+        };
+        work = {
+          id = 1;
+          name = "work";
+          isDefault = config.firefox.workExtensions;
         };
       };
     };

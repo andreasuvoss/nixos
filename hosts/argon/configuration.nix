@@ -58,7 +58,17 @@
   sound-config.enable = true;
 
   # Enable the gnome-keyring for Hyprland with auto unlock from decryption passphrase
-  gnome-keyring.enable = false; # now part of desktop
+  # gnome-keyring.enable = false; # now part of desktop
+
+  # TODO: Make this configurable later for different hosts
+  programs.firejail = {
+    enable = true;
+    wrappedBinaries = {
+      teams = {
+        executable = "${pkgs.teams-for-linux}/bin/teams-for-linux";
+      };
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

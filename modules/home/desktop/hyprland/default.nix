@@ -171,6 +171,11 @@
         "dimaround, title:^(Authentication Required)$"
         "dimaround, title:^(Authorization Failed)$"
 
+        # "float, title:^(Extension:.*Bitwarden.*Firefox)$"
+        # "center, title:^(Extension:.*Bitwarden.*Firefox)$"
+        # "size 500 200, title:^(Extension:.*Bitwarden.*Firefox)$"
+        # "dimaround, title:^(Extension:.*Bitwarden.*Firefox)$"
+
         "float, title:^(Save Document\?)$"
         "center, title:^(Save Document\?)$"
         "dimaround, class:(soffice)"

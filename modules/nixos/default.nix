@@ -4,7 +4,6 @@
   imports = [
     ./desktop.nix
     ./gaming.nix
-    ./gnome-keyring.nix
     ./locale.nix
     ./sound.nix
     ./virtualization.nix
