@@ -15,7 +15,7 @@
   users.users.andreasvoss = {
     isNormalUser = true;
     description = "Andreas Voss";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
   };
 
   # Bootloader

@@ -22,6 +22,7 @@
       };
     };
     virtualisation.podman.enable = true;
+    virtualisation.docker.enable = true;
     services.spice-vdagentd.enable = true;
     programs.virt-manager.enable = true;
   };
