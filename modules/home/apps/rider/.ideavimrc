@@ -14,6 +14,9 @@ let mapleader=","
 nnoremap <C-z> :action ToggleDistractionFreeMode<CR>
 
 
+nmap <C-h> :action PrevSplitter<CR>
+nmap <C-l> :action NextSplitter<CR>
+
 nnoremap <leader>ff :action SearchEverywhere<CR>
 nnoremap <leader>lg :action FindInPath<CR>
 nnoremap gI :action GotoImplementation<CR>
@@ -29,6 +32,7 @@ nnoremap <leader>sO :action StepOut<CR>
 nnoremap <leader>t :action Stop<CR>
 nnoremap <leader>dbg :action Debug<CR>
 
+nnoremap <leader>ra :action RenameElement<CR>
 " nnoremap gcc :action CommentByLineComment<CR>
 nnoremap <leader>lf :action ReformatCode<CR>
 " Git blame toggle
@@ -40,3 +44,6 @@ nnoremap L :action Forward<CR>
 
 vnoremap < <gv
 vnoremap > >gv
+
+" Emulated plugins
+Plug 'tpope/vim-surround'
