@@ -26,7 +26,10 @@
 
   # Dynamic linkers
   # TODO: Might try to get this to work later
-  # programs.nix-ld.enable = true;
+  programs.nix-ld.enable = true;
+  # programs.nix-ld.libraries = with pkgs; [
+  #   icu
+  # ];
   # environment.sessionVariables = {
   #   # NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
   #   #   pkgs.stdenv.cc.cc

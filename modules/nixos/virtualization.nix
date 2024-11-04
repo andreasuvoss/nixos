@@ -5,6 +5,7 @@
   config = lib.mkIf config.virtualization.enable {
     environment.systemPackages = with pkgs; [
       virtiofsd
+      podman-compose
     ];
     virtualisation.libvirtd = {
       enable = true;

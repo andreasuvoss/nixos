@@ -110,3 +110,9 @@ az config set bicep.use_binary_from_path=True
 ```
 
 This could be part of my configuration, but I will work on this some other day I reckon
+
+# Quick todo
+
+- Get jumping plugin for nvim
+- d+i + (/{ is pretty cool
+

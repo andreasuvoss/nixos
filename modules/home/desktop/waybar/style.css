@@ -72,6 +72,7 @@ window#waybar.chromium {
 #clock,
 #battery,
 #cpu,
+#disk,
 #memory,
 #temperature,
 #backlight,
@@ -125,12 +126,14 @@ window#waybar.chromium {
 #clock {
     /* background-color: #282a36; */
     background-color: #000000;
-    color: white;
+    color: #f1fa8c;
+    border-bottom: 2px solid #f1fa8c;
 }
 
 #battery {
     background-color: #000000;
-    color: white;
+    color: #50fa7b;
+    border-bottom: 2px solid #50fa7b;
 }
 
 #battery.charging {
@@ -161,24 +164,34 @@ label:focus {
 
 #cpu {
     background-color: #000000;
-    color: #ffffff;
+    color: #8be9fd ;
+    border-bottom: 2px solid #8be9fd ;
 }
 
 #memory {
     background-color: #000000;
-    color: white;
+    color: #8be9fd ;
+    border-bottom: 2px solid #8be9fd ;
+}
+
+#disk {
+    background-color: #000000;
+    color: #8be9fd ;
+    border-bottom: 2px solid #8be9fd ;
 }
 
 #backlight {
     background-color: #000000;
-    color:white;
+    color: #ffb86c ;
+    border-bottom: 2px solid #ffb86c ;
 }
 
 #network {
     /* background-color: #282a36; */
     background-color: #000000;
     /* border: 1px solid #282a36; */
-    color:white;
+    color:#ff79c6;
+    border-bottom: 2px solid #ff79c6;
 }
 
 /* #hardware { */
@@ -187,12 +200,14 @@ label:focus {
 
 #network.disconnected {
     background-color: #ff5555;
+    border:none;
 }
 
 #pulseaudio {
     /* background-color: #282a36; */
     background-color: #000000;
-    color: #ffffff;
+    color: #bd93f9;
+    border-bottom: 2px solid #bd93f9;
 }
 
 #pulseaudio.muted {

@@ -14,7 +14,7 @@
             "hyprland/workspaces"
           ];
           modules-center = [
-            "clock"
+            "hyprland/window"
           ];
           modules-right = [
             "custom/audio_idle_inhibitor"
@@ -25,7 +25,8 @@
             "group/hardware"
             "temperature"
             "battery"
-            "tray"
+            # "tray"
+            "group/clocktray"
             "custom/notification"
           ];
 
@@ -149,7 +150,8 @@
             format = "{icon}";
             format-icons = {
               notification = "<span foreground='red'><sup></sup></span>";
-              none = "";
+              # none = "";
+              none = "";
               dnd-notification = "<span foreground='red'><sup></sup></span>";
               dnd-none = "";
               inhibited-notification = "<span foreground='red'><sup></sup></span>";
@@ -176,7 +178,18 @@
               "memory"
               "disk"
             ];
+          };
 
+          "group/clocktray" = {
+            orientation = "horizontal";
+            drawer = {
+              transition-duration = 150;
+              click-to-reveal = true;
+            };
+            modules = [
+              "clock"
+              "tray"
+            ];
           };
 
           cpu = {
@@ -189,7 +202,7 @@
           };
           disk = {
             interval = 30;
-            format = "{specific_free:0.0f}GB 󰋊  ";
+            format = "{specific_free:0.0f}GB 󰋊";
             unit = "GB";
           };
 
