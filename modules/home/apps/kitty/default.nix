@@ -9,6 +9,9 @@
       theme = "Dracula";
       font.name = "JetBrainsMono Nerd Font";
       font.size = 9;
+      settings = {
+        scrollback_lines = 10000;
+      };
     };
   };
 }
