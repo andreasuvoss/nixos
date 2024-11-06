@@ -22,7 +22,6 @@
     ./nvim
     ./parallel
     ./ripgrep
-    ./smassh
     ./sshfs
     ./starship
     ./stow
@@ -65,7 +64,6 @@
     nvim.enable = true;
     parallel.enable = true;
     ripgrep.enable = true;
-    smassh.enable = true;
     sshfs.enable = true;
     starship.enable = true;
     stow.enable = false;
