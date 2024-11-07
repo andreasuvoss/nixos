@@ -116,3 +116,23 @@ This could be part of my configuration, but I will work on this some other day I
 - Get jumping plugin for nvim
 - d+i + (/{ is pretty cool
 
+# Connect to WIFI with `nmcli`
+
+```sh
+nmcli device wifi connect <APname> password <password>
+```
+
+# Make the WWAN interface work (for X1 Carbon)
+I spent some time trying to get auto fcc unlock to work, but I do not want to invest more time in that now, since I
+rarely use it, so as long as I have documented how I can connect that is fine. [This repo](https://github.com/lenovo/lenovo-wwan-unlock) might be useful in the future if I want to automate it.
+
+```sh
+# Create the connection
+nmcli connection add type gsm ifname wwan0mbim0 con-name "tdc-modem" apn internet
+
+# Unlock the radio (I guess, I don't really know)
+sudo mbimcli -p -d /dev/wwan0mbim0 -v --quectel-set-radio-state=on
+
+# Connect
+nmcli c up tdc-modem --ask
+```

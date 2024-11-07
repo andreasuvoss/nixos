@@ -21,6 +21,7 @@
             "idle_inhibitor"
             "backlight"
             "pulseaudio"
+            "bluetooth"
             "network"
             "group/hardware"
             # "temperature"
@@ -78,11 +79,19 @@
               ""
             ];
           };
+          bluetooth = {
+            format-on = "󰂯";
+            format-off = "󰂲";
+            format-disabled = ""; 
+            format-connected = "󰂱 {num_connections}";
+            tooltip-format-connected = "{device_enumerate}";
+            tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          };
           network = {
             format-wifi = "{essid} {icon}";
             format-ethernet = "{ifname} {icon}";
-            format-linked = "{ifname} (No IP) ";
-            format-disconnected = "Disconnected ";
+            format-linked = "{ifname} (No IP)";
+            format-disconnected = "Disconnected 󰌙";
             format-alt = "{ifname}: {ipaddr}/{cidr}";
             tooltip-format-ethernet = ''
               Interface: {ifname} {icon}
@@ -123,9 +132,11 @@
               warning = 30;
               critical = 15;
             };
+            full-at = 99;
             format = "{capacity}% {icon}";
             format-charging = "{capacity}% 󰂄";
-            format-plugged = "{capacity}% 󰂄";
+            # format-plugged = "{capacity}% 󰂄";
+            format-plugged = "";
             format-alt = "{time} {icon}";
             format-icons = [
               "󰁺"

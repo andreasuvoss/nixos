@@ -1,18 +1,39 @@
-{ config, pkgs, inputs, lib, ... }: {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-     ../../modules/nixos
-    ];
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+{
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/nixos
+  ];
 
   # NixOS
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = 1;
+  };
+
+  environment.systemPackages = with pkgs; [ modemmanager libmbim ];
+
+  systemd.services.modem-manager = {
+    description = "Modem Manager";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.modemmanager}/bin/ModemManager";
+      Restart = "always";
+    };
   };
 
   services.udev.extraRules = ''
@@ -23,11 +44,23 @@
   users.users.andreasvoss = {
     isNormalUser = true;
     description = "Andreas Voss";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "video" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirtd"
+      "video"
+    ];
     openssh.authorizedKeys.keys = [
-        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTDEi9qjl+MWFW53lLn280+DXvnEUfmoQd2IdR6GQoTQNnb0vrEUaDqPF1M1TNMa3zTj4zN5+SpTcKE69FKlrVW7jBoSN82g/6gc3tb8j2QXjYkKh6/fqIWQdMKvM1DsK7O5g3rFdQbUN+sb3RovZvns4wsZJCMsZFASkBJnYbQ5GZ2fYtxFk75JjRWm4kroByu/tka5wmO9K9oIzH2/D1/9Se3NbAZtxjAUyjtE5GY2yU3LYbfdG+VvlSuyVE9JDuk2Cepls5HFwXmoYn4NAwd7izuOwCsc95bdSw0Ju3t1TDeCxo7YSTx0hxkjVt0xi6mZZThyvAhXzUCUBxUhET andreasvoss@argon"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTDEi9qjl+MWFW53lLn280+DXvnEUfmoQd2IdR6GQoTQNnb0vrEUaDqPF1M1TNMa3zTj4zN5+SpTcKE69FKlrVW7jBoSN82g/6gc3tb8j2QXjYkKh6/fqIWQdMKvM1DsK7O5g3rFdQbUN+sb3RovZvns4wsZJCMsZFASkBJnYbQ5GZ2fYtxFk75JjRWm4kroByu/tka5wmO9K9oIzH2/D1/9Se3NbAZtxjAUyjtE5GY2yU3LYbfdG+VvlSuyVE9JDuk2Cepls5HFwXmoYn4NAwd7izuOwCsc95bdSw0Ju3t1TDeCxo7YSTx0hxkjVt0xi6mZZThyvAhXzUCUBxUhET andreasvoss@argon"
     ];
   };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  services.blueman.enable = true;
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -50,11 +83,14 @@
   desktop.enable = true;
 
   # Enables virtualization
-  virtualization.enable = false;
+  virtualization.enable = true;
 
   # Network configuration
   networking.hostName = "x1"; # Define your hostname.
   networking.networkmanager.enable = true;
+  networking.networkmanager.fccUnlockScripts = [
+    { id = "1eac:100d"; path = "${pkgs.lenovo-wwan-unlock}/bin/fcc_unlock.sh"; }
+  ];
 
   # Enable gaming
   gaming.enable = false;
