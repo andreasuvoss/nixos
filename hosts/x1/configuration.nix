@@ -88,9 +88,9 @@
   # Network configuration
   networking.hostName = "x1"; # Define your hostname.
   networking.networkmanager.enable = true;
-  networking.networkmanager.fccUnlockScripts = [
-    { id = "1eac:100d"; path = "${pkgs.lenovo-wwan-unlock}/bin/fcc_unlock.sh"; }
-  ];
+  # networking.networkmanager.fccUnlockScripts = [
+  #   { id = "1eac:100d"; path = "${pkgs.lenovo-wwan-unlock}/bin/fcc_unlock.sh"; }
+  # ];
 
   # Enable gaming
   gaming.enable = false;

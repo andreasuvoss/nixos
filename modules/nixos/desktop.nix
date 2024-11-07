@@ -33,6 +33,7 @@ in
 
     environment.systemPackages = with pkgs; [ greetd.tuigreet ];
 
+    security.pam.services.greetd.enableGnomeKeyring = true;
     services.gnome.gnome-keyring.enable = true;
     services.dbus.packages = [ pkgs.gnome.seahorse ];
     boot.initrd.systemd.enable = true;
