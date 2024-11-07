@@ -32,8 +32,15 @@
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # TODO: Throw in gnome-keyring if not enabled
-  # boot.initrd.systemd.enable = true;
+
+  programs.firejail = {
+    enable = true;
+    wrappedBinaries = {
+      teams = {
+        executable = "${pkgs.teams-for-linux}/bin/teams-for-linux";
+      };
+    };
+  };
 
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
@@ -54,9 +61,6 @@
 
   # Enable sound
   sound-config.enable = true;
-
-  # Enable the gnome-keyring for Hyprland with auto unlock from decryption passphrase
-  gnome-keyring.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -5,6 +5,7 @@
     hyprland.natural_scroll = lib.mkOption {
       default = false;
     };
+    hyprland.startTeams = lib.mkEnableOption "starts teams automatically";
     hyprland.wlogout.command = lib.mkOption {
       default = "wlogout -b 6 -s -R 1500 -L 1500 -T 600 -B 600";
       description = "command to run when opening wlogout";
@@ -85,7 +86,7 @@
         "sleep 1; bitwarden"
         # The command below might work for keeping xclip and wl-clipboard in sync, I had some issues copying text into proton games
         # "wl-paste -t text -w bash -c '[ \"$(xclip -selection clipboard -o)\" = \"$(wl-paste -n)\" ] || [ \"$(wl-paste -l | grep image)\" = \"\" ] && xclip -selection clipboard'"
-      ];
+      ] ++ lib.optional config.hyprland.startTeams "sleep 1; teams";
       env = [
         "XDG_CURRENT_DESKTOP,sway"
         "XCURSOR_SIZE,24"
@@ -99,6 +100,7 @@
           accel_profile = "flat";
           force_no_accel = true;
           touchpad.natural_scroll = config.hyprland.natural_scroll;
+          touchpad.clickfinger_behavior = config.hyprland.natural_scroll;
       };
       general = {
         gaps_in = 2;

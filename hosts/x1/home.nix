@@ -20,12 +20,19 @@ in
     ];
   };
 
+  services.easyeffects = {
+    enable = true;
+    preset = "DolbyMovie";
+    package = pkgs.easyeffects;
+  };
 
-  services.pulseeffects.enable = true;
+
+  # services.pulseeffects.enable = true;
 
   # Desktop
   desktop.enable = true;
   hyprland.wlogout.command = "wlogout -b 6 -s -R 300 -L 300 -T 500 -B 500";
+  hyprland.startTeams = true;
   hyprland.natural_scroll = true;
   hyprland.monitor = [
     # "eDP-1,highrr,auto,auto"

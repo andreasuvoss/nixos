@@ -13,7 +13,10 @@
     environment.shells = with pkgs; [ zsh ];
     
     # Tailscale
-    services.tailscale.enable = true;
+    services.tailscale = {
+      enable = true;
+      useRoutingFeatures = "client";
+    };
 
     # NFS shares
     environment.systemPackages = with pkgs; [ nfs-utils home-manager ];

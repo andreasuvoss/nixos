@@ -137,7 +137,7 @@ window#waybar.chromium {
 }
 
 #battery.charging {
-    color: #ffffff;
+    color: #50fa7b;
     background-color: #000000;
 }
 
@@ -212,7 +212,7 @@ label:focus {
 
 #pulseaudio.muted {
     background-color: #000000;
-    color: #ffffff;
+    color: #bd93f9;
 }
 
 #custom-media {

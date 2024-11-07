@@ -11,28 +11,26 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # MOVE ME UP!
-  boot.initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/cfe19bac-2337-458f-a8b1-9ef95d1d1a46";
-  hardware.ipu6 = {
-      enable = true;
-      platform = "ipu6ep";
-  };
+  boot.extraModulePackages = [ ];
+
+
+# MOVE ME UP!
+boot.initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/97161386-8535-4254-b218-435f3eea2679";
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b4739382-c70c-4003-b189-0c9fca25a3d6";
+    { device = "/dev/disk/by-uuid/aeb8350b-1b19-4392-ae43-f6d881c65357";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4731-87E6";
+    { device = "/dev/disk/by-uuid/2677-7E2F";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/baaf2aa8-7d40-4e6f-a6d1-51755639a0c2"; }
+    [ { device = "/dev/disk/by-uuid/0e71eea1-95d7-4cd4-a53b-2ba22c1a78fa"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

@@ -23,7 +23,7 @@
             "pulseaudio"
             "network"
             "group/hardware"
-            "temperature"
+            # "temperature"
             "battery"
             # "tray"
             "group/clocktray"
@@ -112,8 +112,9 @@
           backlight = {
             format = "{percent}% {icon}";
             format-icons = [
-              " "
-              " "
+              "󰃞"
+              "󰃟"
+              "󰃠"
             ];
           };
           battery = {
@@ -122,10 +123,22 @@
               warning = 30;
               critical = 15;
             };
-            format = "{capacity}% ";
-            format-charging = "{capacity}%";
-            format-plugged = "{capacity}%";
-            format-alt = "{time} ";
+            format = "{capacity}% {icon}";
+            format-charging = "{capacity}% 󰂄";
+            format-plugged = "{capacity}% 󰂄";
+            format-alt = "{time} {icon}";
+            format-icons = [
+              "󰁺"
+              "󰁻"
+              "󰁼"
+              "󰁽"
+              "󰁾"
+              "󰁿"
+              "󰂀"
+              "󰂁"
+              "󰂂"
+              "󰁹"
+            ];
           };
           "battery#bat2" = {
             bat = "BAT2";
