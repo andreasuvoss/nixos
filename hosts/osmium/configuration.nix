@@ -35,7 +35,7 @@
     backend = "podman";
     containers = {
       home-assistant = {
-        image = "homeassistant/home-assistant:2024.8.3";
+        image = "homeassistant/home-assistant:2024.11";
         volumes = [
           "/home/andreasvoss/apps/homeassistant:/config"
         ];
@@ -71,8 +71,8 @@
 
   # Network configuration
   networking.hostName = "osmium";
-  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 5201 ];
-  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5201 ];
+  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 5201 8080 ];
+  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5201 8080 ];
   #networking.firewall.enable = false;
 
   # Enable the OpenSSH deamon
