@@ -48,7 +48,7 @@ in
   firefox.workExtensions = true;
 
   # Scripts
-  scripts.enable = false;
+  scripts.enable = true;
 
   # Development tools
   dotnet.enable = true;
