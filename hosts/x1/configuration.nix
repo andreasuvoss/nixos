@@ -20,6 +20,8 @@
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
 
+  programs.nix-ld.enable = true;
+
   environment.sessionVariables = {
     NIXOS_OZONE_WL = 1;
   };
