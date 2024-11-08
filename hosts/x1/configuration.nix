@@ -26,7 +26,10 @@
     NIXOS_OZONE_WL = 1;
   };
 
-  environment.systemPackages = with pkgs; [ modemmanager libmbim ];
+  environment.systemPackages = with pkgs; [
+    modemmanager
+    libmbim
+  ];
 
   systemd.services.modem-manager = {
     description = "Modem Manager";
@@ -41,6 +44,17 @@
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
+
+  # systemd.services.kanshi = {
+  #   enable = true;
+  #   description = "kanshi daemon";
+  #   wantedBy = [ ];
+  #   after = [ ];
+  #   serviceConfig = {
+  #     Type = "simple";
+  #     ExecStart = ''${pkgs.kanshi}/bin/kanshi'';
+  #   };
+  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.andreasvoss = {

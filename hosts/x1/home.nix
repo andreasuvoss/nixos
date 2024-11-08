@@ -1,11 +1,15 @@
-{ lib, pkgs, nixpkgs, inputs, ... }:
+{
+  lib,
+  pkgs,
+  nixpkgs,
+  inputs,
+  ...
+}:
 let
   username = "andreasvoss";
 in
 {
-  imports = [
-    ../../modules/home
-  ];
+  imports = [ ../../modules/home ];
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (_: true);
@@ -26,19 +30,51 @@ in
     package = pkgs.easyeffects;
   };
 
-
   # services.pulseeffects.enable = true;
 
   # Desktop
   desktop.enable = true;
   hyprland.wlogout.command = "wlogout -b 6 -s -R 300 -L 300 -T 500 -B 500";
   hyprland.startTeams = true;
+  hyprland.enableKanshi = true;
   hyprland.natural_scroll = true;
   hyprland.monitor = [
     # "eDP-1,highrr,auto,auto"
     "eDP-1,2880x1800@120.0,0x0,1.5"
     "Unknown-1,disable"
   ];
+
+  # Kanshi
+  services.kanshi = {
+    # systemdTarget = "";
+    enable = true;
+    settings = [
+      {
+        profile.name = "undocked";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            scale = 1.5;
+            mode = "2880x1800@120Hz";
+            status = "enable";
+          }
+        ];
+        # profile.exec = [ "${pkgs.freetube}/bin/freetube" ];
+      }
+      {
+        profile.name = "docked";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            scale = 1.5;
+            mode = "2880x1800@120Hz";
+            status = "disable";
+          }
+          { criteria = "DP-1"; status = "enable"; }
+        ];
+      }
+    ];
+  };
 
   # CLIS
   clis.enable = true;
