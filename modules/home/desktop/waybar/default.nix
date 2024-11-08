@@ -83,7 +83,10 @@
             format-on = "󰂯";
             format-off = "󰂲";
             format-disabled = ""; 
-            format-connected = "󰂱 {num_connections}";
+            # format-connected = "󰂱 {num_connections}";
+            format-connected = "󰂱 {device_alias}";
+            format-connected-battery = "󰂱 {device_alias} {device_battery_percentage}%";
+            format-no-controller = "";
             tooltip-format-connected = "{device_enumerate}";
             tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
           };
