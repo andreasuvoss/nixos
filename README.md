@@ -116,6 +116,12 @@ This could be part of my configuration, but I will work on this some other day I
 - Get jumping plugin for nvim
 - d+i + (/{ is pretty cool
 
+# Clean profiles
+
+```sh
+sudo ~/.scripts/clean-profiles.sh "+2"
+```
+
 # Connect to WIFI with `nmcli`
 
 ```sh
