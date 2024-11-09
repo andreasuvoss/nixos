@@ -22,6 +22,7 @@
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = [ ];
 
   boot.initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/72b7d1c8-7710-4e4a-aa4d-a88133c85895";
