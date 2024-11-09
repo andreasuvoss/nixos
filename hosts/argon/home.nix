@@ -18,6 +18,7 @@ in
 
   # Desktop
   desktop.enable = true;
+  swayidle.enableWorkaround = true;
 
   # CLIS
   clis.enable = true;

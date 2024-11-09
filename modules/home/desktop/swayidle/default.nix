@@ -2,6 +2,7 @@
 {
   options = {
     swayidle.enable = lib.mkEnableOption "enable swayidle";
+    swayidle.enableWorkaround = lib.mkEnableOption "enable sway-audio-idle-inhibit workaround";
   };
   config = lib.mkIf config.swayidle.enable {
     home.packages = with pkgs; [
@@ -10,7 +11,7 @@
     ];
 
     # Workaround systemd for restarting sway-audio-idle-inhibit in case it crashes
-    systemd.user.services.keep-saii-alive = {
+    systemd.user.services.keep-saii-alive = lib.mkIf config.swayidle.enableWorkaround {
       Unit = {
         Description = "Keep sway-audio-idle-inhibit alive";
       };
@@ -23,7 +24,7 @@
       Install.WantedBy = [ "default.target" ];
     };
 
-    systemd.user.timers.keep-saii-alive = {
+    systemd.user.timers.keep-saii-alive = lib.mkIf config.swayidle.enableWorkaround {
       Unit = {
         Description = "Keep sway-audio-idle-inhibit alive";
       };

@@ -44,6 +44,8 @@ in
     "Unknown-1,disable"
   ];
 
+  teams.enable = lib.mkForce true;
+
   # Kanshi
   services.kanshi = {
     # systemdTarget = "";
