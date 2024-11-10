@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, pkgs-unstable, lib, config, ... }:
 let
   bicepLanguageServer = pkgs.stdenv.mkDerivation rec {
     pname = "bicep-langserver";
@@ -38,8 +38,8 @@ in
         lua-language-server
         csharp-ls
         rust-analyzer
-        nodePackages.typescript-language-server
-        nodePackages.volar
+        pkgs-unstable.typescript-language-server
+        pkgs-unstable.vue-language-server
         nil
         gopls
         docker-compose-language-service
@@ -148,5 +148,6 @@ in
       ];
     };
     home.sessionVariables.BICEP_LANGSERVER = "${bicepLanguageServer}/Bicep.LangServer.dll";
+    home.sessionVariables.VUE_LANGSERVER = "${pkgs-unstable.vue-language-server}/lib/node_modules/@vue/language-server";
   };
 }

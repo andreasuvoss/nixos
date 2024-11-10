@@ -60,7 +60,7 @@
     jq.enable = true;
     # keychain.enable = false;
     lazygit.enable = true;
-    nodejs.enable = true;
+    nodejs.enable = false;
     nvim.enable = true;
     parallel.enable = true;
     ripgrep.enable = true;

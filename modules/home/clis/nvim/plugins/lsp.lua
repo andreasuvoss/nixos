@@ -5,6 +5,21 @@ local on_attach = function(_, bufnr)
         vim.keymap.set(m, lhs, rhs, { buffer = bufnr })
     end
 
+    vim.diagnostic.config({
+        virtual_text = false,
+        update_in_insert = false,
+        underline = true,
+        severity_sort = true,
+        float = {
+            border = "single",
+            focusable = false,
+            style = "minimal",
+            source = "always",
+            header = "",
+            prefix = "",
+        },
+    })
+
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = "single",
     })
@@ -46,7 +61,7 @@ require 'lspconfig'.nil_ls.setup {
     capabilities = capabilities,
     settings = {
         ['nil'] = {
-            formatting = { command = {"nixfmt"} },
+            formatting = { command = { "nixfmt" } },
         },
     },
 }
@@ -74,30 +89,31 @@ require 'lspconfig'.rust_analyzer.setup {
 }
 
 
+
+local vue_lsp = os.getenv('VUE_LANGSERVER')
+
+-- require 'lspconfig'.ts_ls.setup {
 require 'lspconfig'.tsserver.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     init_options = {
         plugins = {
             {
-                name = "@vue/typescript-plugin",
-                location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-                languages = { "javascript", "typescript", "vue" },
+                name = '@vue/typescript-plugin',
+                location = vue_lsp,
+                languages = { 'vue' },
             },
         },
     },
     filetypes = {
-        "javascript",
-        "typescript",
-        "vue",
+        'javascript',
+        'typescript',
+        'javascriptreact',
+        'typescriptreact',
+        'vue',
     },
 }
-
-require 'lspconfig'.volar.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
-}
+require 'lspconfig'.volar.setup({})
 
 require 'lspconfig'.docker_compose_language_service.setup {
     on_attach = on_attach,
