@@ -29,6 +29,7 @@
   environment.systemPackages = with pkgs; [
     modemmanager
     libmbim
+    keyd
   ];
 
   systemd.services.modem-manager = {
@@ -38,6 +39,22 @@
     serviceConfig = {
       ExecStart = "${pkgs.modemmanager}/bin/ModemManager";
       Restart = "always";
+    };
+  };
+
+  services.keyd = {
+    enable = true;
+    keyboards.default.settings = {
+      main = {
+        capslock = "layer(capslock)";
+      };
+      capslock = {
+        h = "left";
+        j = "down";
+        k = "up";
+        l = "right";
+        p = "sysrq";
+      };
     };
   };
 
