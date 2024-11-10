@@ -68,6 +68,9 @@
                 ""
               ];
             };
+            ignored-sinks = [
+              "Easy Effects Sink"
+            ];
             on-click = "pavucontrol";
           };
           temperature = {
