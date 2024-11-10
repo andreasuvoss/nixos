@@ -113,7 +113,8 @@
               Subnet:    {netmask}
               Gateway:   {gwaddr}'';
             format-icons = {
-              ethernet = " ";
+              # ethernet = " ";
+              ethernet = "";
               default = [
                 "󰤟 "
                 "󰤢 "
