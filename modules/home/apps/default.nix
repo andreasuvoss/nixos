@@ -2,6 +2,7 @@
 
   imports = [
     ./alacritty
+    ./azuredatastudio
     ./bitwarden
     ./discord
     ./firefox
@@ -13,6 +14,7 @@
     ./libreoffice
     ./megasync
     ./obs-studio
+    ./postman
     ./rider
     ./signal
     ./spotify

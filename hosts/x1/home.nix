@@ -32,6 +32,10 @@ in
 
   # services.pulseeffects.enable = true;
 
+  # Work specific apps
+  postman.enable = true;
+  azuredatastudio.enable = true;
+
   # Desktop
   desktop.enable = true;
   hyprland.wlogout.command = "wlogout -b 6 -s -R 300 -L 300 -T 500 -B 500";
