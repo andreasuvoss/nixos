@@ -35,6 +35,7 @@ in
   # Work specific apps
   postman.enable = true;
   azuredatastudio.enable = true;
+  _1password.enable = false;
 
   # Desktop
   desktop.enable = true;

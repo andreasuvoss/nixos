@@ -89,6 +89,7 @@
         # "wl-paste -t text -w bash -c '[ \"$(xclip -selection clipboard -o)\" = \"$(wl-paste -n)\" ] || [ \"$(wl-paste -l | grep image)\" = \"\" ] && xclip -selection clipboard'"
       ] 
       ++ lib.optional config.hyprland.startTeams "sleep 1; teams --minimized true"
+      # ++ lib.optional config._1password.enable "sleep 1; 1password --silent"
       ++ lib.optional config.hyprland.enableKanshi "exec ${pkgs.kanshi}/bin/kanshi"
       ++ lib.optional (!config.swayidle.enableWorkaround) "exec ${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
       env = [

@@ -1,6 +1,7 @@
 { lib, config, ... }:{
 
   imports = [
+    ./1password
     ./alacritty
     ./azuredatastudio
     ./bitwarden
