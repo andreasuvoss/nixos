@@ -2,6 +2,7 @@
 
 REQUIRED_DEPENDENCIES="gum az jq"
 APP_PREFIX="bc-"
+WORSE_APP_PREFIX="ACCESS-bc-"
 
 for CLI in $REQUIRED_DEPENDENCIES; do
     if ! command -v $CLI &> /dev/null; then
@@ -22,9 +23,9 @@ fi
 # The following command gets a maximum of 100 applications the '--all' flag can be added to the 'az' command if you 
 # really want to list everything
 if ! command -v fzf &> /dev/null; then
-    APP_DISPLAY_NAME=$(gum spin --spinner dot --title "Fetching BCs..." -- az ad app list --filter "startswith(displayName,'$APP_PREFIX')" | jq '.[].displayName' -r | gum choose --height 20 --header "Choose the application")
+    APP_DISPLAY_NAME=$(gum spin --spinner dot --title "Fetching BCs..." -- az ad app list --filter "startswith(displayName,'$APP_PREFIX') or startswith(displayName, '$WORSE_APP_PREFIX')" | jq '.[].displayName' -r | gum choose --height 20 --header "Choose the application")
 else
-    APPS=$(gum spin --spinner dot --title "Fetching BCs..." -- az ad app list --filter "startswith(displayName,'$APP_PREFIX')")
+    APPS=$(gum spin --spinner dot --title "Fetching BCs..." -- az ad app list --filter "startswith(displayName,'$APP_PREFIX') or startswith(displayName, '$WORSE_APP_PREFIX')")
     APP_DISPLAY_NAME=$(echo $APPS | jq '.[].displayName' -r | fzf)
 fi
 
