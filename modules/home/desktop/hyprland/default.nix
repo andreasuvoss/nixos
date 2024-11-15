@@ -198,6 +198,15 @@
         # "move 100% 0, title:^(Volume Control)$"
         # "size 500 200, title:^(Authentication Required)$"
 
+        # RIDER
+        "float, title:^(Rename)$"
+        "center, title:^(Rename)$"
+        # "dimaround, class:(Rename)"
+        "stayfocused, title:^(Rename)$"
+        "forceinput, title:^(Rename)$"
+
+        "stayfocused, title:^(Create\: Directory)$"
+
         # alternative to audio inhibit?
         # "idleinhibit fullscreen, class:.*"
         "suppressevent maximize, class:.*"

@@ -25,6 +25,7 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = 1;
   };
+  services.intune.enable = true;
 
   environment.systemPackages = with pkgs; [
     modemmanager
