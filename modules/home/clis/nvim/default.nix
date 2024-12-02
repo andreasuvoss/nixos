@@ -40,6 +40,7 @@ in
         rust-analyzer
         pkgs-unstable.typescript-language-server
         pkgs-unstable.vue-language-server
+        pyright
         nil
         gopls
         docker-compose-language-service
@@ -126,6 +127,7 @@ in
             p.tree-sitter-markdown
             p.tree-sitter-markdown-inline
             p.tree-sitter-c-sharp
+            p.tree-sitter-python
             p.tree-sitter-yaml
             (pkgs.tree-sitter.buildGrammar {
               language = "bicep";

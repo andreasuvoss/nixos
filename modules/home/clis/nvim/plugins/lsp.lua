@@ -71,6 +71,11 @@ require 'lspconfig'.csharp_ls.setup {
     capabilities = capabilities,
 }
 
+require 'lspconfig'.pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
 require 'lspconfig'.gopls.setup {
     on_attach = on_attach,
     capabilities = capabilities,

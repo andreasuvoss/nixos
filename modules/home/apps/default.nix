@@ -11,6 +11,7 @@
     ./gimp
     ./google-chrome
     ./gthumb
+    ./jetbrains-gateway
     ./kitty
     ./libreoffice
     ./megasync

@@ -25,6 +25,7 @@ in
 
   # Apps
   apps.enable = true;
+  jetbrains-gateway.enable = true;
 
   # Scripts
   scripts.enable = true;
