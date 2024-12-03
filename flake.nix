@@ -77,6 +77,7 @@
           extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
+              config.permittedInsecurePackages = [ "dotnet-sdk-7.0.410" ];
               inherit system;
             };
             inherit inputs;
