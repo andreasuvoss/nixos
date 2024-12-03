@@ -6,7 +6,7 @@
   config = lib.mkIf config.kitty.enable {
     programs.kitty = {
       enable = true;
-      theme = "Dracula";
+      themeFile = "Dracula";
       font.name = "JetBrainsMono Nerd Font";
       font.size = 9;
       settings = {

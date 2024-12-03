@@ -1,4 +1,10 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   options = {
     gaming.enable = lib.mkEnableOption "enables libraries needed for gaming";
   };
@@ -16,11 +22,10 @@
       gamescopeSession.enable = true;
     };
     programs.gamemode.enable = true;
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
-    services.xserver.videoDrivers = ["amdgpu"];
+    services.xserver.videoDrivers = [ "amdgpu" ];
   };
 }

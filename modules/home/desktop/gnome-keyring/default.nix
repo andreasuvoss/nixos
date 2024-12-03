@@ -6,7 +6,7 @@
   config = lib.mkIf config.gnome-keyring.ssh.enable {
     home.sessionVariables = {
       SSH_AUTH_SOCK = "\${XDG_RUNTIME_DIR}/keyring/ssh";
-      SSH_ASKPASS = "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
+      SSH_ASKPASS = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
     };
     systemd.user.services.gnome-keyring =
     {

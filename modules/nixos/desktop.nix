@@ -35,7 +35,7 @@ in
 
     security.pam.services.greetd.enableGnomeKeyring = true;
     services.gnome.gnome-keyring.enable = true;
-    services.dbus.packages = [ pkgs.gnome.seahorse ];
+    services.dbus.packages = [ pkgs.seahorse ];
     boot.initrd.systemd.enable = true;
 
     services.greetd = {

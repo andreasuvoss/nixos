@@ -2,7 +2,7 @@
   description = "My NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
@@ -10,7 +10,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -27,7 +27,10 @@
       lib = nixpkgs.lib;
       user = "andreasvoss";
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        config.permittedInsecurePackages = [ "dotnet-sdk-7.0.410" ];
+      };
     in
     {
       nixosConfigurations = {
@@ -61,6 +64,7 @@
           extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
+              config.permittedInsecurePackages = [ "dotnet-sdk-7.0.410" ];
               inherit system;
             };
             inherit inputs;

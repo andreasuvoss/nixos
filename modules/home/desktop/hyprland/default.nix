@@ -157,6 +157,7 @@
         disable_hyprland_logo = true;
         mouse_move_enables_dpms = false;
         key_press_enables_dpms = true;
+        focus_on_activate = true;
       };
       device = {
         name = "epic-mouse-v1";
