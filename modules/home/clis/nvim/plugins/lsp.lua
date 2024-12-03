@@ -98,7 +98,7 @@ require 'lspconfig'.rust_analyzer.setup {
 local vue_lsp = os.getenv('VUE_LANGSERVER')
 
 -- require 'lspconfig'.ts_ls.setup {
-require 'lspconfig'.tsserver.setup {
+require 'lspconfig'.ts_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     init_options = {

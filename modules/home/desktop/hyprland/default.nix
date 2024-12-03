@@ -93,7 +93,7 @@
       ++ lib.optional config.hyprland.enableKanshi "exec ${pkgs.kanshi}/bin/kanshi"
       ++ lib.optional (!config.swayidle.enableWorkaround) "exec ${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
       env = [
-        "XDG_CURRENT_DESKTOP,sway"
+        # "XDG_CURRENT_DESKTOP,sway"
         "XCURSOR_SIZE,24"
         "QT_QPA_PLATFORMTHEME,qt5ct"
       ];
@@ -126,10 +126,10 @@
           size = 3;
           passes = 1;
         };
-        drop_shadow = "yes";
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
+        # drop_shadow = "yes";
+        # shadow_range = 4;
+        # shadow_render_power = 3;
+        # "col.shadow" = "rgba(1a1a1aee)";
       };
       animations = {
         enabled = "yes";
@@ -172,7 +172,7 @@
         # MEGA
         "float, class:^(MEGAsync)$"
         "stayfocused, class:^(MEGAsync)$"
-        "forceinput, class:^(MEGAsync)$"
+        # "forceinput, class:^(MEGAsync)$"
         "dimaround, class:^(MEGAsync)$"
 
         "float, title:^(Authentication Required)$"
@@ -190,7 +190,7 @@
         "center, title:^(Save Document\?)$"
         "dimaround, class:(soffice)"
         "stayfocused, title:^(Save Document\?)$"
-        "forceinput, title:^(Save Document\?)$"
+        # "forceinput, title:^(Save Document\?)$"
 
         "float, title:^(Welcome to JetBrains Rider\?)$"
         "center, title:^(Welcome to JetBrains Rider\?)$"
@@ -204,7 +204,7 @@
         "center, title:^(Rename)$"
         # "dimaround, class:(Rename)"
         "stayfocused, title:^(Rename)$"
-        "forceinput, title:^(Rename)$"
+        # "forceinput, title:^(Rename)$"
 
         "stayfocused, title:^(Create\: Directory)$"
 

@@ -215,7 +215,7 @@
             orientation = "horizontal";
             drawer = {
               transition-duration = 150;
-              click-to-reveal = true;
+              click-to-reveal = false;
             };
             modules = [
               "clock"
