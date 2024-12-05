@@ -69,7 +69,7 @@ in
         # profile.exec = [ "${pkgs.freetube}/bin/freetube" ];
       }
       {
-        profile.name = "docked";
+        profile.name = "docked-at-work";
         profile.outputs = [
           {
             criteria = "eDP-1";
@@ -77,7 +77,11 @@ in
             mode = "2880x1800@120Hz";
             status = "disable";
           }
-          { criteria = "DP-1"; status = "enable"; }
+          {
+            # criteria = "DP-1";
+            criteria = "Dell Inc. Dell U4924DW 68JT0S3";
+            status = "enable";
+          }
         ];
       }
     ];
