@@ -127,8 +127,8 @@
       };
       master = {
         allow_small_split = true;
-        # orientation = "left"; # to use entire monitor
-        orientation = "center";
+        orientation = "left"; # to use entire monitor
+        # orientation = "center";
         always_center_master = true;
         mfact = "0.55";
       };
