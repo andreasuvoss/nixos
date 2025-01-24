@@ -4,6 +4,18 @@
   };
   config = lib.mkIf config.fonts.enable {
     fonts.fontconfig.enable = true;
+    # fonts.packages = with pkgs; [
+    #   google-fonts
+    #   noto-fonts
+    #   noto-fonts-cjk-sans
+    #   noto-fonts-emoji
+    #   liberation_ttf
+    #   fira-code
+    #   fira-code-symbols
+    #   mplus-outline-fonts.githubRelease
+    #   dina-font
+    #   (nerdfonts.override { fonts = [ "JetBrainsMono" ] ; })
+    # ];
     home.packages = with pkgs; [
       google-fonts
       noto-fonts
@@ -14,7 +26,8 @@
       fira-code-symbols
       mplus-outline-fonts.githubRelease
       dina-font
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ] ; })
+      # (nerdfonts.override { fonts = [ "JetBrainsMono" ] ; })
+      nerd-fonts.jetbrains-mono
     ];
   };
 }
