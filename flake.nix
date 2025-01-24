@@ -40,6 +40,7 @@
         };
         argon = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = [ ./hosts/argon/configuration.nix ];
         };
         osmium = nixpkgs.lib.nixosSystem {

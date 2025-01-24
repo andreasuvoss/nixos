@@ -31,6 +31,41 @@
       lxqt.lxqt-policykit
     ];
 
+    home.pointerCursor = {
+      gtk.enable = true;
+      # x11.enable = true;
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 16;
+    };
+    gtk = {
+      enable = true;
+
+      font = {
+        name = "Sans";
+        size = 11;
+      };
+
+      iconTheme = { 
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+      };
+      theme = {
+        name = "Dracula";
+        package = pkgs.dracula-theme;
+      };
+      gtk3.extraConfig = {
+        Settings = ''
+          gtk-application-prefer-dark-theme=1
+        '';
+      };
+      gtk4.extraConfig = {
+        Settings = ''
+          gtk-application-prefer-dark-theme=1
+        '';
+      };
+    };
+
     programs.tofi = {
       enable = true;
       settings = {
@@ -71,26 +106,28 @@
     };
 
     wayland.windowManager.hyprland.enable = true;
+    wayland.windowManager.hyprland.systemd.enable = false;
     wayland.windowManager.hyprland.settings = {
       monitor = config.hyprland.monitor;
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "yazi";
-      "$menu" = "tofi-drun | xargs hyprctl dispatch exec --";
+      "$menu" = "uwsm app -- $(tofi-drun)";
       "$lock" = "swaylock";
       "$wlogoutCmd" = config.hyprland.wlogout.command;
       exec-once =
         [
-          "swaybg --color 000000" # at some point maybe look into swww
-          "waybar"
-          "sleep 1; swaync"
-          "sleep 1; exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
-          "discord --start-minimized"
-          "sleep 1; signal-desktop"
-          "steam %U -nochatui -nofriendsui -silent"
-          "exec swayidle -w timeout 180 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 300 '$lock' before-sleep '$lock'"
-          "sleep 1; megasync"
-          "sleep 1; bitwarden"
+          "uwsm finalize"
+          "uwsm app -- swaybg --color 000000" # at some point maybe look into swww
+          "uwsm app -- waybar"
+          "uwsm app -- sleep 1; swaync"
+          "uwsm app -- sleep 1; exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
+          "uwsm app -- discord --start-minimized"
+          "uwsm app -- sleep 1; signal-desktop"
+          "uwsm app -- steam %U -nochatui -nofriendsui -silent"
+          "uwsm app -- exec swayidle -w timeout 180 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 300 '$lock' before-sleep '$lock'"
+          "uwsm app -- sleep 1; megasync"
+          "uwsm app -- sleep 1; bitwarden"
           # The command below might work for keeping xclip and wl-clipboard in sync, I had some issues copying text into proton games
           # "wl-paste -t text -w bash -c '[ \"$(xclip -selection clipboard -o)\" = \"$(wl-paste -n)\" ] || [ \"$(wl-paste -l | grep image)\" = \"\" ] && xclip -selection clipboard'"
         ]
@@ -129,6 +166,7 @@
         allow_small_split = true;
         orientation = "left"; # to use entire monitor
         # orientation = "center";
+        # always_center_master = true;
         slave_count_for_center_master = 0;
         mfact = "0.55";
       };
@@ -231,8 +269,8 @@
 
       bind =
         [
-          "$mainMod, Q, exec, $terminal"
-          "$mainMod, M, exec, sleep 0.1; hyprctl dispatch dpms off; $lock"
+          "$mainMod, Q, exec, uwsm app -- $terminal"
+          "$mainMod, M, exec, sleep 0.1; hyprctl dispatch dpms off; uwsm app -- $lock"
           "$mainMod, ESCAPE, exec, pgrep -U $USER wlogout >/dev/null || exec $wlogoutCmd" # I wonder how this looks on a smaller display..
           # "$mainMod, E, exec, $fileManager"
           "$mainMod, V, togglefloating"

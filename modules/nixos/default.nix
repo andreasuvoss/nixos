@@ -9,9 +9,14 @@
     ./virtualization.nix
   ];
   config = {
+    nix.settings = {
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    };
+
     # Enable zsh
     environment.shells = with pkgs; [ zsh ];
-    
+
     # Tailscale
     services.tailscale = {
       enable = true;
@@ -19,7 +24,10 @@
     };
 
     # NFS shares
-    environment.systemPackages = with pkgs; [ nfs-utils home-manager ];
+    environment.systemPackages = with pkgs; [
+      nfs-utils
+      home-manager
+    ];
 
     users.defaultUserShell = pkgs.zsh;
     programs.zsh.enable = true;

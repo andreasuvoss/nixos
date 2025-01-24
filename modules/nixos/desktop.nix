@@ -1,12 +1,14 @@
 {
+  inputs,
   pkgs,
   lib,
   config,
+  pkgsUnstable,
   ...
 }:
 let
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-  session = "${pkgs.hyprland}/bin/Hyprland";
+  session = "${pkgsUnstable.hyprland}/bin/Hyprland";
   username = "andreasvoss";
 in
 {
@@ -15,21 +17,48 @@ in
   };
   config = lib.mkIf config.desktop.enable {
 
+    _module.args.pkgsUnstable = import inputs.nixpkgs-unstable {
+      inherit (pkgs.stdenv.hostPlatform) system;
+      inherit (config.nixpkgs) config;
+    };
     # Screensharing and stuff + portal for gnome-keyring
     xdg.portal = {
       enable = true;
       wlr.enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
-        xdg-desktop-portal-hyprland
+        # xdg-desktop-portal-hyprland
+        pkgsUnstable.xdg-desktop-portal-hyprland
+        # inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
       ];
     };
 
+    hardware.graphics = {
+      package = pkgsUnstable.mesa.drivers;
+      enable32Bit = true;
+      package32 = pkgsUnstable.pkgsi686Linux.mesa.drivers;
+    };
     # Mount USB drives
     services.udisks2.enable = false; # Does not autologin to ssh-agent with this
 
     # Enable WM and DM
-    programs.hyprland.enable = true;
+    programs.hyprland = {
+      enable = true;
+      # withUWSM = true;
+      xwayland.enable = true;
+      package = pkgsUnstable.hyprland;
+      portalPackage = pkgsUnstable.xdg-desktop-portal-hyprland;
+    };
+    # programs.uwsm = {
+    #   enable = true;
+    #   waylandCompositors = {
+    #     hyprland = {
+    #       prettyName = "Hyprland";
+    #       comment = "Hyprland compositor managed by UWSM";
+    #       binPath = "/run/current-system/sw/bin/Hyprland";
+    #     };
+    #   };
+    # };
 
     environment.systemPackages = with pkgs; [ greetd.tuigreet ];
 
