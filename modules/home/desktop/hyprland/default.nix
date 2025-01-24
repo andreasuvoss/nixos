@@ -129,7 +129,8 @@
         allow_small_split = true;
         orientation = "left"; # to use entire monitor
         # orientation = "center";
-        always_center_master = true;
+        # slave_count_for_center_master = 0;
+        always_center_master = 1;
         mfact = "0.55";
       };
       cursor = {
@@ -165,7 +166,7 @@
         pseudotile = "yes";
         preserve_split = "yes";
       };
-      master.new_status = "master";
+      master.new_status = "slave";
       # master.new_is_master = true;
       gestures.workspace_swipe = "off";
       misc = {
