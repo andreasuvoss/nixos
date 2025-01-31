@@ -102,7 +102,8 @@
         ) "exec ${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
       env = [
         # "XDG_CURRENT_DESKTOP,sway"
-        "XCURSOR_SIZE,24"
+        "XCURSOR_SIZE,16"
+        "HYPRCURSOR_SIZE,16"
         "QT_QPA_PLATFORMTHEME,qt5ct"
       ];
       input = {
@@ -130,6 +131,7 @@
         orientation = "left"; # to use entire monitor
         # orientation = "center";
         # slave_count_for_center_master = 0;
+        # center_master_slaves_on_right = 0;
         always_center_master = 1;
         mfact = "0.55";
       };
