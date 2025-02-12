@@ -41,10 +41,10 @@ in
     services.greetd = {
       enable = true;
       settings = {
-        initial_session = {
-          command = "${session}";
-          user = "${username}";
-        };
+        # initial_session = {
+        #   command = "${session}";
+        #   user = "${username}";
+        # };
         default_session = {
           command = "${tuigreet} --greeting 'enter the mainframe' --asterisks --remember --remember-user-session --time --cmd ${session}";
           user = "greeter";
