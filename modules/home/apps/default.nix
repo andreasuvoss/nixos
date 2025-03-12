@@ -5,6 +5,7 @@
     ./alacritty
     ./azuredatastudio
     ./bitwarden
+    ./bruno
     ./discord
     ./firefox
     ./freetube

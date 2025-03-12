@@ -34,6 +34,7 @@ in
 
   # Work specific apps
   postman.enable = true;
+  bruno.enable = true;
   azuredatastudio.enable = true;
   _1password.enable = false;
 
