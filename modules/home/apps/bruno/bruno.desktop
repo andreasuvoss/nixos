@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Bruno
+GenericName=Bruno Editor
+Comment=Bruno text editor
+Exec=bruno
+Terminal=false
+Categories=Utility;TextEditor;
