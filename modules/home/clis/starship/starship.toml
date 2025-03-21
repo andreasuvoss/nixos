@@ -15,6 +15,7 @@ $azure\
 $rust\
 $jobs\
 $line_break\
+$container\
 $character\
 """
 
@@ -52,3 +53,6 @@ disabled = false
 format = 'on [$symbol($subscription)]($style) '
 symbol = '󰠅 '
 style = 'blue bold'
+
+[container]
+disabled = false

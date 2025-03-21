@@ -6,6 +6,7 @@
     environment.systemPackages = with pkgs; [
       virtiofsd
       podman-compose
+      distrobox
     ];
     virtualisation.libvirtd = {
       enable = true;

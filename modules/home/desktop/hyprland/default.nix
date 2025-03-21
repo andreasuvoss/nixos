@@ -76,7 +76,7 @@
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "yazi";
-      "$menu" = "tofi-drun | xargs hyprctl dispatch exec --";
+      "$menu" = "tofi-drun | xargs -I{} hyprctl dispatch exec -- \"{}\"";
       "$lock" = "swaylock";
       "$wlogoutCmd" = config.hyprland.wlogout.command;
       exec-once =
