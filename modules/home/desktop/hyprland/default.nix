@@ -91,6 +91,7 @@
           "exec swayidle -w timeout 180 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 300 '$lock' before-sleep '$lock'"
           "sleep 1; megasync"
           "sleep 1; bitwarden"
+          "tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE \"$HYPRLAND_INSTANCE_SIGNATURE\""
           # The command below might work for keeping xclip and wl-clipboard in sync, I had some issues copying text into proton games
           # "wl-paste -t text -w bash -c '[ \"$(xclip -selection clipboard -o)\" = \"$(wl-paste -n)\" ] || [ \"$(wl-paste -l | grep image)\" = \"\" ] && xclip -selection clipboard'"
         ]
@@ -106,7 +107,7 @@
         "HYPRCURSOR_SIZE,16"
         "QT_QPA_PLATFORMTHEME,qt5ct"
         "SSH_ASKPASS,${pkgs.seahorse}/libexec/seahorse/ssh-askpass"
-        "SSH_AUTH_SOCK,${builtins.getEnv "XDG_RUNTIME_DIR"}/keyring/ssh"
+        "SSH_AUTH_SOCK,\${XDG_RUNTIME_DIR}/keyring/ssh"
       ];
       input = {
         kb_layout = "us";
