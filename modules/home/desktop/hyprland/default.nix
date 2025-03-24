@@ -156,6 +156,7 @@
       animations = {
         enabled = "yes";
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+        # bezier = "myBezier, 0.68, -0.6, 0.32, 1.6";
         animation = [
           #NAME,ONOFF,SPEED,CURVE,STYLE
           "windows, 1, 1, myBezier"

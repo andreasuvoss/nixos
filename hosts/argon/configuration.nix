@@ -4,7 +4,6 @@
       ./hardware-configuration.nix
       ../../modules/nixos
     ];
-
   # NixOS
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

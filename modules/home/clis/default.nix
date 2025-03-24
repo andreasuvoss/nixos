@@ -1,5 +1,6 @@
 { lib, config, ... }:{
   imports = [
+    ./ags
     ./az-cred-provider
     ./azure-cli
     ./bat
@@ -10,6 +11,7 @@
     ./fzf
     ./gcc
     ./git
+    ./gjs
     ./glow
     ./gparted
     ./gum
@@ -43,6 +45,7 @@
     clis.enable = lib.mkEnableOption "enable clis";
   };
   config = lib.mkIf config.clis.enable {
+    ags.enable = true;
     az-cred-provider.enable = true;
     azure-cli.enable = true;
     bat.enable = true;
@@ -53,6 +56,7 @@
     fd.enable = true;
     fzf.enable = true;
     git.enable = true;
+    gjs.enable = true;
     glow.enable = true;
     gparted.enable = false;
     gum.enable = true;

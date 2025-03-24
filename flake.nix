@@ -8,10 +8,12 @@
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ags = {
+      url = "github:aylur/ags";
     };
   };
 
@@ -21,6 +23,7 @@
       home-manager,
       nixpkgs-unstable,
       nixos-wsl,
+      ags,
       ...
     }@inputs:
     let
@@ -33,6 +36,15 @@
       };
     in
     {
+      # packages.${system}.default = ags.lib.bundle {
+      #   inherit pkgs;
+      #   src = ./.;
+      #   name = "my-shell";
+      #   entry = "app.ts";
+      #   gtk4 = false;
+      #   extraPackages = [
+      #   ];
+      # };
       nixosConfigurations = {
         argon-vm = nixpkgs.lib.nixosSystem {
           inherit system;

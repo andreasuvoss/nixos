@@ -38,8 +38,8 @@ in
         lua-language-server
         csharp-ls
         rust-analyzer
-        pkgs-unstable.typescript-language-server
-        pkgs-unstable.vue-language-server
+        typescript-language-server
+        vue-language-server
         pyright
         nil
         gopls

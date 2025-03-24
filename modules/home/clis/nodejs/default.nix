@@ -5,7 +5,7 @@
   };
   config = lib.mkIf config.nodejs.enable {
     home.packages = with pkgs; [
-      nodejs_22
+      nodejs_23
     ];
   };
 }
