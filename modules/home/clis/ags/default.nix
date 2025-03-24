@@ -3,6 +3,9 @@
   options = {
     ags.enable = lib.mkEnableOption "enable ags";
   };
+  imports = [
+    inputs.ags.homeManagerModules.default
+  ];
   config = lib.mkIf config.ags.enable {
     programs.ags = {
       enable = true;
