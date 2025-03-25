@@ -106,8 +106,9 @@
         "XCURSOR_SIZE,16"
         "HYPRCURSOR_SIZE,16"
         "QT_QPA_PLATFORMTHEME,qt5ct"
+        "SSH_AUTH_SOCK,/run/user/1000/keyring/ssh"
         "SSH_ASKPASS,${pkgs.seahorse}/libexec/seahorse/ssh-askpass"
-        "SSH_AUTH_SOCK,\${XDG_RUNTIME_DIR}/keyring/ssh"
+        "SSH_AUTH_SOCK2,\${XDG_RUNTIME_DIR}/keyring/ssh"
       ];
       input = {
         kb_layout = "us";
