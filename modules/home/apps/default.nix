@@ -9,6 +9,7 @@
     ./discord
     ./firefox
     ./freetube
+    ./ghostty
     ./gimp
     ./google-chrome
     ./gthumb
@@ -34,10 +35,11 @@
     discord.enable = true;
     firefox.enable = true;
     freetube.enable = true;
+    ghostty.enable = true;
     gimp.enable = true;
     google-chrome.enable = false;
     gthumb.enable = true;
-    kitty.enable = true;
+    kitty.enable = false;
     libreoffice.enable = true;
     megasync.enable = true;
     obs-studio.enable = true;

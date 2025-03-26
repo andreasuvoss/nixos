@@ -74,7 +74,7 @@
     wayland.windowManager.hyprland.settings = {
       monitor = config.hyprland.monitor;
       "$mainMod" = "SUPER";
-      "$terminal" = "kitty";
+      "$terminal" = "ghostty";
       "$fileManager" = "yazi";
       "$menu" = "tofi-drun | xargs -I{} hyprctl dispatch exec -- \"{}\"";
       "$lock" = "swaylock";
