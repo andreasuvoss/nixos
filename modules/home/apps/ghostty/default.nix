@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs-unstable, ... }:
 {
   options = {
     ghostty.enable = lib.mkEnableOption "enables ghostty";
@@ -11,6 +11,7 @@
         font-family = "JetBrainsMono Nerd Font";
         font-size = 9;
       };
+      package = pkgs-unstable.ghostty;
       themes = {
         dracula = {
           palette = [
