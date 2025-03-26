@@ -10,6 +10,7 @@
         theme = "dracula";
         font-family = "JetBrainsMono Nerd Font";
         font-size = 9;
+        gtk-single-instance = true;
       };
       package = pkgs-unstable.ghostty;
       themes = {
