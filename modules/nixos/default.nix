@@ -11,6 +11,7 @@
   config = {
     # Enable zsh
     environment.shells = with pkgs; [ zsh ];
+    environment.localBinInPath = true;
     
     # Tailscale
     services.tailscale = {

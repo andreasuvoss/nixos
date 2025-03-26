@@ -47,7 +47,7 @@
   config = lib.mkIf config.clis.enable {
     ags.enable = true;
     az-cred-provider.enable = true;
-    azure-cli.enable = true;
+    azure-cli.enable = false;
     bat.enable = true;
     bicep.enable = true;
     btop.enable = true;
