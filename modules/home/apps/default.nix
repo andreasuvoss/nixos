@@ -14,7 +14,6 @@
     ./google-chrome
     ./gthumb
     ./jetbrains-gateway
-    ./kitty
     ./libreoffice
     ./megasync
     ./obs-studio
@@ -39,7 +38,6 @@
     gimp.enable = true;
     google-chrome.enable = false;
     gthumb.enable = true;
-    kitty.enable = false;
     libreoffice.enable = true;
     megasync.enable = true;
     obs-studio.enable = true;

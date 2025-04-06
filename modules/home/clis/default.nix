@@ -46,10 +46,10 @@
   };
   config = lib.mkIf config.clis.enable {
     ags.enable = true;
-    az-cred-provider.enable = true;
+    az-cred-provider.enable = false;
     azure-cli.enable = false;
     bat.enable = true;
-    bicep.enable = true;
+    bicep.enable = false;
     btop.enable = true;
     curl.enable = true;
     fastfetch.enable = true;
