@@ -14,8 +14,8 @@ $nodejs\
 $azure\
 $rust\
 $jobs\
-$container\
 $line_break\
+$container\
 $character\
 """
 
