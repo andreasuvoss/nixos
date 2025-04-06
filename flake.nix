@@ -32,19 +32,9 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
-        config.permittedInsecurePackages = [ "dotnet-sdk-7.0.410" ];
       };
     in
     {
-      # packages.${system}.default = ags.lib.bundle {
-      #   inherit pkgs;
-      #   src = ./.;
-      #   name = "my-shell";
-      #   entry = "app.ts";
-      #   gtk4 = false;
-      #   extraPackages = [
-      #   ];
-      # };
       nixosConfigurations = {
         argon-vm = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -76,7 +66,6 @@
           extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
-              config.permittedInsecurePackages = [ "dotnet-sdk-7.0.410" ];
               inherit system;
             };
             inherit inputs;
@@ -89,7 +78,6 @@
           extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
-              config.permittedInsecurePackages = [ "dotnet-sdk-7.0.410" ];
               inherit system;
             };
             inherit inputs;
