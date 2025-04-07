@@ -3,7 +3,6 @@
   imports = [
     ./1password
     ./alacritty
-    ./azuredatastudio
     ./bitwarden
     ./bruno
     ./discord
