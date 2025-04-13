@@ -47,7 +47,7 @@ in
           DisplayMenuBar = "default-off";
           SearchBar = "unified";
           SearchEngines = {
-            Default = "Startpage";
+            Default = "Qwant";
             PreventInstalls = true;
           };
           ExtensionSettings =
@@ -58,11 +58,16 @@ in
                 installation_mode = "force_installed";
                 default_area = "menupanel";
               };
-              "{20fc2e06-e3e4-4b2b-812b-ab431220cada}" = {
-                install_url = "https://addons.mozilla.org/firefox/downloads/latest/startpage-private-search/latest.xpi";
+              "qwant-search-firefox@qwant.com" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/qwant-the-search-engine/latest.xpi";
                 installation_mode = "force_installed";
                 default_area = "menupanel";
               };
+              # "{20fc2e06-e3e4-4b2b-812b-ab431220cada}" = {
+              #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/startpage-private-search/latest.xpi";
+              #   installation_mode = "force_installed";
+              #   default_area = "menupanel";
+              # };
               "addon@darkreader.org" = {
                 install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
                 installation_mode = "force_installed";
