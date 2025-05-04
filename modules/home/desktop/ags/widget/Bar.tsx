@@ -6,6 +6,7 @@ import Wp from "gi://AstalWp?version=0.1"
 import { Networking } from "./modules/network"
 import { Audio } from "./modules/audio"
 import { Tailscale } from "./modules/tailscale"
+import { Battery } from "./modules/battery"
 
 function Workspaces() {
     const hypr = Hyprland.get_default()
@@ -94,6 +95,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
                 <Audio/>
                 <Networking/>
                 <Tailscale />
+                <Battery/>
                 <Time />
                 <SysTray />
             </box>
