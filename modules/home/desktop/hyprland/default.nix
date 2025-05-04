@@ -24,11 +24,13 @@
     };
   };
   config = lib.mkIf config.hyprland.enable {
+
+    # Extra packages required
     home.packages = with pkgs; [
       wl-clipboard
       xclip
       nwg-displays
-      lxqt.lxqt-policykit
+      hyprpolkitagent
     ];
 
     programs.tofi = {
@@ -70,6 +72,7 @@
       };
     };
 
+
     wayland.windowManager.hyprland.enable = true;
     wayland.windowManager.hyprland.settings = {
       monitor = config.hyprland.monitor;
@@ -77,18 +80,21 @@
       "$terminal" = "ghostty";
       "$fileManager" = "yazi";
       "$menu" = "tofi-drun | xargs -I{} hyprctl dispatch exec -- \"{}\"";
-      "$lock" = "swaylock";
+      "$lock" = "hyprlock";
       "$wlogoutCmd" = config.hyprland.wlogout.command;
       exec-once =
         [
           "swaybg --color 000000" # at some point maybe look into swww
-          "waybar"
+          # "waybar"
+          "ags run"
           "sleep 1; swaync"
           "sleep 1; exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
           "discord --start-minimized"
           "sleep 1; signal-desktop"
           "steam %U -nochatui -nofriendsui -silent"
-          "exec swayidle -w timeout 180 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 300 '$lock' before-sleep '$lock'"
+          # "hyprpolkitagent"
+          # "systemctl --user start hyprpolkitagent.service"
+          # "exec swayidle -w timeout 180 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 300 '$lock' before-sleep '$lock'"
           "sleep 1; megasync"
           "sleep 1; bitwarden"
           "tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE \"$HYPRLAND_INSTANCE_SIGNATURE\""
@@ -240,7 +246,10 @@
       bind =
         [
           "$mainMod, Q, exec, $terminal"
-          "$mainMod, M, exec, sleep 0.1; hyprctl dispatch dpms off; $lock"
+          # Use this to completely black out the monitor when locking
+          # "$mainMod, M, exec, sleep 0.1; hyprctl dispatch dpms off; $lock"
+          "$mainMod, M, exec, $lock"
+          "$mainMod, P, exec, hyprpicker -a"
           "$mainMod, ESCAPE, exec, pgrep -U $USER wlogout >/dev/null || exec $wlogoutCmd" # I wonder how this looks on a smaller display..
           # "$mainMod, E, exec, $fileManager"
           "$mainMod, V, togglefloating"

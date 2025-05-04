@@ -18,7 +18,7 @@ in
 
   # Desktop
   desktop.enable = true;
-  swayidle.enableWorkaround = true;
+  swayidle.enableWorkaround = false;
   # rider.enable = lib.mkForce false;
 
   # CLIS

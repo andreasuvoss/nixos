@@ -1,0 +1,108 @@
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+$fg-color: #{"@theme_fg_color"};
+$bg-color: #{"@theme_bg_color"};
+
+window.Bar {
+    font-family: "JetBrains Mono";
+    font-size: 9pt;
+    background: transparent;
+    color: $fg-color;
+    font-weight: bold;
+    padding: 0px 10px;
+
+    .Workspaces {
+      padding-left:5px;
+      button {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        font-size: 9pt;
+        border-radius: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      .focused {
+        color:#bd93f9;
+        font-weight: bold;
+        border-bottom: 1px solid #bd93f9;
+      }
+    }
+
+    .Time {
+      padding:2px 6px;
+      background: #44475a;
+      margin-right: 15px;
+      margin: 4px 15px 4px 0px;
+      border-radius: 5px;
+      background: #44475a;
+    }
+
+    .BarModule{
+      margin: 4px 0px;
+      padding-right: 6px;
+      
+      icon {
+        font-size:12pt;
+        padding: 4px 3px 4px 5px;
+        background: #bd93f9;
+        margin-right:2px;
+        border-radius: 5px 0px 0px 5px;
+      }
+      label {
+        padding-left: 6px;
+        font-size:9pt;
+      }
+      margin-right: 15px;
+      border-radius: 5px;
+      background: #44475a;
+    }
+
+    .Networking {
+      icon {
+        background: #FF79C6;
+        color: #000;
+      }
+    }
+
+    .Audio {
+      icon {
+        color: #000;
+      }
+    }
+
+    .Tailscale {
+      icon {
+        background: #bd93f9;
+      }
+    }
+
+    .SysTray {
+      button {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        font-size: 10pt;
+        border-radius: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+
+    >centerbox {
+        background: $bg-color;
+        border-radius: 10px;
+        margin: 2px;
+        button {
+          padding: 0px;
+          border-radius: 0px;
+          min-height:1px;
+        }
+    }
+
+    button {
+        border-radius: 8px;
+        margin: 2px;
+          min-height:1px;
+    }
+
+  }

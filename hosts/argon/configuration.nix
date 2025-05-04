@@ -45,13 +45,15 @@
   # Network configuration
   networking.hostName = "argon"; # Define your hostname.
   networking.networkmanager.enable = true;
-  networking.interfaces.enp8s0.useDHCP = true;
-  networking.interfaces.br0.useDHCP = true;
-  networking.bridges = {
-    "br0" = {
-      interfaces = [ "enp8s0" ];
-    };
-  };
+
+  # The configuration below might be needed for accessing the network on VMs
+  # networking.interfaces.enp8s0.useDHCP = true;
+  # networking.interfaces.br0.useDHCP = true;
+  # networking.bridges = {
+  #   "br0" = {
+  #     interfaces = [ "enp8s0" ];
+  #   };
+  # };
 
   # Enable gaming
   gaming.enable = true;

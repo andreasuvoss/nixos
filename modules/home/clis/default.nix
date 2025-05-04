@@ -1,6 +1,5 @@
 { lib, config, ... }:{
   imports = [
-    ./ags
     ./az-cred-provider
     ./azure-cli
     ./bat
@@ -45,7 +44,6 @@
     clis.enable = lib.mkEnableOption "enable clis";
   };
   config = lib.mkIf config.clis.enable {
-    ags.enable = true;
     az-cred-provider.enable = false;
     azure-cli.enable = false;
     bat.enable = true;
