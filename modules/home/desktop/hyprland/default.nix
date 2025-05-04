@@ -101,7 +101,7 @@
           # The command below might work for keeping xclip and wl-clipboard in sync, I had some issues copying text into proton games
           # "wl-paste -t text -w bash -c '[ \"$(xclip -selection clipboard -o)\" = \"$(wl-paste -n)\" ] || [ \"$(wl-paste -l | grep image)\" = \"\" ] && xclip -selection clipboard'"
         ]
-        ++ lib.optional config.hyprland.startTeams "sleep 1; teams --minimized true"
+        ++ lib.optional config.hyprland.startTeams "sleep 5; teams --minimized true"
         # ++ lib.optional config._1password.enable "sleep 1; 1password --silent"
         ++ lib.optional config.hyprland.enableKanshi "exec ${pkgs.kanshi}/bin/kanshi"
         ++ lib.optional (

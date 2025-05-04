@@ -10,17 +10,21 @@ const Networking = () => {
     const wirelessIcon: Variable<string> = Variable('');
     const ssidLabel: Variable<string> = Variable('');
 
-    Variable.derive([bind(network.wifi, 'iconName')], (icon) => {
-        wirelessIcon.set(icon);
-    });
+    if (network.wifi) {
+        Variable.derive([bind(network.wifi, 'iconName')], (icon) => {
+            wirelessIcon.set(icon);
+        });
 
-    Variable.derive([bind(network.wired, 'iconName')], (icon) => {
-        wiredIcon.set(icon);
-    });
+        Variable.derive([bind(network.wifi, 'ssid')], (ssid) => {
+            ssidLabel.set(ssid);
+        });
+    }
 
-    Variable.derive([bind(network.wifi, 'ssid')], (ssid) => {
-        ssidLabel.set(ssid);
-    });
+    if (network.wired) {
+        Variable.derive([bind(network.wired, 'iconName')], (icon) => {
+            wiredIcon.set(icon);
+        });
+    }
 
     const iconBinding = Variable.derive(
         [bind(network, "primary"), bind(wiredIcon), bind(wirelessIcon)],
@@ -32,11 +36,11 @@ const Networking = () => {
     const labelBinding = Variable.derive(
         [bind(network, "primary"), bind(ssidLabel)],
         (primary, ssid) => {
-            return primary === Network.Primary.WIRED ? "Wired" : ssid;
+            return primary === Network.Primary.WIRED ? "wired" : ssid;
         }
     );
 
-    return <box className="Networking BarModule" visible={wired.as(Boolean) || wifi.as(Boolean)}>
+    return <box className="Networking BarModule" visible={true}>
         <icon onDestroy={() => iconBinding.drop()} icon={iconBinding()}/>
         <label onDestroy={() => labelBinding.drop()} label={bind(labelBinding)} />
     </box>
