@@ -35,9 +35,10 @@ const Tailscale = () => {
             return "Error";
         }
     });
-    // TODO: The image should not be hardcoded like below
+    // TODO: The image should not be hardcoded like below - and also it uses a lot of CPU for some reason...
+    // <icon icon="/home/andreasvoss/repos/nixos/modules/home/desktop/ags/widget/tailscale.svg" />
     return <box className="Tailscale BarModule">
-        <icon icon="/home/andreasvoss/.config/ags/widget/idH7o9R3S1_1742755657531.png" />
+        <icon icon="tailscale-symbolic" />
         <label onDestroy={() => tailscaleStatus.drop()} label={tailscaleStatus()} />
     </box>
 }

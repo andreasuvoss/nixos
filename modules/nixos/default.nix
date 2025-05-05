@@ -18,6 +18,7 @@
       enable = true;
       useRoutingFeatures = "client";
     };
+    services.upower.enable = true;
 
     # NFS shares
     environment.systemPackages = with pkgs; [ nfs-utils home-manager ];

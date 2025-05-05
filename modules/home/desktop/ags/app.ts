@@ -2,6 +2,9 @@ import { App, Gdk, Gtk } from "astal/gtk3"
 import style from "./style.scss"
 import Bar from "./widget/Bar"
 
+
+App.add_icons("/home/andreasvoss/.config/ags/icons");
+
 App.start({
     css: style,
     main() {
