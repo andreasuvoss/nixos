@@ -38,8 +38,8 @@ const Tailscale = () => {
     // TODO: The image should not be hardcoded like below - and also it uses a lot of CPU for some reason...
     // <icon icon="/home/andreasvoss/repos/nixos/modules/home/desktop/ags/widget/tailscale.svg" />
     return <box className="Tailscale BarModule">
-        <icon icon="tailscale-symbolic" />
-        <label onDestroy={() => tailscaleStatus.drop()} label={tailscaleStatus()} />
+        <icon className="module-icon" icon="tailscale-symbolic" />
+        <label className="module-label" onDestroy={() => tailscaleStatus.drop()} label={tailscaleStatus()} />
     </box>
 }
 

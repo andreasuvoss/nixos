@@ -28,33 +28,41 @@ window.Bar {
       }
     }
 
-    .Time {
-      padding:2px 6px;
-      background: #44475a;
+    .BarModule{
+      margin: 4px 0px;
+      padding-right: 6px;
+
+      .module-icon{
+        font-size:12pt;
+        padding: 3px 5px 3px 7px;
+        margin-right:2px;
+        border-radius: 5px 0px 0px 5px;
+      }
+      .module-label{
+        padding-left: 6px;
+        font-size:9pt;
+      }
+      .module-icon-txt{
+        font-size:12pt;
+        padding: 3px 9px 3px 9px;
+        margin-right:2px;
+        border-radius: 5px 0px 0px 5px;
+      }
+      .module-label{
+        padding-left: 6px;
+        font-size:9pt;
+      }
+      
       margin-right: 15px;
-      margin: 4px 15px 4px 0px;
       border-radius: 5px;
       background: #44475a;
     }
 
-    .BarModule{
-      margin: 4px 0px;
-      padding-right: 6px;
-      
-      icon {
-        font-size:12pt;
-        padding: 4px 3px 4px 5px;
-        background: #bd93f9;
-        margin-right:2px;
-        border-radius: 5px 0px 0px 5px;
+    .Time {
+      .module-icon-txt {
+        background: #ffb86c;
+        color: #000;
       }
-      label {
-        padding-left: 6px;
-        font-size:9pt;
-      }
-      margin-right: 15px;
-      border-radius: 5px;
-      background: #44475a;
     }
 
     .Networking {
@@ -74,6 +82,7 @@ window.Bar {
 
     .Audio {
       icon {
+        background: #bd93f9;
         color: #000;
       }
     }
@@ -88,6 +97,7 @@ window.Bar {
     .SysTray {
       button {
         background: transparent;
+        font-family: "JetBrainsMono Nerd Font";
         border: none;
         box-shadow: none;
         font-size: 10pt;

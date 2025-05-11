@@ -10,8 +10,8 @@ const Audio = () => {
     );
 
     return <box className="Audio BarModule">
-        <icon icon={bind(speaker, "volumeIcon")}/>
-        <label onDestroy={() => volume.drop()} label={bind(volume)}/>
+        <icon className="module-icon" icon={bind(speaker, "volumeIcon")}/>
+        <label className="module-label" onDestroy={() => volume.drop()} label={bind(volume)}/>
     </box>
 }
 

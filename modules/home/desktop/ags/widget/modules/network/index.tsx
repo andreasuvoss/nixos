@@ -41,8 +41,8 @@ const Networking = () => {
     );
 
     return <box className="Networking BarModule" visible={true}>
-        <icon onDestroy={() => iconBinding.drop()} icon={iconBinding()}/>
-        <label onDestroy={() => labelBinding.drop()} label={bind(labelBinding)} />
+        <icon className="module-icon" onDestroy={() => iconBinding.drop()} icon={iconBinding()}/>
+        <label className="module-label" onDestroy={() => labelBinding.drop()} label={bind(labelBinding)} />
     </box>
 }
 

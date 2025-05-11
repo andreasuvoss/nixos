@@ -20,8 +20,8 @@ const Battery = () => {
     );
 
     return <box visible={bind(battery, "is-battery")} className="Battery BarModule">
-        <icon icon={bind(battery, "iconName")} />
-        <label onDestroy={() => percentage.drop()} label={bind(percentage)} />
+        <icon className="module-icon" icon={bind(battery, "iconName")} />
+        <label className="module-label" onDestroy={() => percentage.drop()} label={bind(percentage)} />
     </box>
 }
 

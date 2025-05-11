@@ -1,12 +1,13 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable, GLib, bind } from "astal"
 import Hyprland from "gi://AstalHyprland"
-import Tray from "gi://AstalTray"
 import Wp from "gi://AstalWp?version=0.1"
 import { Networking } from "./modules/network"
 import { Audio } from "./modules/audio"
 import { Tailscale } from "./modules/tailscale"
 import { Battery } from "./modules/battery"
+import { SysTray } from "./modules/systray"
+import { Time } from "./modules/clock"
 
 function Workspaces() {
     const hypr = Hyprland.get_default()
@@ -39,32 +40,32 @@ function FocusedClient() {
     </box>
 }
 
-function SysTray() {
-    const tray = Tray.get_default()
+// function SysTray() {
+//     const tray = Tray.get_default()
+//
+//     return <box className="SysTray">
+//         {bind(tray, "items").as(items => items.map(item => (
+//             <menubutton
+//                 tooltipMarkup={bind(item, "tooltipMarkup")}
+//                 usePopover={false}
+//                 actionGroup={bind(item, "actionGroup").as(ag => ["dbusmenu", ag])}
+//                 menuModel={bind(item, "menuModel")}>
+//                 <icon gicon={bind(item, "gicon")} />
+//             </menubutton>
+//         )))}
+//     </box>
+// }
 
-    return <box className="SysTray">
-        {bind(tray, "items").as(items => items.map(item => (
-            <menubutton
-                tooltipMarkup={bind(item, "tooltipMarkup")}
-                usePopover={false}
-                actionGroup={bind(item, "actionGroup").as(ag => ["dbusmenu", ag])}
-                menuModel={bind(item, "menuModel")}>
-                <icon gicon={bind(item, "gicon")} />
-            </menubutton>
-        )))}
-    </box>
-}
-
-function Time({ format = "%H:%M" }) {
-    const time = Variable<string>("").poll(1000, () =>
-        GLib.DateTime.new_now_local().format(format)!)
-
-    return <label
-        className="Time"
-        onDestroy={() => time.drop()}
-        label={time()}
-    />
-}
+// function Time({ format = "%H:%M" }) {
+//     const time = Variable<string>("").poll(1000, () =>
+//         GLib.DateTime.new_now_local().format(format)!)
+//
+//     return <label
+//         className="Time"
+//         onDestroy={() => time.drop()}
+//         label={time()}
+//     />
+// }
 
 function AudioSlider() {
     const speaker = Wp.get_default()?.audio.defaultSpeaker!;

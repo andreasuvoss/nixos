@@ -109,6 +109,7 @@
         ) "exec ${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
       env = [
         # "XDG_CURRENT_DESKTOP,sway"
+        "GTK_THEME,Dracula"
         "XCURSOR_SIZE,16"
         "HYPRCURSOR_SIZE,16"
         "QT_QPA_PLATFORMTHEME,qt5ct"
