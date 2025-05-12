@@ -9,10 +9,13 @@ const Audio = () => {
         (vol) => `${(vol*100).toFixed(0)}%`
     );
 
-    return <box className="Audio BarModule">
-        <icon className="module-icon" icon={bind(speaker, "volumeIcon")}/>
-        <label className="module-label" onDestroy={() => volume.drop()} label={bind(volume)}/>
-    </box>
+    // TODO: Do something when clicking :)
+    return <button cursor={'pointer'} onClick={(self, event) => {}} className="module-button">
+        <box className="Audio BarModule">
+            <icon className="module-icon" icon={bind(speaker, "volumeIcon")}/>
+            <label className="module-label" onDestroy={() => volume.drop()} label={bind(volume)}/>
+        </box>
+    </button>
 }
 
 export { Audio }

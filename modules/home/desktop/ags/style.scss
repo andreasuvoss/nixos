@@ -28,9 +28,18 @@ window.Bar {
       }
     }
 
+    // TODO: Move this styling around?
+    .module-button {
+        border: none;
+        box-shadow: none;
+        margin: 0px;
+        padding: 0px;
+        background: transparent;
+      }
     .BarModule{
       margin: 4px 0px;
       padding-right: 6px;
+      
 
       .module-icon{
         font-size:12pt;
