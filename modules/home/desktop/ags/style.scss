@@ -9,6 +9,9 @@ window.Bar {
     color: $fg-color;
     font-weight: bold;
     padding: 0px 10px;
+    .BarSpacer {
+      margin: 8px;
+    }
 
     .Workspaces {
       padding-left:5px;
@@ -35,10 +38,13 @@ window.Bar {
         margin: 0px;
         padding: 0px;
         background: transparent;
+        font-weight: bold;
       }
     .BarModule{
       margin: 4px 0px;
       padding-right: 6px;
+      border-radius: 5px;
+      background: #44475a;
       
 
       .module-icon{
@@ -61,10 +67,6 @@ window.Bar {
         padding-left: 6px;
         font-size:9pt;
       }
-      
-      margin-right: 15px;
-      border-radius: 5px;
-      background: #44475a;
     }
 
     .Time {

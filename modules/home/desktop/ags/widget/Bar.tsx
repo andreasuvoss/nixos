@@ -8,6 +8,7 @@ import { Tailscale } from "./modules/tailscale"
 import { Battery } from "./modules/battery"
 import { SysTray } from "./modules/systray"
 import { Time } from "./modules/clock"
+import { BarSpacer } from "./helpers/spacer"
 
 function Workspaces() {
     const hypr = Hyprland.get_default()
@@ -94,9 +95,13 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <FocusedClient />
             <box halign={Gtk.Align.END}>
                 <Audio/>
+                <BarSpacer/>
                 <Networking/>
+                <BarSpacer/>
                 <Tailscale />
+                <BarSpacer/>
                 <Battery/>
+                <BarSpacer/>
                 <Time />
                 <SysTray />
             </box>
