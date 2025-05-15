@@ -12,6 +12,7 @@
     ./git
     ./gjs
     ./glow
+    ./glunch
     ./gparted
     ./gum
     ./iperf
@@ -56,6 +57,7 @@
     git.enable = true;
     gjs.enable = true;
     glow.enable = true;
+    glunch.enable = true;
     gparted.enable = false;
     gum.enable = true;
     iperf.enable = true;
