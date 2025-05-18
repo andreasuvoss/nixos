@@ -4,7 +4,7 @@
   fetchFromGitHub,
 }:
 let
-  version = "0.0.2";
+  version = "0.0.3";
 in
 buildGoModule {
   pname = "glunch";
@@ -14,7 +14,7 @@ buildGoModule {
     owner = "andreasuvoss";
     repo = "glunch";
     rev = "v${version}";
-    hash = "sha256-Djs/yXqDWKM7iSQdNAOkwykzNQ7ImrrENeGrSUxNd8U=";
+    hash = "sha256-OzxyzsuYnKDII3PMK63cMoFXGTmS5Ph+vxTFnerzj+U=";
   };
 
   vendorHash = null;
