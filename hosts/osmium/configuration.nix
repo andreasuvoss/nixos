@@ -2,6 +2,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
+      # ./compose.nix
       ../../modules/nixos
     ];
 
@@ -30,6 +31,16 @@
 
   # systemd.services.podman-home-assistant.serviceConfig.User = "andreasvoss";
   # systemd.services.podman-pihole.serviceConfig.User = "andreasvoss";
+  # virtualisation.podman = {
+  #   enable = true;
+  #   autoPrune.enable = true;
+  #   # dockerCompat = true;
+  #   defaultNetwork.settings = {
+  #     dns_enabled = true;
+  #   };
+  # };
+  #
+  # networking.firewall.interfaces."podman+".allowedUDPPorts = [ 53 ];
 
   virtualisation.oci-containers = {
     backend = "podman";
@@ -45,7 +56,6 @@
         extraOptions = [
           "--network=host"  
           "--cap-add=CAP_NET_RAW"
-          "--device=/dev/ttyACM0"
         ];
       };
       pihole = {
@@ -65,14 +75,61 @@
         # extraOptions = [
         # ];
       };
+      # The network needs to be created manually for now
+      mqtt = {
+        image = "docker.io/library/eclipse-mosquitto:2.0";
+        volumes = [
+          "/home/andreasvoss/apps/mosquitto-data:/mosquitto"
+        ];
+        # ports = [
+        #   "1883:1883"
+        #   "9001:9001"
+        # ];
+        cmd = [
+          "mosquitto"
+          "-c" 
+          "/mosquitto-no-auth.conf"
+        ];
+        extraOptions = [
+          "--pod=mqtt"
+        ];
+      };
+
+      zigbee2mqtt = {
+        image = "docker.io/koenkk/zigbee2mqtt";
+        volumes = [
+          "/home/andreasvoss/apps/zigbee2mqtt-data:/app/data"
+          "/run/udev:/run/udev:ro"
+        ];
+        # ports = [
+        #   "8081:8081"
+        # ];
+        environment = {
+          TZ = "Europe/Copenhagen";
+        };
+        extraOptions = [
+          "--pod=mqtt"
+          "--device=/dev/ttyUSB0"
+        ];
+      };
     };
 
   };
 
+  # Create a pod for mqtt and zigbee2mqtt
+  systemd.services.create-mqtt-pod = with config.virtualisation.oci-containers; {
+    serviceConfig.Type = "oneshot";
+    wantedBy = [ "${backend}-mqtt.service" ];
+    script = ''
+      ${pkgs.podman}/bin/podman pod exists mqtt || \
+        ${pkgs.podman}/bin/podman pod create -n mqtt -p '0.0.0.0:8081:8081' -p '0.0.0.0:1883:1883'
+    '';
+  };
+
   # Network configuration
   networking.hostName = "osmium";
-  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 5201 8080 ];
-  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5201 8080 ];
+  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 5201 8080 8081 1883 ];
+  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5201 8080 8081 1883 ];
   #networking.firewall.enable = false;
 
   # Enable the OpenSSH deamon
