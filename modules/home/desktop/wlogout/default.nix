@@ -14,13 +14,13 @@
       layout = [
         {
             label = "lock";
-            action = "swaylock -f -c 000000";
+            action = "hyprlock";
             text = "Lock";
             keybind = "l";
         }
         {
             label = "logout";
-            action = "hyprctl dispatch exit";
+            action = "loginctl terminate-user $USER";
             text = "Logout";
             keybind = "e";
         }

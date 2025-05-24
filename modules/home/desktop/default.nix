@@ -14,8 +14,6 @@
     ./hyprpicker
     ./screenshot
     ./swaybg
-    ./swayidle
-    ./swaylock
     ./swaync
     ./udiskie
     ./utility
@@ -38,8 +36,6 @@
     hyprpicker.enable = true;
     screenshot.enable = true;
     swaybg.enable = true;
-    swayidle.enable = false;
-    swaylock.enable = false;
     swaync.enable = true;
     udiskie.enable = false; # Does not autologin to ssh-agent with this
     waybar.enable = true;

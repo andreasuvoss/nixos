@@ -87,13 +87,6 @@ https://jnsgr.uk/2024/04/nixos-secure-boot-tpm-fde/
 
 ## Troubleshooting
 
-### `sway-audio-idle-inhibit` crashes after monitor standby
-If my monitor goes into standby mode, `sway-audio-idle-inhibit` crashes the next time sound is played. To combat this,
-I am starting it as a service, such that whenever it crashes is quickly starts up again, so I wont get frustrated while
-watching videos, having to move my mouse every 180 seconds.
-
-The standby / disconnect of a monitor also makes Hyprland go to an empty workspace when the monitor wakes back up.
-
 ### `bicep` with the `az` CLI
 When trying to deploy a `.bicep` file without any extra configuration, the error
 

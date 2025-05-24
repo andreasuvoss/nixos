@@ -29,7 +29,10 @@ in
     services.udisks2.enable = false; # Does not autologin to ssh-agent with this
 
     # Enable WM and DM
-    programs.hyprland.enable = true;
+    programs.hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
 
     environment.systemPackages = with pkgs; [ greetd.tuigreet ];
 

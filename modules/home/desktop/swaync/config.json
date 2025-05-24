@@ -89,11 +89,11 @@
           },
           {
             "label": "  Lock",
-            "command": "swaylock -f -c 000000"
+            "command": "hyprlock"
           },
           {
             "label": "  Logout",
-            "command": "hyprctl dispatch exit"
+            "command": "loginctl terminate-user $USER"
           },
           {
             "label": "  Shut down",
