@@ -36,6 +36,7 @@
       nwg-displays
       hyprpolkitagent
     ];
+    # services.hyprpolkitagent.enable = true;
 
     programs.tofi = {
       enable = true;
@@ -70,30 +71,28 @@
     wayland.windowManager.hyprland.settings = {
       monitor = config.hyprland.monitor;
       "$mainMod" = "SUPER";
-      "$terminal" = "uwsm app -- ghostty";
-      # "$fileManager" = "yazi";
-      # "$menu" = "tofi-drun | xargs -I{} hyprctl dispatch exec -- \"{}\"";
+      "$terminal" = "uwsm-app -- ghostty";
+      # TODO: Replace with uwsm-app however pressing escape will result in an error notification
       "$menu" = "uwsm app -- $(tofi-drun)";
       "$lock" = "hyprlock";
       "$wlogoutCmd" = config.hyprland.wlogout.command;
       exec-once =
         [
-          "uwsm app -- swaybg --color 000000"
-          "uwsm app -- ags run"
-          "uwsm app -- swaync"
-          # "uwsm app -- exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
+          "sleep 0.5; uwsm-app -- swaybg --color 000000"
+          "sleep 0.5; uwsm-app -- ags run"
+          # "uwsm-app -- exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
           # sleepers (system tray...)
-          "sleep 1; uwsm app -- discord --start-minimized"
-          "sleep 2; uwsm app -- megasync"
-          "sleep 2; uwsm app -- bitwarden"
-          "uwsm app -- steam %U -nochatui -nofriendsui -silent"
-          "uwsm app -- tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE \"$HYPRLAND_INSTANCE_SIGNATURE\""
+          "sleep 2; uwsm-app -- discord --start-minimized"
+          "sleep 2; uwsm-app -- megasync"
+          "sleep 2; uwsm-app -- bitwarden"
+          "sleep 2; uwsm-app -- steam %U -nochatui -nofriendsui -silent"
+          "sleep 2; uwsm-app -- tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE \"$HYPRLAND_INSTANCE_SIGNATURE\""
           # The command below might work for keeping xclip and wl-clipboard in sync, I had some issues copying text into proton games
           # "wl-paste -t text -w bash -c '[ \"$(xclip -selection clipboard -o)\" = \"$(wl-paste -n)\" ] || [ \"$(wl-paste -l | grep image)\" = \"\" ] && xclip -selection clipboard'"
         ]
-        ++ lib.optional config.hyprland.startTeams "uwsm app -- teams --minimized true"
-        # ++ lib.optional config._1password.enable "uwsm app -- sleep 1; 1password --silent"
-        ++ lib.optional config.hyprland.enableKanshi "uwsm app -- exec ${pkgs.kanshi}/bin/kanshi";
+        ++ lib.optional config.hyprland.startTeams "sleep 2; uwsm-app -- teams --minimized true"
+        # ++ lib.optional config._1password.enable "uwsm-app -- sleep 1; 1password --silent"
+        ++ lib.optional config.hyprland.enableKanshi "sleep 2; uwsm-app -- exec ${pkgs.kanshi}/bin/kanshi";
       env = [
         # "XDG_CURRENT_DESKTOP,sway"
         "GTK_THEME,Dracula"
@@ -232,12 +231,12 @@
         [
           # exec binds
           "$mainMod, Q, exec, $terminal"
-          "$mainMod, F, exec, uwsm app -- firefox"
-          "$mainMod, M, exec, uwsm app -- $lock"
-          "$mainMod, P, exec, uwsm app -- hyprpicker -a"
-          "$mainMod, N, exec, uwsm app -- swaync-client -t -sw"
-          ", PRINT, exec, uwsm app -- grim -g \"$(slurp)\" - | convert - -shave 1x1 PNG:- | swappy -f -"
-          "$mainMod, ESCAPE, exec, uwsm app -- pgrep -U $USER wlogout >/dev/null || exec $wlogoutCmd" # I wonder how this looks on a smaller display..
+          "$mainMod, F, exec, uwsm-app -- firefox"
+          "$mainMod, M, exec, uwsm-app -- $lock"
+          "$mainMod, P, exec, uwsm-app -- hyprpicker -a"
+          "$mainMod, N, exec, uwsm-app -- swaync-client -t -sw"
+          ", PRINT, exec, uwsm-app -- grim -g \"$(slurp)\" - | convert - -shave 1x1 PNG:- | swappy -f -"
+          "$mainMod, ESCAPE, exec, uwsm-app -- pgrep -U $USER wlogout >/dev/null || exec $wlogoutCmd" # I wonder how this looks on a smaller display..
           "ALT, SPACE, exec, $menu"
 
           "$mainMod, V, togglefloating"
@@ -299,11 +298,11 @@
         "$mainMod, mouse:273, resizewindow"
       ];
       binde = [
-        ", XF86MonBrightnessUp , exec, uwsm app -- brightnessctl set 5%+"
-        ", XF86MonBrightnessDown , exec, uwsm app -- brightnessctl set 5%-"
-        ", XF86AudioRaiseVolume, exec, uwsm app -- wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, uwsm app -- wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, uwsm app -- wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86MonBrightnessUp , exec, brightnessctl set 5%+"
+        ", XF86MonBrightnessDown , exec, brightnessctl set 5%-"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
       # bindl = [
       #   ", switch:on:Lid Switch, exec, $terminal"
