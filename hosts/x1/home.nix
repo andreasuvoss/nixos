@@ -43,6 +43,7 @@ in
   hyprland.startTeams = true;
   hyprland.enableKanshi = true;
   hyprland.natural_scroll = true;
+  hyprland.defaultOrientation = "left";
   hyprland.monitor = [
     # "eDP-1,highrr,auto,auto"
     "eDP-1,2880x1800@120.0,0x0,1.5"

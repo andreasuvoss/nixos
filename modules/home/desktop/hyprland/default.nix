@@ -12,6 +12,10 @@
     };
     hyprland.startTeams = lib.mkEnableOption "starts teams automatically";
     hyprland.enableKanshi = lib.mkEnableOption "starts kanshi";
+    hyprland.defaultOrientation = lib.mkOption {
+      default = "center";
+      description = "default orientation for master layout - left for entire monitor";
+    };
     hyprland.wlogout.command = lib.mkOption {
       default = "wlogout -b 6 -s -R 1500 -L 1500 -T 600 -B 600";
       description = "command to run when opening wlogout";
@@ -41,22 +45,11 @@
 
         border-width = 1;
         border-color = "#ff79c6"; # pink
-        # border-color = "#bd93f9"; # purple
-        # border-color = "#ffb86c"; # orange
         corner-radius = 5;
         outline-width = 0;
         num-results = 12;
         width = 700;
         height = 350;
-
-        # prompt-text = "run: ";
-        # text-color = "#cad3f5";
-        # prompt-color = "#ed8796";
-        # background-color = "#24273a";
-        #
-        #
-        # selection-color = "#eed49f";
-        # selection-background = "#000000";
         background-color = "#282a36";
         text-color = "#f8f8f2";
         input-color = "#ff79c6";
@@ -68,7 +61,6 @@
         selection-color = "#50fa7b";
         selection-background-padding = "4, -1";
         selection-background = "#44475a";
-        # selection-match-color = "#8be9fd"; # this results in weird behaviour
       };
     };
 
@@ -85,7 +77,6 @@
       exec-once =
         [
           "swaybg --color 000000" # at some point maybe look into swww
-          # "waybar"
           "ags run"
           "sleep 1; swaync"
           "sleep 1; exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
@@ -94,7 +85,6 @@
           "steam %U -nochatui -nofriendsui -silent"
           # "hyprpolkitagent"
           # "systemctl --user start hyprpolkitagent.service"
-          # "exec swayidle -w timeout 180 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' timeout 300 '$lock' before-sleep '$lock'"
           "sleep 1; megasync"
           "sleep 1; bitwarden"
           "tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE \"$HYPRLAND_INSTANCE_SIGNATURE\""
@@ -103,10 +93,7 @@
         ]
         ++ lib.optional config.hyprland.startTeams "sleep 5; teams --minimized true"
         # ++ lib.optional config._1password.enable "sleep 1; 1password --silent"
-        ++ lib.optional config.hyprland.enableKanshi "exec ${pkgs.kanshi}/bin/kanshi"
-        ++ lib.optional (
-          !config.swayidle.enableWorkaround
-        ) "exec ${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
+        ++ lib.optional config.hyprland.enableKanshi "exec ${pkgs.kanshi}/bin/kanshi";
       env = [
         # "XDG_CURRENT_DESKTOP,sway"
         "GTK_THEME,Dracula"
@@ -133,17 +120,14 @@
         border_size = 1;
         "col.active_border" = "rgb(bd93f9)";
         "col.inactive_border" = "rgba(595959aa)";
-        # layout = "dwindle";
         layout = "master";
         allow_tearing = false;
       };
       master = {
         allow_small_split = true;
-        orientation = "left"; # to use entire monitor
-        # orientation = "center";
-        # slave_count_for_center_master = 0;
-        # center_master_slaves_on_right = 0;
-        always_center_master = 1;
+        orientation = config.hyprland.defaultOrientation;
+        slave_count_for_center_master = 0;
+        center_master_fallback = "left";
         mfact = "0.55";
       };
       cursor = {
@@ -156,15 +140,10 @@
           size = 3;
           passes = 1;
         };
-        # drop_shadow = "yes";
-        # shadow_range = 4;
-        # shadow_render_power = 3;
-        # "col.shadow" = "rgba(1a1a1aee)";
       };
       animations = {
         enabled = "yes";
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-        # bezier = "myBezier, 0.68, -0.6, 0.32, 1.6";
         animation = [
           #NAME,ONOFF,SPEED,CURVE,STYLE
           "windows, 1, 1, myBezier"
@@ -172,7 +151,6 @@
           "border, 1, 10, default"
           "borderangle, 1, 8, default"
           "fade, 1, 1, default"
-          # "workspaces, 1, 6, default"
           "workspaces,1,1,default"
         ];
       };
@@ -181,7 +159,6 @@
         preserve_split = "yes";
       };
       master.new_status = "slave";
-      # master.new_is_master = true;
       gestures.workspace_swipe = "off";
       misc = {
         force_default_wallpaper = 0;
