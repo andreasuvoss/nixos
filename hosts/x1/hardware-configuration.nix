@@ -24,14 +24,14 @@
   boot.kernelModules = [ "kvm-intel" ];
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   # Building ther kernel every time takes quite a while
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_12.override {
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_14.override {
     argsOverride = rec {
       src = pkgs.fetchurl {
             url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
-            sha256 = "sha256-h74DYN8JMbNA0rrDUWGlSAcPvDqMNSxJ4h6WZmwmrrQ=";
+            sha256 = "sha256-YrEuzTB1o1frMgk1ZX3oTgFVKANxfa04P6fMOqSqKQU=";
       };
-      version = "6.12.9";
-      modDirVersion = "6.12.9";
+      version = "6.14.8";
+      modDirVersion = "6.14.8";
       };
   });
   boot.extraModulePackages = [ ];
