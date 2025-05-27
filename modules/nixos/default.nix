@@ -17,6 +17,9 @@
     services.tailscale = {
       enable = true;
       useRoutingFeatures = "client";
+      extraSetFlags = [
+        "--operator=andreasvoss"
+      ];
     };
     services.upower.enable = true;
 

@@ -28,7 +28,7 @@
     apps.enable = lib.mkEnableOption "enable apps";
   };
   config = lib.mkIf config.apps.enable {
-    alacritty.enable = false;
+    alacritty.enable = true;
     bitwarden.enable = true;
     discord.enable = true;
     firefox.enable = true;

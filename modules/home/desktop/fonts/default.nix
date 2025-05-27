@@ -14,7 +14,9 @@
       fira-code-symbols
       mplus-outline-fonts.githubRelease
       dina-font
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ] ; })
+      nerd-fonts.jetbrains-mono
     ];
+    # Add this to the end to install ALL nerd-fonts
+    # ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   };
 }
