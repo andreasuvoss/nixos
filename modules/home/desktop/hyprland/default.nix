@@ -166,6 +166,7 @@
         mouse_move_enables_dpms = false;
         key_press_enables_dpms = true;
         focus_on_activate = true;
+        enable_anr_dialog = false;
       };
       device = {
         name = "epic-mouse-v1";
