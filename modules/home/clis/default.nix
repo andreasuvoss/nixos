@@ -1,10 +1,8 @@
 { lib, config, ... }:{
   imports = [
-    ./az-cred-provider
-    ./azure-cli
     ./bat
-    ./bicep
     ./curl
+    ./eza
     ./fastfetch
     ./fd
     ./fzf
@@ -13,7 +11,6 @@
     ./gjs
     ./glow
     ./glunch
-    ./gparted
     ./gum
     ./iperf
     ./btop
@@ -45,12 +42,10 @@
     clis.enable = lib.mkEnableOption "enable clis";
   };
   config = lib.mkIf config.clis.enable {
-    az-cred-provider.enable = false;
-    azure-cli.enable = false;
     bat.enable = true;
-    bicep.enable = false;
     btop.enable = true;
     curl.enable = true;
+    eza.enable = true;
     fastfetch.enable = true;
     fd.enable = true;
     fzf.enable = true;
@@ -58,7 +53,6 @@
     gjs.enable = true;
     glow.enable = true;
     glunch.enable = true;
-    gparted.enable = false;
     gum.enable = true;
     iperf.enable = true;
     jq.enable = true;

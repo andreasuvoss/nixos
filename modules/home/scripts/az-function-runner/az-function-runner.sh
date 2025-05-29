@@ -32,7 +32,7 @@ FUNCTIONAPP_HOST_NAME=$(echo $FUNCTIONAPP_JSON | jq '.defaultHostName' -r)
 FUNCTION_ACCESS_RESTRICTIONS=$(gum spin --spinner dot --title "Getting access restrictions for ${FUNCTIONAPP_NAME}..." -- az functionapp config access-restriction show -g $FUNCTIONAPP_RG -n $FUNCTIONAPP_NAME)
 
 # Check network access restrictions for the function
-MY_IP="$(curl 'https://myip.dk' -s)"
+MY_IP="$(curl 'https://ip.me' -s)"
 MY_IP_SEARCH="${MY_IP}/32"
 EXISTING_ACCESS_RESTRICTION=$(echo $FUNCTION_ACCESS_RESTRICTIONS | jq --arg IP $MY_IP_SEARCH '.ipSecurityRestrictions.[] | select(.ip_address==$IP)')
 

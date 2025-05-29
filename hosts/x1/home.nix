@@ -99,7 +99,6 @@ in
   scripts.enable = true;
 
   # Development tools
-  dotnet.enable = true;
   rust.enable = true;
   golang.enable = true;
 

@@ -175,8 +175,8 @@
 
       windowrulev2 = [
         # Steam
-        "float, title:^(Friends List)$"
-        "float, class:^(steam)$"
+        # "float, title:^(Friends List)$"
+        # "float, class:^(steam)$"
 
         # MEGA
         "float, class:^(MEGAsync)$"
