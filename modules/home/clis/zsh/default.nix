@@ -5,7 +5,10 @@ let
     ii = "xdg-open";
     nrb = "nixos-rebuild switch --flake .";
     bfzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
-    rdr = "rider > /dev/null 2>&1";
+    db = "distrobox";
+    tree = "eza --tree";
+    q = "exit";
+    ":q" = "exit";
   };
 in
 {

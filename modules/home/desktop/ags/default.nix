@@ -11,6 +11,7 @@
       source = ../ags;
       recursive = true;
     };
+    home.packages = [ inputs.ags.packages.${pkgs.system}.io ];
     programs.ags = {
       enable = true;
       extraPackages = with pkgs; [

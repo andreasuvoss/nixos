@@ -28,7 +28,6 @@
     ./timewarrior
     ./tldr
     ./tmux
-    ./tree
     ./tree-sitter
     ./udisks
     ./unzip
@@ -69,7 +68,6 @@
     timewarrior.enable = true;
     tldr.enable = true;
     tmux.enable = true;
-    tree.enable = true;
     tree-sitter.enable = true;
     udisks.enable = true;
     unzip.enable = true;
