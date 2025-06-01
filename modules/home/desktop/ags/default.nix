@@ -7,11 +7,8 @@
     inputs.ags.homeManagerModules.default
   ];
   config = lib.mkIf config.ags.enable {
-    home.file.".config/ags" = {
-      source = ../ags;
-      recursive = true;
-    };
     home.packages = [ inputs.ags.packages.${pkgs.system}.io ];
+    # For development purposes I keep these
     programs.ags = {
       enable = true;
       extraPackages = with pkgs; [
