@@ -16,10 +16,6 @@
       default = "center";
       description = "default orientation for master layout - left for entire monitor";
     };
-    hyprland.wlogout.command = lib.mkOption {
-      default = "wlogout -b 6 -s -R 1500 -L 1500 -T 600 -B 600";
-      description = "command to run when opening wlogout";
-    };
     hyprland.monitor = lib.mkOption {
       default = [
         ",highrr,auto,auto"
@@ -73,11 +69,10 @@
       "$fileManager" = "yazi";
       "$menu" = "tofi-drun | xargs -I{} hyprctl dispatch exec -- \"{}\"";
       "$lock" = "hyprlock";
-      "$wlogoutCmd" = config.hyprland.wlogout.command;
       exec-once =
         [
           "swaybg --color 000000" # at some point maybe look into swww
-          "ags run"
+          "gtk-shell"
           "sleep 1; swaync"
           "sleep 1; exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
           "discord --start-minimized"
@@ -229,7 +224,7 @@
           # "$mainMod, M, exec, sleep 0.1; hyprctl dispatch dpms off; $lock"
           "$mainMod, M, exec, $lock"
           "$mainMod, P, exec, hyprpicker -a"
-          "$mainMod, ESCAPE, exec, pgrep -U $USER wlogout >/dev/null || exec $wlogoutCmd" # I wonder how this looks on a smaller display..
+          "$mainMod, ESCAPE, exec, astal -i gtk-shell power-menu"
           # "$mainMod, E, exec, $fileManager"
           "$mainMod, V, togglefloating"
           "$mainMod, C, togglefloating"

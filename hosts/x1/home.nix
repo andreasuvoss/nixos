@@ -39,7 +39,6 @@ in
 
   # Desktop
   desktop.enable = true;
-  hyprland.wlogout.command = "wlogout -b 6 -s -R 300 -L 300 -T 500 -B 500";
   hyprland.startTeams = true;
   hyprland.enableKanshi = true;
   hyprland.natural_scroll = true;

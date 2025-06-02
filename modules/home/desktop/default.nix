@@ -8,6 +8,7 @@
     ./fonts
     ./gnome-keyring
     ./gtk
+    ./gtk-shell
     ./hypridle
     ./hyprland
     ./hyprlock
@@ -17,7 +18,6 @@
     ./swaync
     ./udiskie
     ./utility
-    ./wlogout
   ];
   options = {
     desktop.enable = lib.mkEnableOption "enables desktop";
@@ -29,6 +29,7 @@
     fonts.enable = true;
     gnome-keyring.ssh.enable = true;
     gtk-theme.enable = true;
+    gtk-shell.enable = true;
     hypridle.enable = true;
     hyprland.enable = true;
     hyprlock.enable = true;
@@ -37,6 +38,5 @@
     swaybg.enable = true;
     swaync.enable = true;
     udiskie.enable = false; # Does not autologin to ssh-agent with this
-    wlogout.enable = true;
   };
 }

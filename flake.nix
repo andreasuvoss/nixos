@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    gtk-shell.url = "git+ssh://git@github.com/andreasuvoss/gtk-shell.git";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,6 +20,7 @@
       home-manager,
       nixpkgs-unstable,
       ags,
+      gtk-shell,
       ...
     }@inputs:
     let
