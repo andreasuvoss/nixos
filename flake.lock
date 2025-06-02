@@ -22,7 +22,7 @@
     "ags_2": {
       "inputs": {
         "astal": "astal_2",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1744557573,
@@ -81,10 +81,28 @@
         "type": "github"
       }
     },
+    "glunch": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1748886638,
+        "narHash": "sha256-XeYu5kOCVt3PThnROaWAWVzwtDpbFKrfnGAQV3GTP5M=",
+        "owner": "andreasuvoss",
+        "repo": "glunch",
+        "rev": "f6e48a3c8e5272f651869a53d8980ae3c8281754",
+        "type": "github"
+      },
+      "original": {
+        "owner": "andreasuvoss",
+        "repo": "glunch",
+        "type": "github"
+      }
+    },
     "gtk-shell": {
       "inputs": {
         "ags": "ags_2",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1748802841,
@@ -155,6 +173,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1748693115,
+        "narHash": "sha256-StSrWhklmDuXT93yc3GrTlb0cKSS0agTAxMGjLKAsY8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "910796cabe436259a29a72e8d3f5e180fc6dfacc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1743583204,
         "narHash": "sha256-F7n4+KOIfWrwoQjXrL2wD9RhFYLs2/GGe/MQY1sSdlE=",
         "owner": "nixos",
@@ -169,7 +203,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1748460289,
         "narHash": "sha256-7doLyJBzCllvqX4gszYtmZUToxKvMUrg45EUWaUYmBg=",
@@ -185,7 +219,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1748510609,
         "narHash": "sha256-J2Ppr+X/mx7Bf2rkX0h7s1qIWU6zDIPpBbmcoVqvC80=",
@@ -204,9 +238,10 @@
     "root": {
       "inputs": {
         "ags": "ags",
+        "glunch": "glunch",
         "gtk-shell": "gtk-shell",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "nixpkgs-unstable": "nixpkgs-unstable"
       }
     }
