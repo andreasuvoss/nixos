@@ -105,11 +105,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1749064587,
-        "narHash": "sha256-DLNSM4yXQIwV4WIy0Dx1iwfEYpW7v0HRHxN9yqklMOM=",
+        "lastModified": 1749749799,
+        "narHash": "sha256-t7tUCPoOwtK7xLIuEold9xqmwid/d1IvQF8UyLRpc2Q=",
         "ref": "refs/heads/main",
-        "rev": "4c78c363cc1892e22ad8ecdc817c979ddf355489",
-        "revCount": 8,
+        "rev": "bf0c9313871185bd27f2034698d269599b40d9e4",
+        "revCount": 9,
         "type": "git",
         "url": "ssh://git@github.com/andreasuvoss/gtk-shell.git"
       },
@@ -157,11 +157,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1749143949,
-        "narHash": "sha256-QuUtALJpVrPnPeozlUG/y+oIMSLdptHxb3GK6cpSVhA=",
+        "lastModified": 1749285348,
+        "narHash": "sha256-frdhQvPbmDYaScPFiCnfdh3B/Vh81Uuoo0w5TkWmmjU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d3d2d80a2191a73d1e86456a751b83aa13085d7d",
+        "rev": "3e3afe5174c561dee0df6f2c2b2236990146329f",
         "type": "github"
       },
       "original": {
@@ -221,11 +221,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1749279162,
-        "narHash": "sha256-+8Xs/L8IjhRmL5xveQYjxKCw2SSAtUpuyOw5yLvdHAU=",
+        "lastModified": 1749747924,
+        "narHash": "sha256-jKQUHC9ufIkhjPMUQRn+ZlN5mvYbZDS8hkltoWtdUco=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6003004c7b3c3f3464a164e423381cf1a1fe7ed7",
+        "rev": "ea0962d5c9a0f78014c63b82847c33efa003b4fd",
         "type": "github"
       },
       "original": {
