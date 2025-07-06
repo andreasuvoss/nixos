@@ -1,4 +1,5 @@
 {
+  pkgs,
   pkgs-unstable,
   lib,
   config,
@@ -36,7 +37,7 @@ in
     };
     programs.firefox = {
       enable = true;
-      package = pkgs-unstable.wrapFirefox pkgs-unstable.firefox-esr-128-unwrapped {
+      package = pkgs.wrapFirefox pkgs.firefox-esr-128-unwrapped {
         extraPolicies = {
           DisableTelemetry = true;
           ExtensionUpdate = true;
