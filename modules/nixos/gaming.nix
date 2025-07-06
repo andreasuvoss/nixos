@@ -15,7 +15,11 @@
       protonup
       mangohud
       wowup-cf
+      linuxKernel.packages.linux_zen.xone
+      lact
     ];
+    systemd.packages = with pkgs; [ lact ];
+    systemd.services.lactd.wantedBy = [ "multi-user.target" ];
 
     programs.steam = {
       enable = true;
@@ -26,6 +30,8 @@
       enable = true;
       enable32Bit = true;
     };
+    hardware.steam-hardware.enable = true;
+    hardware.xone.enable = true;
     services.xserver.videoDrivers = [ "amdgpu" ];
   };
 }
