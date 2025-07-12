@@ -40,6 +40,7 @@
     libreoffice.enable = true;
     megasync.enable = true;
     obs-studio.enable = true;
+    postman.enable = true;
     rider.enable = true;
     signal.enable = true;
     spotify.enable = true;
