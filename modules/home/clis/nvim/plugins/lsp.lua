@@ -133,7 +133,7 @@ require 'lspconfig'.bicep.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "dotnet", bicep_lsp_bin },
-    filetypes = { 'bicep' }
+    filetypes = { 'bicep', 'bicep-params' }
 }
 
 -- TODO: Enable more language servers

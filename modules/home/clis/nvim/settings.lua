@@ -30,6 +30,7 @@ vim.opt.colorcolumn = "120"
 vim.opt.clipboard = "unnamedplus"
 
 vim.cmd [[autocmd FileType markdown set tw=120 wrap]]
+vim.cmd [[ autocmd BufNewFile,BufRead *.bicepparam set filetype=bicep-params ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.bicep set filetype=bicep ]]
 vim.cmd [[autocmd FileType bicep setlocal commentstring=//\ %s]]
 
