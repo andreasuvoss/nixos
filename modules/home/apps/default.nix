@@ -12,7 +12,6 @@
     ./gimp
     ./google-chrome
     ./gthumb
-    ./jetbrains-gateway
     ./libreoffice
     ./megasync
     ./obs-studio
