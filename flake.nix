@@ -13,6 +13,10 @@
     ags = {
       url = "github:aylur/ags";
     };
+    nvim-autotag  = {
+      url = "github:windwp/nvim-ts-autotag";
+      flake = false;
+    };
   };
 
   outputs =
