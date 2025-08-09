@@ -262,9 +262,12 @@
           "$mainMod SHIFT, RETURN, layoutmsg, swapwithmaster"
           "$mainMod SHIFT, period, layoutmsg, mfact +0.1"
           "$mainMod SHIFT, comma, layoutmsg, mfact -0.1"
-          "$mainMod SHIFT, F, fullscreen"
           "$mainMod ALT, F, togglefloating"
           "$mainMod ALT, C, centerwindow"
+
+          # Fullscreen and maximize
+          "$mainMod, F, fullscreen, 1"
+          "$mainMod SHIFT, F, fullscreen, 0"
 
           ", PRINT, exec, grim -g \"$(slurp)\" - | convert - -shave 1x1 PNG:- | swappy -f -"
 
