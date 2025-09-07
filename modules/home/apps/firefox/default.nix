@@ -37,7 +37,7 @@ in
     };
     programs.firefox = {
       enable = true;
-      package = pkgs.wrapFirefox pkgs.firefox-esr-128-unwrapped {
+      package = pkgs.wrapFirefox pkgs.firefox-esr-140-unwrapped {
         extraPolicies = {
           DisableTelemetry = true;
           ExtensionUpdate = true;
