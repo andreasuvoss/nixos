@@ -63,6 +63,7 @@ in
           vue-language-server
           pyright
           nil
+          elixir-ls
           gopls
           docker-compose-language-service
           bicepLanguageServer
@@ -93,6 +94,10 @@ in
           {
             plugin = nvim-autotag;
             config = toLua "require(\"nvim-ts-autotag\").setup()";
+          }
+          {
+            plugin = nvim-highlight-colors;
+            config = toLua "require(\"nvim-highlight-colors\").setup()";
           }
           nvim-web-devicons
           nui-nvim
@@ -157,6 +162,8 @@ in
                 p.tree-sitter-yaml
                 p.tree-sitter-html
                 p.tree-sitter-tsx
+                p.tree-sitter-elixir
+                p.tree-sitter-heex
                 (pkgs.tree-sitter.buildGrammar {
                   language = "bicep";
                   version = "0092c7d";

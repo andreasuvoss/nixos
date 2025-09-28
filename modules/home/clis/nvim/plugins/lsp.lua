@@ -81,6 +81,12 @@ require 'lspconfig'.gopls.setup {
     capabilities = capabilities,
 }
 
+require 'lspconfig'.elixirls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { 'elixir-ls' }
+}
+
 require 'lspconfig'.rust_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities,
