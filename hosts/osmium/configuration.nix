@@ -63,7 +63,7 @@
         ];
       };
       pihole = {
-        image = "pihole/pihole:latest";
+        image = "pihole/pihole:2025.08.0";
         volumes = [
           "/home/andreasvoss/apps/pihole/pihole:/etc/pihole"
           "/home/andreasvoss/apps/pihole/dnsmasq.d:/etc/dnsmasq.d"
@@ -100,7 +100,7 @@
       };
 
       zigbee2mqtt = {
-        image = "docker.io/koenkk/zigbee2mqtt";
+        image = "docker.io/koenkk/zigbee2mqtt:2.6.1";
         volumes = [
           "/home/andreasvoss/apps/zigbee2mqtt-data:/app/data"
           "/run/udev:/run/udev:ro"
