@@ -1,6 +1,6 @@
 { config, pkgs, inputs, lib, ... }: {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
       # ./compose.nix
       ../../modules/nixos
@@ -50,7 +50,7 @@
     backend = "podman";
     containers = {
       home-assistant = {
-        image = "homeassistant/home-assistant:2024.11";
+        image = "homeassistant/home-assistant:2025.9.4";
         volumes = [
           "/home/andreasvoss/apps/homeassistant:/config"
         ];
@@ -58,7 +58,7 @@
           "8123:8123"
         ];
         extraOptions = [
-          "--network=host"  
+          "--network=host"
           "--cap-add=CAP_NET_RAW"
         ];
       };
@@ -91,7 +91,7 @@
         # ];
         cmd = [
           "mosquitto"
-          "-c" 
+          "-c"
           "/mosquitto-no-auth.conf"
         ];
         extraOptions = [
