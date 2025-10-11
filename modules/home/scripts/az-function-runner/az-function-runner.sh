@@ -18,12 +18,26 @@ else
     az login > /dev/null
 fi
 
+SUBSCRIPTION=$(az account list --query "[?name == 'integration-sub-nonproduction-aura' || name == 'integration-sub-production-aura'].name" --all | jq '.[]' -r | gum choose --limit=1 --header="Select Azure subscription")
+
+if [ $? -ne 0 ]; then 
+    echo 'No subscription selected'
+    exit 1;
+fi
+
+gum spin --spinner dot --title "Changing subscription" -- az account set --subscription $SUBSCRIPTION
+
 # Get the subscription name
-SUBSCRIPTION=$(az account show | jq '.name' -r)
+# SUBSCRIPTION=$(az account show | jq '.name' -r)
 
 # Get all functionapps in the subscription
 FUNCTIONAPPS=$(gum spin --spinner dot --title "Fetching functionapps in subscription ${SUBSCRIPTION}..." -- az functionapp list)
-FUNCTIONAPP_NAME=$(echo $FUNCTIONAPPS | jq '.[].name' -r | fzf)
+FUNCTIONAPP_NAME=$(echo $FUNCTIONAPPS | jq '.[].name' -r | gum filter --limit=1 --header="Select functionapp")
+
+if [ $? -ne 0 ]; then 
+    echo 'No functionapp selected'
+    exit 1;
+fi
 
 # Pull details for the selected functionapp
 FUNCTIONAPP_JSON=$(echo $FUNCTIONAPPS | jq --arg FUNCTIONAPP_NAME "$FUNCTIONAPP_NAME" '.[] | select(.name==$FUNCTIONAPP_NAME)')
@@ -39,11 +53,21 @@ EXISTING_ACCESS_RESTRICTION=$(echo $FUNCTION_ACCESS_RESTRICTIONS | jq --arg IP $
 # Ask to add IP to allow list if it is not there already
 if [[ -z "$EXISTING_ACCESS_RESTRICTION" ]]; then 
     ADD_RESTRICTION=$(gum confirm "Your IP ($MY_IP) is blocked would you like to allow it?" && gum spin --spinner dot --title "Allowing IP ${MY_IP} access to function ${FUNCTIONAPP_NAME}" -- az functionapp config access-restriction add --ip-address $MY_IP -p 300 --resource-group $FUNCTIONAPP_RG --name $FUNCTIONAPP_NAME)
+
+    if [ $? -ne 0 ]; then 
+        echo 'Without unblocking your IP, you can not run the function'
+        exit 1;
+    fi
 fi
 
 # Fetch functions within the function app
 FUNCTIONS=$(gum spin --spinner dot --title "Fetching functions for functionapp ${FUNCTIONAPP_NAME}..." -- az functionapp function list -g $FUNCTIONAPP_RG -n $FUNCTIONAPP_NAME)
-FUNCTION_NAME=$(echo $FUNCTIONS | jq '.[].config.name' -r | fzf)
+FUNCTION_NAME=$(echo $FUNCTIONS | jq '.[].config.name' -r | gum filter --limit=1)
+
+if [ $? -ne 0 ]; then 
+    echo 'No function selected'
+    exit 1;
+fi
 
 # Get the master key for executing the selected function
 FUNCTION_MASTER_KEY=$(gum spin --spinner dot --title "Getting function master key for ${FUNCTIONAPP_NAME}..." -- az functionapp keys list -g $FUNCTIONAPP_RG -n $FUNCTIONAPP_NAME | jq '.masterKey' -r)
