@@ -19,6 +19,7 @@
     ./lazygit
     ./nodejs
     ./nvim
+    ./oha
     ./parallel
     ./ripgrep
     ./sshfs
@@ -59,6 +60,7 @@
     lazygit.enable = true;
     nodejs.enable = false;
     nvim.enable = true;
+    oha.enable = true;
     parallel.enable = true;
     ripgrep.enable = true;
     sshfs.enable = true;

@@ -34,7 +34,7 @@
     freetube.enable = true;
     ghostty.enable = true;
     gimp.enable = true;
-    google-chrome.enable = false;
+    google-chrome.enable = true;
     gthumb.enable = true;
     libreoffice.enable = true;
     megasync.enable = true;
