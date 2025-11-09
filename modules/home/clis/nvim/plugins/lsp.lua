@@ -20,12 +20,12 @@ local on_attach = function(_, bufnr)
         },
     })
 
-    vim.o.winborder = 'single'
+    -- vim.o.winborder = 'single'
 
     map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
     map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
-    map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-    map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+    map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help({border = "single"})<cr>')
+    map('n', 'K', '<cmd>lua vim.lsp.buf.hover({border = "single"})<cr>')
     map('n', '<leader>ra', '<cmd>lua vim.lsp.buf.rename()<cr>')
     map('n', 'gI', '<cmd>lua vim.lsp.buf.implementation()<cr>')
     map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
