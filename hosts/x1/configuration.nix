@@ -16,6 +16,9 @@
     "nix-command"
     "flakes"
   ];
+  nix.settings.trusted-users = [
+    "andreasvoss"
+  ];
 
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
