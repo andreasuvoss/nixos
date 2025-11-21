@@ -15,6 +15,7 @@
     ./libreoffice
     ./megasync
     ./obs-studio
+    ./obsidian
     ./postman
     ./rider
     ./signal
@@ -39,6 +40,7 @@
     libreoffice.enable = true;
     megasync.enable = true;
     obs-studio.enable = true;
+    obsidian.enable = true;
     postman.enable = true;
     rider.enable = true;
     signal.enable = true;

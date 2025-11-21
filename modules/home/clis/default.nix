@@ -1,6 +1,7 @@
 { lib, config, ... }:{
   imports = [
     ./bat
+    ./carapace
     ./curl
     ./eza
     ./fastfetch
@@ -44,6 +45,7 @@
   config = lib.mkIf config.clis.enable {
     bat.enable = true;
     btop.enable = true;
+    carapace.enable = true;
     curl.enable = true;
     eza.enable = true;
     fastfetch.enable = true;

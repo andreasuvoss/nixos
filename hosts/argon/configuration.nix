@@ -1,6 +1,6 @@
 { config, pkgs, inputs, lib, ... }: {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
       ../../modules/nixos
     ];
@@ -45,6 +45,9 @@
   # Network configuration
   networking.hostName = "argon"; # Define your hostname.
   networking.networkmanager.enable = true;
+  networking.firewall.allowedUDPPorts = [
+    5353 # Spotify discovery
+  ];
 
   # The configuration below might be needed for accessing the network on VMs
   # networking.interfaces.enp8s0.useDHCP = true;
