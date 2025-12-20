@@ -22,7 +22,18 @@
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_17.override {
+    argsOverride = rec {
+      src = pkgs.fetchurl {
+            url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
+            sha256 = "sha256-Wo3mSnX8pwbAHGwKd891p0YYQ52xleJfHwJor2svsdo=";
+      };
+      version = "6.17.8";
+      modDirVersion = "6.17.8";
+      };
+  });
   boot.extraModulePackages = [ ];
 
   boot.initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/72b7d1c8-7710-4e4a-aa4d-a88133c85895";

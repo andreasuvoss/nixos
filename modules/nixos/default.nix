@@ -1,5 +1,5 @@
 # TODO: Modularize the NixOS configuration
-{ pkgs, config, ... }:
+{ pkgs, pkgs-unstable, config, ... }:
 {
   imports = [
     ./desktop.nix
@@ -12,10 +12,11 @@
     # Enable zsh
     environment.shells = with pkgs; [ zsh ];
     environment.localBinInPath = true;
-    
+
     # Tailscale
     services.tailscale = {
       enable = true;
+      package = pkgs-unstable.tailscale;
       useRoutingFeatures = "client";
       extraSetFlags = [
         "--operator=andreasvoss"

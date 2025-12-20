@@ -15,7 +15,7 @@
       protonup
       mangohud
       wowup-cf
-      linuxKernel.packages.linux_zen.xone
+      # linuxKernel.packages.linux_zen.xone
       lact
     ];
     systemd.packages = with pkgs; [ lact ];

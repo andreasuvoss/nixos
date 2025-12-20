@@ -41,6 +41,10 @@
       nixosConfigurations = {
         argon = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { pkgs-unstable = import nixpkgs-unstable {
+              config.allowUnfree = true;
+              inherit system;
+          }; };
           modules = [ ./hosts/argon/configuration.nix ];
         };
         osmium = nixpkgs.lib.nixosSystem {

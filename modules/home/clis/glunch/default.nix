@@ -5,7 +5,7 @@
   };
   config = lib.mkIf config.glunch.enable {
     home.packages = [
-      inputs.glunch.packages.${pkgs.system}.default
+      inputs.glunch.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 }
