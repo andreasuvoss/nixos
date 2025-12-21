@@ -12,10 +12,10 @@
     # Gaming settings
     # https://youtu.be/qlfm3MEbqYA?si=SjIg2ab0Ka5N20Bs&t=336
     environment.systemPackages = with pkgs; [
-      protonup
+      protonup-ng
       mangohud
       wowup-cf
-      # linuxKernel.packages.linux_zen.xone
+      linuxKernel.packages.linux_zen.xone
       lact
     ];
     systemd.packages = with pkgs; [ lact ];

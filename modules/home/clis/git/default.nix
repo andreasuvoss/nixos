@@ -9,19 +9,25 @@
     };
   };
   config = lib.mkIf config.git.enable {
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
+    };
+
     programs.git = {
-      enable = true;  
-      delta.enable = true;
-      userName = "Andreas Voss";
-      userEmail = "andreas@anvo.dk";
-      extraConfig = {
-        push.autoSetupRemote = true;
-        user.signingkey = "~/.ssh/${config.git.signingkey}";
-        gpg.format = "ssh";
-        commit.gpgsign = true;
-        rerere.enabled = true;
-        delta.line-numbers = true;
-        delta.side-by-side = true;
+      enable = true;
+      settings = {
+        user = {
+          name = "Andreas Voss";
+          email = "andreas@anvo.dk";
+          push.autoSetupRemote = true;
+          user.signingkey = "~/.ssh/${config.git.signingkey}";
+          gpg.format = "ssh";
+          commit.gpgsign = true;
+          rerere.enabled = true;
+          delta.line-numbers = true;
+          delta.side-by-side = true;
+        };
       };
     };
   };

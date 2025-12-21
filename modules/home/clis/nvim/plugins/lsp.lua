@@ -37,7 +37,7 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require('lspconfig').lua_ls.setup {
+vim.lsp.config['lua_ls'] = {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -49,8 +49,9 @@ require('lspconfig').lua_ls.setup {
         }
     },
 }
+vim.lsp.enable('lua_ls')
 
-require 'lspconfig'.nil_ls.setup {
+vim.lsp.config['nil_ls'] = {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -59,29 +60,34 @@ require 'lspconfig'.nil_ls.setup {
         },
     },
 }
+vim.lsp.enable('nil_ls')
 
-require 'lspconfig'.csharp_ls.setup {
+vim.lsp.config['csharp_ls'] = {
     on_attach = on_attach,
     capabilities = capabilities,
 }
+vim.lsp.enable('csharp_ls')
 
-require 'lspconfig'.pyright.setup {
+vim.lsp.config['pyright'] = {
     on_attach = on_attach,
     capabilities = capabilities,
 }
+vim.lsp.enable('pyright')
 
-require 'lspconfig'.gopls.setup {
+vim.lsp.config['gopls'] = {
     on_attach = on_attach,
     capabilities = capabilities,
 }
+vim.lsp.enable('gopls')
 
-require 'lspconfig'.elixirls.setup {
+vim.lsp.config['elixirls'] = {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { 'elixir-ls' }
 }
+vim.lsp.enable('elixirls')
 
-require 'lspconfig'.rust_analyzer.setup {
+vim.lsp.config['rust_analyzer'] = {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -92,13 +98,13 @@ require 'lspconfig'.rust_analyzer.setup {
         }
     }
 }
+vim.lsp.enable('rust_analyzer')
 
 
 
 local vue_lsp = os.getenv('VUE_LANGSERVER')
 
--- require 'lspconfig'.ts_ls.setup {
-require 'lspconfig'.ts_ls.setup {
+vim.lsp.config['ts_ls'] = {
     on_attach = on_attach,
     capabilities = capabilities,
     init_options = {
@@ -118,22 +124,28 @@ require 'lspconfig'.ts_ls.setup {
         'vue',
     },
 }
-require 'lspconfig'.volar.setup({})
+vim.lsp.enable('ts_ls')
 
-require 'lspconfig'.docker_compose_language_service.setup {
+-- deprecated now vue_ls
+-- vim.lsp.config['volar'] = {}
+-- vim.lsp.enable('volar')
+
+vim.lsp.config['docker_compose_language_service'] = {
     on_attach = on_attach,
     capabilities = capabilities,
 }
+vim.lsp.enable('docker_compose_language_service')
 
 -- TODO: Install the LSP and configure it here
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bicep
 -- https://github.com/Azure/bicep/releases
 local bicep_lsp_bin = os.getenv('BICEP_LANGSERVER')
-require 'lspconfig'.bicep.setup {
+vim.lsp.config['bicep'] = {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "dotnet", bicep_lsp_bin },
     filetypes = { 'bicep', 'bicep-params' }
 }
+vim.lsp.enable('bicep')
 
 -- TODO: Enable more language servers

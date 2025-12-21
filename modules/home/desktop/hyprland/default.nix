@@ -102,9 +102,9 @@
         "XCURSOR_SIZE,16"
         "HYPRCURSOR_SIZE,16"
         "QT_QPA_PLATFORMTHEME,qt5ct"
-        "SSH_AUTH_SOCK,/run/user/1000/keyring/ssh"
+        "SSH_AUTH_SOCK,/run/user/1000/gcr/ssh"
         "SSH_ASKPASS,${pkgs.seahorse}/libexec/seahorse/ssh-askpass"
-        "SSH_AUTH_SOCK2,\${XDG_RUNTIME_DIR}/keyring/ssh"
+        "SSH_AUTH_SOCK2,\${XDG_RUNTIME_DIR}/gcr/ssh"
       ];
       input = {
         kb_layout = "us";
@@ -161,7 +161,7 @@
         preserve_split = "yes";
       };
       master.new_status = "slave";
-      gestures.workspace_swipe = "off";
+      # gestures.workspace_swipe = "off";
       misc = {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
