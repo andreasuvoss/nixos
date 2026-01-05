@@ -85,6 +85,10 @@ in
           # TODO: https://github.com/folke/lazydev.nvim
           # TODO: https://github.com/stevearc/conform.nvim
           luasnip
+          {
+            plugin = conform-nvim;
+            config = toLua "require(\"conform\").setup()";
+          }
 
           # nvim-autopairs
           {

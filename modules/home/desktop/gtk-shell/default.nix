@@ -5,7 +5,7 @@
   };
   config = lib.mkIf config.gtk-shell.enable {
     home.packages = [
-      inputs.gtk-shell.packages.${pkgs.system}.default
+      inputs.gtk-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 }

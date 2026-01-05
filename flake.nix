@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    gtk-shell.url = "git+ssh://git@github.com/andreasuvoss/gtk-shell.git";
+    gtk-shell.url = "git+ssh://git@github.com/andreasuvoss/gtk-shell.git?ref=ags3";
     glunch.url = "github:andreasuvoss/glunch";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
