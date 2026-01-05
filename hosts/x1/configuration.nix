@@ -62,11 +62,13 @@
     };
   };
 
-  services.logind.lidSwitchExternalPower= "ignore";
-  services.logind.lidSwitch = "suspend";
-  services.logind.lidSwitchDocked = "ignore";
-  services.logind.powerKey = "suspend";
-  services.logind.powerKeyLongPress = "poweroff";
+  services.logind.settings.Login = {
+    HandlePowerKey = "suspend";
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandlePowerKeyLongPress = "poweroff";
+  };
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"

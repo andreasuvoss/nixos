@@ -13,7 +13,7 @@
     ags = {
       url = "github:aylur/ags";
     };
-    nvim-autotag  = {
+    nvim-autotag = {
       url = "github:windwp/nvim-ts-autotag";
       flake = false;
     };
@@ -41,18 +41,32 @@
       nixosConfigurations = {
         argon = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { pkgs-unstable = import nixpkgs-unstable {
+          specialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
               inherit system;
-          }; };
+            };
+          };
           modules = [ ./hosts/argon/configuration.nix ];
         };
         osmium = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
+              config.allowUnfree = true;
+              inherit system;
+            };
+          };
           modules = [ ./hosts/osmium/configuration.nix ];
         };
         x1 = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
+              config.allowUnfree = true;
+              inherit system;
+            };
+          };
           modules = [ ./hosts/x1/configuration.nix ];
         };
       };
