@@ -34,7 +34,7 @@ in
 
   # Work specific apps
   postman.enable = true;
-  bruno.enable = true;
+  bruno.enable = false;
   _1password.enable = false;
 
   # Desktop
