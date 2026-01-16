@@ -20,14 +20,14 @@
         user = {
           name = "Andreas Voss";
           email = "andreas@anvo.dk";
-          push.autoSetupRemote = true;
-          user.signingkey = "~/.ssh/${config.git.signingkey}";
-          gpg.format = "ssh";
-          commit.gpgsign = true;
-          rerere.enabled = true;
-          delta.line-numbers = true;
-          delta.side-by-side = true;
+          signingkey = "~/.ssh/${config.git.signingkey}";
         };
+        push.autoSetupRemote = true;
+        gpg.format = "ssh";
+        commit.gpgsign = true;
+        rerere.enabled = true;
+        delta.line-numbers = true;
+        delta.side-by-side = true;
       };
     };
   };
