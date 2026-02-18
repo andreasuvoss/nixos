@@ -62,6 +62,27 @@
           "--cap-add=CAP_NET_RAW"
         ];
       };
+      syncthing = {
+        image = "syncthing/syncthing:2.0.14";
+        volumes = [
+          "/home/andreasvoss/apps/syncthing/config:/config"
+          "/home/andreasvoss/apps/syncthing/data:/data"
+        ];
+        ports = [
+          "8384:8384"
+          "22000:22000/tcp"
+          "22000:22000/udp"
+          "21027:21027/udp"
+        ];
+        extraOptions = [
+          "--network=host"
+        ];
+        environment = {
+          TZ = "Etc/UTC";
+          PUID = "1000";
+          PGID = "1000";
+        };
+      };
       pihole = {
         image = "pihole/pihole:2025.08.0";
         volumes = [
