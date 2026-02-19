@@ -45,8 +45,12 @@
   # Network configuration
   networking.hostName = "argon"; # Define your hostname.
   networking.networkmanager.enable = true;
+  networking.firewall.allowedTCPPorts = [
+    22000 # Syncthing
+  ];
   networking.firewall.allowedUDPPorts = [
     5353 # Spotify discovery
+    22000 # Syncthing
   ];
 
   # The configuration below might be needed for accessing the network on VMs

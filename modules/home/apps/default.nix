@@ -20,6 +20,7 @@
     ./rider
     ./signal
     ./spotify
+    ./syncthing
     ./teams
     ./vlc
   ];
@@ -45,6 +46,7 @@
     rider.enable = true;
     signal.enable = true;
     spotify.enable = true;
+    syncthing.enable = true;
     teams.enable = false;
     vlc.enable = true;
   };
