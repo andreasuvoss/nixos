@@ -63,7 +63,7 @@
         ];
       };
       syncthing = {
-        image = "syncthing/syncthing:2.0.14";
+        image = "docker.io/syncthing/syncthing:2.0.14";
         volumes = [
           "/home/andreasvoss/apps/syncthing/config:/config"
           "/home/andreasvoss/apps/syncthing/data:/data"
@@ -96,6 +96,7 @@
         ];
         environment = {
           TZ = "Europe/Copenhagen";
+          FTLCONF_webserver_api_password = "";
         };
         # extraOptions = [
         # ];
@@ -153,8 +154,8 @@
 
   # Network configuration
   networking.hostName = "osmium";
-  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 5201 8080 8081 1883 ];
-  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5201 8080 8081 1883 ];
+  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 5201 8080 8081 1883 8284 22000 ];
+  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5201 8080 8081 1883 8284 22000 21027 ];
   #networking.firewall.enable = false;
 
   # Enable the OpenSSH deamon
