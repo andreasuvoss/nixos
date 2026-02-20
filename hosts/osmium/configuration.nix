@@ -50,7 +50,7 @@
     backend = "podman";
     containers = {
       home-assistant = {
-        image = "homeassistant/home-assistant:2025.9.4";
+        image = "homeassistant/home-assistant:2026.2.2";
         volumes = [
           "/home/andreasvoss/apps/homeassistant:/config"
         ];
@@ -84,7 +84,7 @@
         };
       };
       pihole = {
-        image = "pihole/pihole:2025.08.0";
+        image = "pihole/pihole:2026.02.0";
         volumes = [
           "/home/andreasvoss/apps/pihole/pihole:/etc/pihole"
           "/home/andreasvoss/apps/pihole/dnsmasq.d:/etc/dnsmasq.d"
@@ -121,7 +121,7 @@
       };
 
       zigbee2mqtt = {
-        image = "docker.io/koenkk/zigbee2mqtt:2.6.1";
+        image = "docker.io/koenkk/zigbee2mqtt:2.8.0";
         volumes = [
           "/home/andreasvoss/apps/zigbee2mqtt-data:/app/data"
           "/run/udev:/run/udev:ro"
