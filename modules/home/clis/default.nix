@@ -22,6 +22,7 @@
     ./nvim
     ./oha
     ./parallel
+    ./rclone
     ./ripgrep
     ./sshfs
     ./starship
@@ -64,6 +65,7 @@
     nvim.enable = true;
     oha.enable = true;
     parallel.enable = true;
+    rclone.enable = true;
     ripgrep.enable = true;
     sshfs.enable = true;
     starship.enable = true;
