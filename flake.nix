@@ -57,7 +57,10 @@
               inherit system;
             };
           };
-          modules = [ ./hosts/osmium/configuration.nix ];
+          modules = [
+            ./hosts/osmium/configuration.nix
+            (import (nixpkgs-unstable + "/nixos/modules/virtualisation/oci-containers.nix"))
+          ];
         };
         x1 = nixpkgs.lib.nixosSystem {
           inherit system;

@@ -2,9 +2,12 @@
   imports =
     [
       ./hardware-configuration.nix
-      # ./compose.nix
       ../../modules/nixos
     ];
+
+  disabledModules = [
+    "virtualisation/oci-containers.nix"
+  ];
 
   # NixOS
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -26,6 +29,21 @@
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTDEi9qjl+MWFW53lLn280+DXvnEUfmoQd2IdR6GQoTQNnb0vrEUaDqPF1M1TNMa3zTj4zN5+SpTcKE69FKlrVW7jBoSN82g/6gc3tb8j2QXjYkKh6/fqIWQdMKvM1DsK7O5g3rFdQbUN+sb3RovZvns4wsZJCMsZFASkBJnYbQ5GZ2fYtxFk75JjRWm4kroByu/tka5wmO9K9oIzH2/D1/9Se3NbAZtxjAUyjtE5GY2yU3LYbfdG+VvlSuyVE9JDuk2Cepls5HFwXmoYn4NAwd7izuOwCsc95bdSw0Ju3t1TDeCxo7YSTx0hxkjVt0xi6mZZThyvAhXzUCUBxUhET andreasvoss@argon"
   ];
 
+  users.groups.podman = {
+    gid = 994;
+  };
+
+  users.users.podman = {
+    uid = 993;
+    group = "podman";
+    extraGroups = [ "dialout" ];
+    linger = true;
+    autoSubUidGidRange = true;
+    isSystemUser = true;
+    createHome = true;
+    home = "/home/podman";
+  };
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -33,40 +51,28 @@
   # Enables virtualization
   virtualization.enable = true;
 
-  # systemd.services.podman-home-assistant.serviceConfig.User = "andreasvoss";
-  # systemd.services.podman-pihole.serviceConfig.User = "andreasvoss";
-  # virtualisation.podman = {
-  #   enable = true;
-  #   autoPrune.enable = true;
-  #   # dockerCompat = true;
-  #   defaultNetwork.settings = {
-  #     dns_enabled = true;
-  #   };
-  # };
-  #
-  # networking.firewall.interfaces."podman+".allowedUDPPorts = [ 53 ];
-
-  virtualisation.oci-containers = {
+  virtualisation.oci-containers = with config.users; {
     backend = "podman";
     containers = {
       home-assistant = {
         image = "homeassistant/home-assistant:2026.2.2";
+        podman.user = "podman";
         volumes = [
-          "/home/andreasvoss/apps/homeassistant:/config"
+          "/home/podman/apps/homeassistant:/config"
         ];
         ports = [
           "8123:8123"
         ];
         extraOptions = [
           "--network=host"
-          "--cap-add=CAP_NET_RAW"
         ];
       };
       syncthing = {
         image = "docker.io/syncthing/syncthing:2.0.14";
+        podman.user = "podman";
         volumes = [
-          "/home/andreasvoss/apps/syncthing/config:/config"
-          "/home/andreasvoss/apps/syncthing/data:/data"
+          "/home/podman/apps/syncthing/config:/var/syncthing/config"
+          "/home/podman/apps/syncthing/data:/data"
         ];
         ports = [
           "8384:8384"
@@ -76,41 +82,37 @@
         ];
         extraOptions = [
           "--network=host"
+          "--userns=keep-id"
         ];
         environment = {
           TZ = "Etc/UTC";
-          PUID = "1000";
-          PGID = "1000";
+          PUID = "${ builtins.toString users.podman.uid}";
+          PGID = "${ builtins.toString groups.podman.gid}";
         };
       };
       pihole = {
         image = "pihole/pihole:2026.02.0";
+        podman.user = "podman";
         volumes = [
-          "/home/andreasvoss/apps/pihole/pihole:/etc/pihole"
-          "/home/andreasvoss/apps/pihole/dnsmasq.d:/etc/dnsmasq.d"
+          "/home/podman/apps/pihole/pihole:/etc/pihole"
+          "/home/podman/apps/pihole/dnsmasq.d:/etc/dnsmasq.d"
         ];
         ports = [
-          "53:53/tcp"
-          "53:53/udp"
+          "5300:53/tcp"
+          "5300:53/udp"
           "8010:80/tcp"
         ];
         environment = {
           TZ = "Europe/Copenhagen";
           FTLCONF_webserver_api_password = "";
         };
-        # extraOptions = [
-        # ];
       };
-      # The network needs to be created manually for now
       mqtt = {
         image = "docker.io/library/eclipse-mosquitto:2.0";
+        podman.user = "podman";
         volumes = [
-          "/home/andreasvoss/apps/mosquitto-data:/mosquitto"
+          "/home/podman/apps/mosquitto-data:/mosquitto"
         ];
-        # ports = [
-        #   "1883:1883"
-        #   "9001:9001"
-        # ];
         cmd = [
           "mosquitto"
           "-c"
@@ -123,45 +125,84 @@
 
       zigbee2mqtt = {
         image = "docker.io/koenkk/zigbee2mqtt:2.8.0";
+        podman.user = "podman";
         volumes = [
-          "/home/andreasvoss/apps/zigbee2mqtt-data:/app/data"
+          "/home/podman/apps/zigbee2mqtt-data:/app/data"
           "/run/udev:/run/udev:ro"
         ];
-        # ports = [
-        #   "8081:8081"
-        # ];
         environment = {
           TZ = "Europe/Copenhagen";
         };
         extraOptions = [
           "--pod=mqtt"
           "--device=/dev/ttyUSB0"
+          "--group-add=keep-groups"
         ];
       };
     };
 
   };
 
-  # Create a pod for mqtt and zigbee2mqtt
-  systemd.services.create-mqtt-pod = with config.virtualisation.oci-containers; {
+  systemd.services.create-mqtt-pod-rootless = with config.virtualisation.oci-containers; {
     serviceConfig.Type = "oneshot";
+    serviceConfig.User = "podman";
     wantedBy = [ "${backend}-mqtt.service" ];
     script = ''
       ${pkgs.podman}/bin/podman pod exists mqtt || \
-        ${pkgs.podman}/bin/podman pod create -n mqtt -p '0.0.0.0:8081:8081' -p '0.0.0.0:1883:1883'
+        ${pkgs.podman}/bin/podman pod create --userns=keep-id -n mqtt -p '0.0.0.0:8081:8081' -p '0.0.0.0:1883:1883'
     '';
+  };
+
+  systemd.timers."backup" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 4:00:00";
+      Persistent = true;
+      Unit = "backup.service";
+    };
+  };
+
+  systemd.services."backup" = {
+    path = [
+      pkgs.openssh
+      pkgs.restic
+    ];
+    script = ''
+      set -eu
+      ${pkgs.restic}/bin/restic -r sftp:u550609-sub1@u550609-sub1.your-storagebox.de:/ backup /home/podman/apps --tag daily,automatic --password-file /home/podman/secrets/restic_encryption_key
+      ${pkgs.restic}/bin/restic -r sftp:u550609-sub1@u550609-sub1.your-storagebox.de:/ backup /home/podman/apps/syncthing/data/obsidian --tag daily,automatic --password-file /home/podman/secrets/restic_encryption_key
+    '';
+    restartIfChanged = false;
+    serviceConfig = {
+      Type = "oneshot";
+      User = "podman";
+      # ProtectSystem = "full";
+      # ProtectHome = true;
+    };
   };
 
   # Network configuration
   networking.hostName = "osmium";
-  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 5201 8080 8081 1883 8284 22000 ];
-  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5201 8080 8081 1883 8284 22000 21027 ];
+  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 5201 8080 8081 1883 8384 22000 ];
+  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5201 8080 8081 1883 8384 22000 21027 ];
   #networking.firewall.enable = false;
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.eth0.forwarding" = 1;    # enable port forwarding
+  };
+
+  # Port forwarding because rootless containers can not use privileged ports
+  networking.firewall.extraCommands = ''
+      iptables -A PREROUTING -t nat -i eth0 -p TCP --dport 53 -j REDIRECT --to-port 5300
+      iptables -A PREROUTING -t nat -i eth0 -p UDP --dport 53 -j REDIRECT --to-port 5300
+    '';
+
 
   # Enable the OpenSSH deamon
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
   services.openssh.settings.KbdInteractiveAuthentication = false;
+
+  programs.ssh.kexAlgorithms = config.services.openssh.settings.KexAlgorithms;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
