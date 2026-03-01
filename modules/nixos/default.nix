@@ -25,13 +25,15 @@
     services.upower.enable = true;
 
     # NFS shares
-    environment.systemPackages = with pkgs; [ nfs-utils home-manager ];
+    environment.systemPackages = with pkgs; [ nfs-utils home-manager restic ];
 
     users.defaultUserShell = pkgs.zsh;
     programs.zsh.enable = true;
 
     # Enable git
     programs.git.enable = true;
+
+    programs.ssh.kexAlgorithms = config.services.openssh.settings.KexAlgorithms;
 
     # Enable flatpaks
     services.flatpak.enable = false;

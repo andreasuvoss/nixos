@@ -6,6 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     gtk-shell.url = "git+ssh://git@github.com/andreasuvoss/gtk-shell.git?ref=ags3";
     glunch.url = "github:andreasuvoss/glunch";
+    sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,6 +43,7 @@
         argon = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
+            inherit inputs;
             pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
               inherit system;

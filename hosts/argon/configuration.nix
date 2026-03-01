@@ -3,9 +3,19 @@
     [
       ./hardware-configuration.nix
       ../../modules/nixos
+      inputs.sops-nix.nixosModules.sops
     ];
   # NixOS
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+
+  sops.age.keyFile = "/home/andreasvoss/.config/sops/age/keys.txt";
+
+  sops.secrets.restic-key = {
+    owner = config.users.users.andreasvoss.name;
+  };
 
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
@@ -29,12 +39,9 @@
   # programs.nix-ld.libraries = with pkgs; [
   #   icu
   # ];
-  # environment.sessionVariables = {
-  #   # NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
-  #   #   pkgs.stdenv.cc.cc
-  #   # ];
-  #   NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
-  # };
+  environment.sessionVariables = {
+    RESTIC_PASSWORD_FILE = "/run/secrets/restic-key";
+  };
 
   # Enables the desktop module
   desktop.enable = true;
