@@ -95,11 +95,11 @@
         podman.user = "podman";
         volumes = [
           "/home/podman/apps/pihole/pihole:/etc/pihole"
-          "/home/podman/apps/pihole/dnsmasq.d:/etc/dnsmasq.d"
+          "/home/podman/apps/_backups/pihole:/etc/pihole-backup"
         ];
         ports = [
-          "5300:53/tcp"
-          "5300:53/udp"
+          "0.0.0.0:5300:53/tcp"
+          "0.0.0.0:5300:53/udp"
           "8010:80/tcp"
         ];
         environment = {
@@ -153,6 +153,29 @@
     '';
   };
 
+
+  systemd.timers."pihole-teleporter" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "Mon *-*-1..7 3:00:00";
+      Persistent = true;
+      Unit = "pihole-teleporter.service";
+    };
+  };
+
+
+  systemd.services."pihole-teleporter" = {
+    script = ''
+      set -eu
+      ${pkgs.podman}/bin/podman exec --workdir /etc/pihole-backup pihole pihole-FTL --teleporter
+    '';
+    restartIfChanged = false;
+    serviceConfig = {
+      Type = "oneshot";
+      User = "podman";
+    };
+  };
+
   systemd.timers."backup" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
@@ -169,33 +192,36 @@
     ];
     script = ''
       set -eu
-      ${pkgs.restic}/bin/restic -r sftp:u550609-sub1@u550609-sub1.your-storagebox.de:/ backup /home/podman/apps --tag daily,automatic --password-file /home/podman/secrets/restic_encryption_key
-      ${pkgs.restic}/bin/restic -r sftp:u550609-sub1@u550609-sub1.your-storagebox.de:/ backup /home/podman/apps/syncthing/data/obsidian --tag daily,automatic --password-file /home/podman/secrets/restic_encryption_key
+      ${pkgs.restic}/bin/restic -r sftp:u550609-sub1@u550609-sub1.your-storagebox.de:/ backup /home/podman/apps --tag daily,automatic --exclude /home/podman/apps/pihole --password-file /home/podman/secrets/restic_encryption_key
     '';
     restartIfChanged = false;
     serviceConfig = {
       Type = "oneshot";
       User = "podman";
-      # ProtectSystem = "full";
-      # ProtectHome = true;
     };
   };
 
   # Network configuration
   networking.hostName = "osmium";
-  networking.firewall.allowedTCPPorts = [ 8123 1400 53 8010 5201 8080 8081 1883 8384 22000 ];
-  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5201 8080 8081 1883 8384 22000 21027 ];
+  networking.firewall.allowedTCPPorts = [ 8123 1400 53 5300 8010 5201 8080 8081 1883 8384 22000 ];
+  networking.firewall.allowedUDPPorts = [ 1900 5353 53 5300 5300 5201 8080 8081 1883 8384 22000 21027 ];
+  networking.nftables.enable = true;
+  # Local portforwading due to Pihole running as a rootless container
+  networking.nftables.ruleset = ''
+    table inet nat {
+      chain prerouting {
+        type nat hook prerouting priority -100; policy accept;
+        udp dport 53 redirect to :5300
+        tcp dport 53 redirect to :5300
+      }
+    }
+  '';
+
+
   #networking.firewall.enable = false;
   boot.kernel.sysctl = {
     "net.ipv4.conf.eth0.forwarding" = 1;    # enable port forwarding
   };
-
-  # Port forwarding because rootless containers can not use privileged ports
-  networking.firewall.extraCommands = ''
-      iptables -A PREROUTING -t nat -i eth0 -p TCP --dport 53 -j REDIRECT --to-port 5300
-      iptables -A PREROUTING -t nat -i eth0 -p UDP --dport 53 -j REDIRECT --to-port 5300
-    '';
-
 
   # Enable the OpenSSH deamon
   services.openssh.enable = true;
