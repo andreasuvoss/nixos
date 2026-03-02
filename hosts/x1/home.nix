@@ -118,7 +118,6 @@ in
   golang.enable = true;
 
   # Disable a few things
-  megasync.enable = lib.mkForce false;
   discord.enable = lib.mkForce false;
   signal.enable = lib.mkForce false;
 }

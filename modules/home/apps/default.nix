@@ -13,7 +13,6 @@
     ./google-chrome
     ./gthumb
     ./libreoffice
-    ./megasync
     ./obs-studio
     ./obsidian
     ./postman
@@ -39,7 +38,6 @@
     google-chrome.enable = true;
     gthumb.enable = true;
     libreoffice.enable = true;
-    megasync.enable = true;
     obs-studio.enable = true;
     obsidian.enable = true;
     postman.enable = true;
