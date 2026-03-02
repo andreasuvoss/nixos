@@ -54,6 +54,7 @@
         osmium = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
+            inherit inputs;
             pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
               inherit system;

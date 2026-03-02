@@ -3,6 +3,7 @@
     [
       ./hardware-configuration.nix
       ../../modules/nixos
+      inputs.sops-nix.nixosModules.sops
     ];
 
   disabledModules = [
@@ -11,6 +12,15 @@
 
   # NixOS
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+
+  sops.age.keyFile = "/home/podman/.config/sops/age/keys.txt";
+
+  sops.secrets.restic-key = {
+    owner = config.users.users.podman.name;
+  };
 
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
@@ -192,7 +202,7 @@
     ];
     script = ''
       set -eu
-      ${pkgs.restic}/bin/restic -r sftp:u550609-sub1@u550609-sub1.your-storagebox.de:/ backup /home/podman/apps --tag daily,automatic --exclude /home/podman/apps/pihole --password-file /home/podman/secrets/restic_encryption_key
+      ${pkgs.restic}/bin/restic -r sftp:u550609-sub1@u550609-sub1.your-storagebox.de:/ backup /home/podman/apps --tag daily,automatic --exclude /home/podman/apps/pihole --password-file /run/secrets/restic-key
     '';
     restartIfChanged = false;
     serviceConfig = {
