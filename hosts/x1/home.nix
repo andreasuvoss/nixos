@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   nixpkgs,
@@ -9,7 +10,10 @@ let
   username = "andreasvoss";
 in
 {
-  imports = [ ../../modules/home ];
+  imports = [
+    ../../modules/home
+    inputs.sops-nix.homeManagerModules.sops
+  ];
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (_: true);
@@ -22,6 +26,18 @@ in
       dconf
       brightnessctl
     ];
+  };
+
+  # https://konradmalik.com/posts/2023/02/sops-nix-simple-secrets-management-for-nix/
+  sops = {
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    # secrets.restic-key = {
+    #   path = "${config.home.homeDirectory}/restic2.txt";
+    # };
+    secrets."ssh-keys/x1" = {
+      path = "${config.home.homeDirectory}/.ssh/id_rsa";
+    };
   };
 
   services.easyeffects = {

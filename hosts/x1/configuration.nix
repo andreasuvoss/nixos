@@ -126,6 +126,12 @@
   # networking.networkmanager.fccUnlockScripts = [
   #   { id = "1eac:100d"; path = "${pkgs.lenovo-wwan-unlock}/bin/fcc_unlock.sh"; }
   # ];
+  networking.firewall.allowedTCPPorts = [
+    22000 # Syncthing
+  ];
+  networking.firewall.allowedUDPPorts = [
+    22000 # Syncthing
+  ];
 
   # Enable gaming
   gaming.enable = false;
