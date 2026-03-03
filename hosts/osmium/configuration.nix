@@ -1,10 +1,24 @@
-{ config, pkgs, inputs, lib, ... }: {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../modules/nixos
-      inputs.sops-nix.nixosModules.sops
-    ];
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+let
+  pihole-image = "docker.io/pihole/pihole:2026.02.0"; # https://hub.docker.com/r/pihole/pihole/tags
+  homeassistant-image = "docker.io/homeassistant/home-assistant:2026.2.3";
+  mosquitto-image = "docker.io/library/eclipse-mosquitto:2.0";
+  syncthing-image = "docker.io/syncthing/syncthing:2.0.14";
+  zigbee2mqtt-image = "docker.io/koenkk/zigbee2mqtt:2.8.0";
+in
+{
+
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/nixos
+    inputs.sops-nix.nixosModules.sops
+  ];
 
   disabledModules = [
     "virtualisation/oci-containers.nix"
@@ -35,9 +49,9 @@
     ];
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTDEi9qjl+MWFW53lLn280+DXvnEUfmoQd2IdR6GQoTQNnb0vrEUaDqPF1M1TNMa3zTj4zN5+SpTcKE69FKlrVW7jBoSN82g/6gc3tb8j2QXjYkKh6/fqIWQdMKvM1DsK7O5g3rFdQbUN+sb3RovZvns4wsZJCMsZFASkBJnYbQ5GZ2fYtxFk75JjRWm4kroByu/tka5wmO9K9oIzH2/D1/9Se3NbAZtxjAUyjtE5GY2yU3LYbfdG+VvlSuyVE9JDuk2Cepls5HFwXmoYn4NAwd7izuOwCsc95bdSw0Ju3t1TDeCxo7YSTx0hxkjVt0xi6mZZThyvAhXzUCUBxUhET andreasvoss@argon"
-  ];
+  # users.users.root.openssh.authorizedKeys.keys = [
+  #   "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTDEi9qjl+MWFW53lLn280+DXvnEUfmoQd2IdR6GQoTQNnb0vrEUaDqPF1M1TNMa3zTj4zN5+SpTcKE69FKlrVW7jBoSN82g/6gc3tb8j2QXjYkKh6/fqIWQdMKvM1DsK7O5g3rFdQbUN+sb3RovZvns4wsZJCMsZFASkBJnYbQ5GZ2fYtxFk75JjRWm4kroByu/tka5wmO9K9oIzH2/D1/9Se3NbAZtxjAUyjtE5GY2yU3LYbfdG+VvlSuyVE9JDuk2Cepls5HFwXmoYn4NAwd7izuOwCsc95bdSw0Ju3t1TDeCxo7YSTx0hxkjVt0xi6mZZThyvAhXzUCUBxUhET andreasvoss@argon"
+  # ];
 
   users.groups.podman = {
     gid = 994;
@@ -65,7 +79,7 @@
     backend = "podman";
     containers = {
       home-assistant = {
-        image = "homeassistant/home-assistant:2026.2.2";
+        image = homeassistant-image;
         podman.user = "podman";
         volumes = [
           "/home/podman/apps/homeassistant:/config"
@@ -78,7 +92,7 @@
         ];
       };
       syncthing = {
-        image = "docker.io/syncthing/syncthing:2.0.14";
+        image = syncthing-image;
         podman.user = "podman";
         volumes = [
           "/home/podman/apps/syncthing/config:/var/syncthing/config"
@@ -96,12 +110,12 @@
         ];
         environment = {
           TZ = "Etc/UTC";
-          PUID = "${ builtins.toString users.podman.uid}";
-          PGID = "${ builtins.toString groups.podman.gid}";
+          PUID = "${builtins.toString users.podman.uid}";
+          PGID = "${builtins.toString groups.podman.gid}";
         };
       };
       pihole = {
-        image = "pihole/pihole:2026.02.0";
+        image = pihole-image;
         podman.user = "podman";
         volumes = [
           "/home/podman/apps/pihole/pihole:/etc/pihole"
@@ -118,7 +132,7 @@
         };
       };
       mqtt = {
-        image = "docker.io/library/eclipse-mosquitto:2.0";
+        image = mosquitto-image;
         podman.user = "podman";
         volumes = [
           "/home/podman/apps/mosquitto-data:/mosquitto"
@@ -134,7 +148,7 @@
       };
 
       zigbee2mqtt = {
-        image = "docker.io/koenkk/zigbee2mqtt:2.8.0";
+        image = zigbee2mqtt-image;
         podman.user = "podman";
         volumes = [
           "/home/podman/apps/zigbee2mqtt-data:/app/data"
@@ -163,7 +177,6 @@
     '';
   };
 
-
   systemd.timers."pihole-teleporter" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
@@ -172,7 +185,6 @@
       Unit = "pihole-teleporter.service";
     };
   };
-
 
   systemd.services."pihole-teleporter" = {
     script = ''
@@ -196,10 +208,7 @@
   };
 
   systemd.services."backup" = {
-    path = [
-      pkgs.openssh
-      pkgs.restic
-    ];
+    path = [ pkgs.openssh pkgs.restic ];
     script = ''
       set -eu
       ${pkgs.restic}/bin/restic -r sftp:u550609-sub1@u550609-sub1.your-storagebox.de:/ backup /home/podman/apps --tag daily,automatic --exclude /home/podman/apps/pihole --password-file /run/secrets/restic-key
@@ -227,10 +236,9 @@
     }
   '';
 
-
   #networking.firewall.enable = false;
   boot.kernel.sysctl = {
-    "net.ipv4.conf.eth0.forwarding" = 1;    # enable port forwarding
+    "net.ipv4.conf.eth0.forwarding" = 1; # enable port forwarding
   };
 
   # Enable the OpenSSH deamon
