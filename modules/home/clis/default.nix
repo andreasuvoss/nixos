@@ -6,6 +6,7 @@
     ./eza
     ./fastfetch
     ./fd
+    ./fish
     ./fzf
     ./gcc
     ./git
@@ -51,6 +52,7 @@
     eza.enable = true;
     fastfetch.enable = true;
     fd.enable = true;
+    fish.enable = true;
     fzf.enable = true;
     git.enable = true;
     gjs.enable = true;

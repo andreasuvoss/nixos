@@ -10,8 +10,13 @@
   ];
   config = {
     # Enable zsh
-    environment.shells = with pkgs; [ zsh ];
+    # environment.shells = with pkgs; [ zsh ];
+
+    # Enable fish
+    environment.shells = with pkgs; [ fish ];
+
     environment.localBinInPath = true;
+
 
     # Tailscale
     services.tailscale = {
@@ -27,8 +32,10 @@
     # NFS shares
     environment.systemPackages = with pkgs; [ nfs-utils home-manager restic ];
 
-    users.defaultUserShell = pkgs.zsh;
-    programs.zsh.enable = true;
+    # users.defaultUserShell = pkgs.zsh;
+    # programs.zsh.enable = true;
+    users.defaultUserShell = pkgs.fish;
+    programs.fish.enable = true;
 
     # Enable git
     programs.git.enable = true;
