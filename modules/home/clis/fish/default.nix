@@ -26,6 +26,7 @@ in
         fish_vi_key_bindings
         fish_config theme choose Dracula
         set fish_greeting
+        carapace _carapace fish | source
         starship init fish | source
         set -l fishconf (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo ~/.config)/fish
         source $fishconf/sensitive.fish
