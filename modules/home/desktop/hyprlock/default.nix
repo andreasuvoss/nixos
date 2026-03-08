@@ -1,11 +1,24 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 {
   options = {
     hyprlock.enable = lib.mkEnableOption "enable hyprlock";
   };
   config = lib.mkIf config.hyprlock.enable {
+    home.file.".config/hypr/bg.png" = {
+      source = ./bg.png;
+      executable = false;
+    };
     programs.hyprlock = {
       enable = true;
+      package = pkgs.hyprlock.overrideAttrs(old: {
+        # patch to allow image to be loaded when using screenshot
+        patches = (old.patches or []) ++ [
+          (pkgs.fetchpatch {
+            url = "https://github.com/hyprwm/hyprlock/commit/98b86752fe4867bd14ef96a92ea788229af93130.patch";
+            hash = "sha256-QmT9WdX1Nh1vy6ybjRATqCt7UW0Byb4QQ2dAfP50c5o=";
+          })
+        ];
+      });
       settings = {
         general = {
           hide_cursor = true;
@@ -18,6 +31,8 @@
             blur_passes = 2;
             blur_size = 7;
             brightness = 0.40;
+            reload_cmd = "echo \"~/.config/hypr/bg.png\"";
+            reload_time = 60;
           }
         ];
         input-field = [
