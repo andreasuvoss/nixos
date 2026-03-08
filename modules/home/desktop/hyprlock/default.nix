@@ -32,7 +32,7 @@
             blur_size = 7;
             brightness = 0.40;
             reload_cmd = "echo \"~/.config/hypr/bg.png\"";
-            reload_time = 60;
+            reload_time = 120;
           }
         ];
         input-field = [
