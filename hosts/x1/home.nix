@@ -38,6 +38,9 @@ in
     secrets."ssh-keys/x1" = {
       path = "${config.home.homeDirectory}/.ssh/id_rsa";
     };
+    secrets."sensitive-abbrs" = {
+      path = "${config.home.homeDirectory}/.config/fish/sensitive.fish";
+    };
   };
 
   services.easyeffects = {
