@@ -108,11 +108,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1767714539,
-        "narHash": "sha256-91f6p2OcllQz+gTApiEis2He72OBM1PNZ49AEny6uJo=",
+        "lastModified": 1773435707,
+        "narHash": "sha256-/b5UIQlzjR2Phkv2IXNOF0C5I4ucOrrbc1gVySQ/PeI=",
         "ref": "ags3",
-        "rev": "cb2958a6e4bc85bceca943fd563ffbfd00b38c0c",
-        "revCount": 22,
+        "rev": "ab2612750649b5e3770c93ceae3b1df9331b3dfb",
+        "revCount": 25,
         "type": "git",
         "url": "ssh://git@github.com/andreasuvoss/gtk-shell.git"
       },
