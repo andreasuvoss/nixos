@@ -26,6 +26,10 @@
     owner = config.users.users.andreasvoss.name;
   };
 
+  sops.secrets."restic-repos/argon" = {
+    owner = config.users.users.andreasvoss.name;
+  };
+
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
 
@@ -55,6 +59,7 @@
   # ];
   environment.sessionVariables = {
     RESTIC_PASSWORD_FILE = "/run/secrets/restic-key";
+    RESTIC_REPOSITORY_FILE = "/run/secrets/restic-repos/argon";
   };
 
   # Enables the desktop module

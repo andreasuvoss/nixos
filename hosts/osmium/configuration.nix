@@ -36,6 +36,10 @@ in
     owner = config.users.users.podman.name;
   };
 
+  sops.secrets."restic-repos/osmium" = {
+    owner = config.users.users.podman.name;
+  };
+
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
 
@@ -211,7 +215,11 @@ in
     path = [ pkgs.openssh pkgs.restic ];
     script = ''
       set -eu
-      ${pkgs.restic}/bin/restic -r sftp:u550609-sub1@u550609-sub1.your-storagebox.de:/ backup /home/podman/apps --tag daily,automatic --exclude /home/podman/apps/pihole --password-file /run/secrets/restic-key
+      ${pkgs.restic}/bin/restic backup /home/podman/apps \
+        --tag daily,automatic \
+        --exclude /home/podman/apps/pihole\
+        --repository-file /run/secrets/restic-repos/osmium \
+        --password-file /run/secrets/restic-key
     '';
     restartIfChanged = false;
     serviceConfig = {
