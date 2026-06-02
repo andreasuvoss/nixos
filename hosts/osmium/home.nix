@@ -27,9 +27,11 @@ in
 
   # Disable stuff I do not need here
   nodejs.enable = lib.mkForce false;
-  taskwarrior.enable = lib.mkForce false;
   tldr.enable = lib.mkForce false;
   tmux.enable = lib.mkForce false;
+
+  # Scripts
+  scripts.enable = true;
 
   # Apps
   apps.enable = false;
