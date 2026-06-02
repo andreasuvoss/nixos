@@ -1,11 +1,34 @@
-{ config, pkgs, inputs, lib, ... }: {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../modules/nixos
-    ];
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+{
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/nixos
+    inputs.sops-nix.nixosModules.sops
+  ];
   # NixOS
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+
+  sops.age.keyFile = "/home/andreasvoss/.config/sops/age/keys.txt";
+
+  sops.secrets.restic-key = {
+    owner = config.users.users.andreasvoss.name;
+  };
+
+  sops.secrets."restic-repos/argon" = {
+    owner = config.users.users.andreasvoss.name;
+  };
 
   # Allow unfree (non open source) packages
   nixpkgs.config.allowUnfree = true;
@@ -14,7 +37,12 @@
   users.users.andreasvoss = {
     isNormalUser = true;
     description = "Andreas Voss";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirtd"
+      "docker"
+    ];
   };
 
   # Bootloader
@@ -29,12 +57,10 @@
   # programs.nix-ld.libraries = with pkgs; [
   #   icu
   # ];
-  # environment.sessionVariables = {
-  #   # NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
-  #   #   pkgs.stdenv.cc.cc
-  #   # ];
-  #   NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
-  # };
+  environment.sessionVariables = {
+    RESTIC_PASSWORD_FILE = "/run/secrets/restic-key";
+    RESTIC_REPOSITORY_FILE = "/run/secrets/restic-repos/argon";
+  };
 
   # Enables the desktop module
   desktop.enable = true;
@@ -67,6 +93,56 @@
 
   # Enable sound
   sound-config.enable = true;
+
+  services.pipewire.wireplumber.extraConfig."10-audio-renames"."monitor.alsa.rules" = [
+    {
+      matches = [
+        {
+          "node.name" = "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_REV8-00.analog-stereo";
+        }
+        {
+          "node.name" = "alsa_input.pci-0000_18_00.6.analog-stereo";
+        }
+      ];
+      actions.update-props = {
+        "node.disabled" = true;
+      };
+    }
+
+    {
+      matches = [
+        {
+          "node.name" = "alsa_output.pci-0000_03_00.1.hdmi-stereo";
+        }
+      ];
+      actions.update-props = {
+        "node.description" = "DisplayPort";
+        "node.nick" = "DisplayPort";
+      };
+    }
+    {
+      matches = [
+        {
+          "node.name" = "alsa_output.pci-0000_18_00.6.analog-stereo";
+        }
+      ];
+      actions.update-props = {
+        "node.description" = "Analog Stereo";
+        "node.nick" = "Analog Stereo";
+      };
+    }
+    {
+      matches = [
+        {
+          "node.name" = "alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_REV8-00.analog-stereo";
+        }
+      ];
+      actions.update-props = {
+        "node.description" = "Yeti Blue";
+        "node.nick" = "Yeti Blue";
+      };
+    }
+  ];
 
   # Enable the gnome-keyring for Hyprland with auto unlock from decryption passphrase
   # gnome-keyring.enable = false; # now part of desktop

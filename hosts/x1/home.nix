@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   nixpkgs,
@@ -9,7 +10,10 @@ let
   username = "andreasvoss";
 in
 {
-  imports = [ ../../modules/home ];
+  imports = [
+    ../../modules/home
+    inputs.sops-nix.homeManagerModules.sops
+  ];
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (_: true);
@@ -22,6 +26,21 @@ in
       dconf
       brightnessctl
     ];
+  };
+
+  # https://konradmalik.com/posts/2023/02/sops-nix-simple-secrets-management-for-nix/
+  sops = {
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    # secrets.restic-key = {
+    #   path = "${config.home.homeDirectory}/restic2.txt";
+    # };
+    secrets."ssh-keys/x1" = {
+      path = "${config.home.homeDirectory}/.ssh/id_rsa";
+    };
+    secrets."sensitive-abbrs" = {
+      path = "${config.home.homeDirectory}/.config/fish/sensitive.fish";
+    };
   };
 
   services.easyeffects = {
@@ -39,6 +58,8 @@ in
 
   # Desktop
   desktop.enable = true;
+  swaync.enable = lib.mkForce false;
+
   hyprland.startTeams = true;
   hyprland.enableKanshi = true;
   hyprland.natural_scroll = true;
@@ -102,7 +123,6 @@ in
   golang.enable = true;
 
   # Disable a few things
-  megasync.enable = lib.mkForce false;
   discord.enable = lib.mkForce false;
   signal.enable = lib.mkForce false;
 }

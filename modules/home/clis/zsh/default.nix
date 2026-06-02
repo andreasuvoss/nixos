@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 let
   shellAliases = {
-    cat = "bat -P -n";
+    cat = "bat -p -n";
     ii = "xdg-open";
     nrb = "nixos-rebuild switch --flake .";
     bfzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";

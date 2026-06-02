@@ -6,7 +6,7 @@
   config = lib.mkIf config.carapace.enable {
     programs.carapace = {
       enable = true;
-      enableZshIntegration = true;
+      enableFishIntegration = true;
     };
   };
 }

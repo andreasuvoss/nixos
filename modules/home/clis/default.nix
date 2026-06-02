@@ -6,6 +6,7 @@
     ./eza
     ./fastfetch
     ./fd
+    ./fish
     ./fzf
     ./gcc
     ./git
@@ -20,21 +21,14 @@
     ./lazygit
     ./nodejs
     ./nvim
-    ./oha
     ./parallel
-    ./rclone
     ./ripgrep
-    ./sshfs
     ./starship
-    ./stow
-    ./taskwarrior
-    ./timewarrior
     ./tldr
     ./tmux
     ./tree-sitter
     ./udisks
     ./unzip
-    ./vhs
     ./yazi
     ./yq
     ./zoxide
@@ -51,6 +45,7 @@
     eza.enable = true;
     fastfetch.enable = true;
     fd.enable = true;
+    fish.enable = true;
     fzf.enable = true;
     git.enable = true;
     gjs.enable = true;
@@ -63,21 +58,14 @@
     lazygit.enable = true;
     nodejs.enable = false;
     nvim.enable = true;
-    oha.enable = true;
     parallel.enable = true;
-    rclone.enable = true;
     ripgrep.enable = true;
-    sshfs.enable = true;
     starship.enable = true;
-    stow.enable = false;
-    taskwarrior.enable = true;
-    timewarrior.enable = true;
     tldr.enable = true;
     tmux.enable = true;
     tree-sitter.enable = true;
     udisks.enable = true;
     unzip.enable = true;
-    vhs.enable = false;
     yazi.enable = true;
     yq.enable = true;
     zoxide.enable = true;

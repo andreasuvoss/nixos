@@ -89,6 +89,11 @@ in
                 installation_mode = "force_installed";
                 default_area = "menupanel";
               };
+              "clipper@obsidian.md" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/web-clipper-obsidian/latest.xpi";
+                installation_mode = "force_installed";
+                default_area = "menupanel";
+              };
             }
             // lib.optionalAttrs (!config.firefox.workExtensions) {
               "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {

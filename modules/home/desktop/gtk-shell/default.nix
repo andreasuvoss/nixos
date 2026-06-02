@@ -5,6 +5,7 @@
   };
   config = lib.mkIf config.gtk-shell.enable {
     home.packages = [
+      pkgs.libnotify
       inputs.gtk-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };

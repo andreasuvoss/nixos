@@ -87,7 +87,6 @@
           "steam %U -nochatui -nofriendsui -silent"
           # "hyprpolkitagent"
           # "systemctl --user start hyprpolkitagent.service"
-          "sleep 1; megasync"
           "sleep 1; bitwarden"
           "tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE \"$HYPRLAND_INSTANCE_SIGNATURE\""
           # The command below might work for keeping xclip and wl-clipboard in sync, I had some issues copying text into proton games
@@ -179,12 +178,6 @@
         # Steam
         # "float, title:^(Friends List)$"
         # "float, class:^(steam)$"
-
-        # MEGA
-        "float, class:^(MEGAsync)$"
-        "stayfocused, class:^(MEGAsync)$"
-        # "forceinput, class:^(MEGAsync)$"
-        "dimaround, class:^(MEGAsync)$"
 
         "float, title:^(Authentication Required)$"
         "center, title:^(Authentication Required)$"

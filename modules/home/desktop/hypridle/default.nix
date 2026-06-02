@@ -15,14 +15,16 @@
         };
         listener = [
           {
-            timeout = 200;
-            on-timeout = "hyprlock";
+            timeout = 180;
+            on-timeout = "pidof hyprlock || hyprlock";
           }
-          {
-            timeout = 260;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
-          }
+          # The code below works, but turning dpms off has annoying side effects like rearranging windows and crashing
+          # programs, so I'll keep this for the future if hyprlock implements a way to swap out the background
+          # {
+          #   timeout = 240;
+            # on-timeout = "hyprctl dispatch dpms off";
+            # on-resume = "hyprctl dispatch dpms on";
+          # }
         ];
       };
     };
