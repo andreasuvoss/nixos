@@ -16,5 +16,6 @@
     documents = "${config.home.homeDirectory}/documents";
     templates = "${config.home.homeDirectory}/templates";
     createDirectories = false;
+    setSessionVariables = false;
   };
 }

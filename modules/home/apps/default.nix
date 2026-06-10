@@ -29,7 +29,7 @@
   };
   config = lib.mkIf config.apps.enable {
     alacritty.enable = false;
-    bitwarden.enable = true;
+    bitwarden.enable = true; # electron insecure?
     discord.enable = true;
     firefox.enable = true;
     freetube.enable = true;

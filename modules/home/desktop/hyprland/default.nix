@@ -69,6 +69,8 @@
     };
 
     wayland.windowManager.hyprland.enable = true;
+    # wayland.windowManager.hyprland.configType = "lua";
+    wayland.windowManager.hyprland.configType = "hyprlang";
     wayland.windowManager.hyprland.settings = {
       monitor = config.hyprland.monitor;
       "$mainMod" = "SUPER";
@@ -79,15 +81,15 @@
       exec-once =
         [
           "swaybg --color 000000" # at some point maybe look into swww
-          "gtk-shell"
-          "sleep 1; swaync"
+          "gtk-power-menu"
           "sleep 1; exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
           "discord --start-minimized"
           "sleep 1; signal-desktop"
+          # "sleep 5; steam %U -nochatui -nofriendsui -silent"
           "steam %U -nochatui -nofriendsui -silent"
           # "hyprpolkitagent"
           # "systemctl --user start hyprpolkitagent.service"
-          "sleep 1; bitwarden"
+          "sleep 1; bitwarden --autostart"
           "tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE \"$HYPRLAND_INSTANCE_SIGNATURE\""
           # The command below might work for keeping xclip and wl-clipboard in sync, I had some issues copying text into proton games
           # "wl-paste -t text -w bash -c '[ \"$(xclip -selection clipboard -o)\" = \"$(wl-paste -n)\" ] || [ \"$(wl-paste -l | grep image)\" = \"\" ] && xclip -selection clipboard'"
@@ -156,7 +158,7 @@
         ];
       };
       dwindle = {
-        pseudotile = "yes";
+        # pseudotile = "yes";
         preserve_split = "yes";
       };
       master.new_status = "slave";
@@ -174,47 +176,37 @@
         sensitivity = -0.5;
       };
 
-      windowrulev2 = [
+      windowrule = [
+        # Rider
+        "match:title ^(Welcome to JetBrains Rider\?)$, float on"
+        "match:title ^(Welcome to JetBrains Rider\?)$, center on"
+        "match:title ^(Rename)$, float on"
+        "match:title ^(Rename)$, center on"
+        "match:title ^(Rename)$, stay_focused on"
+        "match:title ^(Create\: Directory)$, stay_focused on"
+
         # Steam
-        # "float, title:^(Friends List)$"
-        # "float, class:^(steam)$"
+        "match:title ^(Friends List)$, float on"
+        "match:class ^(steam)$, float on"
 
-        "float, title:^(Authentication Required)$"
-        "center, title:^(Authentication Required)$"
-        "size 500 200, title:^(Authentication Required)$"
-        "dimaround, title:^(Authentication Required)$"
-        "dimaround, title:^(Authorization Failed)$"
+        # Volume control
+        "match:title ^(Volume Control)$, float on"
 
-        # "float, title:^(Extension:.*Bitwarden.*Firefox)$"
-        # "center, title:^(Extension:.*Bitwarden.*Firefox)$"
-        # "size 500 200, title:^(Extension:.*Bitwarden.*Firefox)$"
-        # "dimaround, title:^(Extension:.*Bitwarden.*Firefox)$"
+        # Libre Office
+        "match:title ^(Save Document\?)$, float on"
+        "match:title ^(Save Document\?)$, center on"
+        "match:title ^(Save Document\?)$, stay_focused on"
+        "match:class ^(soffice)$, dim_around on"
 
-        "float, title:^(Save Document\?)$"
-        "center, title:^(Save Document\?)$"
-        "dimaround, class:(soffice)"
-        "stayfocused, title:^(Save Document\?)$"
-        # "forceinput, title:^(Save Document\?)$"
+        # Authentication
+        "match:title ^(Authentication Required)$, float on"
+        "match:title ^(Authentication Required)$, center on"
+        "match:title ^(Authentication Required)$, size 500 200"
+        "match:title ^(Authentication Required)$, dim_around on"
+        "match:title ^(Authentication Failed)$, dim_around on"
 
-        "float, title:^(Welcome to JetBrains Rider\?)$"
-        "center, title:^(Welcome to JetBrains Rider\?)$"
-
-        "float, title:^(Volume Control)$"
-        # "move 100% 0, title:^(Volume Control)$"
-        # "size 500 200, title:^(Authentication Required)$"
-
-        # RIDER
-        "float, title:^(Rename)$"
-        "center, title:^(Rename)$"
-        # "dimaround, class:(Rename)"
-        "stayfocused, title:^(Rename)$"
-        # "forceinput, title:^(Rename)$"
-
-        "stayfocused, title:^(Create\: Directory)$"
-
-        # alternative to audio inhibit?
-        # "idleinhibit fullscreen, class:.*"
-        "suppressevent maximize, class:.*"
+        # Inhibit from maximizing window when going fullscreen
+        "match:class .*, suppress_event maximize"
       ];
 
       bind =
@@ -225,13 +217,13 @@
           "$mainMod, M, exec, $lock"
           "$mainMod, P, exec, hyprpicker -a"
           # "$mainMod, ESCAPE, exec, astal -i gtk-shell power-menu"
-          "$mainMod, ESCAPE, exec, ags request -i gtk-shell power-menu"
+          # "$mainMod, ESCAPE, exec, ags request -i gtk-shell power-menu"
+          "$mainMod, ESCAPE, exec, gtk-power-menu show"
           # "$mainMod, E, exec, $fileManager"
           "$mainMod, V, togglefloating"
           "$mainMod, C, togglefloating"
           "$mainMod, X, killactive"
           "$mainMod, C, centerwindow"
-          "$mainMod, N, exec, swaync-client -t -sw"
           "ALT, SPACE, exec, $menu"
 
           "$mainMod, H, movefocus, l"
@@ -297,6 +289,9 @@
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        # ", XF86Display, exec, echo hello"
+        # ", XF86Favorites, exec, echo hello"
       ];
       # bindl = [
       #   ", switch:on:Lid Switch, exec, $terminal"

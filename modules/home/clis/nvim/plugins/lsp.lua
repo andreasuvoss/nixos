@@ -37,18 +37,20 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-vim.lsp.config['lua_ls'] = {
+vim.lsp.config('lua_ls', {
     on_attach = on_attach,
     capabilities = capabilities,
+    cmd = { "lua-language-server" },
+    root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
+    filetypes = { "lua" },
     settings = {
-        Lua =
-        {
+        Lua = {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
-            diagnostics = { globals = { 'vim' } },
+            diagnostics = { globals = { 'vim' } }
         }
-    },
-}
+    }
+})
 vim.lsp.enable('lua_ls')
 
 vim.lsp.config['nil_ls'] = {

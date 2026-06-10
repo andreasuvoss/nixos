@@ -23,7 +23,6 @@ let
       mkdir -p $out/bin
       cp -r * $out/bin
     '';
-
   };
 in
 {
@@ -52,9 +51,11 @@ in
       in
       {
         enable = true;
+        withRuby = false;
+        withPython3 = false;
         defaultEditor = true;
         extraPackages = with pkgs; [
-          nixfmt-rfc-style
+          nixfmt
           # LSPs
           lua-language-server
           csharp-ls
@@ -69,124 +70,124 @@ in
           bicepLanguageServer
         ];
 
-        extraLuaConfig = ''
+        initLua = ''
           ${builtins.readFile ./settings.lua}
           ${builtins.readFile ./keybindings.lua}
+          ${builtins.readFile ./plugins/treesitter.lua}
         '';
         plugins = with pkgs.vimPlugins; [
           {
+            type = "lua";
             plugin = nvim-cmp;
-            config = toLuaFile ./plugins/cmp.lua;
+            config = builtins.readFile ./plugins/cmp.lua;
           }
           cmp-buffer
           cmp-path
           cmp-nvim-lsp
           cmp_luasnip
-          # TODO: https://github.com/folke/lazydev.nvim
-          # TODO: https://github.com/stevearc/conform.nvim
           luasnip
           {
+            type = "lua";
             plugin = conform-nvim;
-            config = toLua "require(\"conform\").setup()";
+            config = "require('conform').setup()";
           }
-
-          # nvim-autopairs
           {
+            type = "lua";
             plugin = nvim-autopairs;
-            config = toLua "require(\"nvim-autopairs\").setup()";
+            config = "require('nvim-autopairs').setup()";
           }
           {
+            type = "lua";
             plugin = nvim-autotag;
-            config = toLua "require(\"nvim-ts-autotag\").setup()";
+            config = "require('nvim-ts-autotag').setup()";
           }
           {
+            type = "lua";
             plugin = nvim-highlight-colors;
-            config = toLua "require(\"nvim-highlight-colors\").setup()";
+            config = "require('nvim-highlight-colors').setup()";
           }
           nvim-web-devicons
           nui-nvim
           plenary-nvim
 
           {
+            type = "lua";
             plugin = comment-nvim;
-            config = toLua "require(\"Comment\").setup()";
+            config = "require('Comment').setup()";
           }
           {
+            type = "lua";
             plugin = dracula-nvim;
-            config = "colorscheme dracula";
+            config = "vim.cmd[[colorscheme dracula]]";
           }
           {
+            type = "lua";
             plugin = gitsigns-nvim;
-            config = toLuaFile ./plugins/gitsigns.lua;
+            config = builtins.readFile ./plugins/gitsigns.lua;
           }
           {
+            type = "lua";
             plugin = undotree;
           }
           {
+            type = "lua";
             plugin = which-key-nvim;
           }
           {
-            plugin = nvim-dap-virtual-text;
-          }
-          {
-            plugin = nvim-dap-ui;
-          }
-          {
-            plugin = nvim-dap;
-            config = toLuaFile ./plugins/dap.lua;
-          }
-          {
+            type = "lua";
             plugin = lualine-nvim;
-            config = toLuaFile ./plugins/lualine.lua;
+            config = builtins.readFile ./plugins/lualine.lua;
           }
           {
+            type = "lua";
             plugin = oil-nvim;
-            config = toLuaFile ./plugins/oil.lua;
+            config = builtins.readFile ./plugins/oil.lua;
           }
           {
+            type = "lua";
             plugin = nvim-surround;
-            config = toLua "require(\"nvim-surround\").setup()";
+            config = "require('nvim-surround').setup()";
           }
           {
+            type = "lua";
             plugin = telescope-nvim;
-            config = toLuaFile ./plugins/telescope.lua;
+            config = builtins.readFile ./plugins/telescope.lua;
           }
           {
-            plugin = (
-              nvim-treesitter.withPlugins (p: [
-                p.tree-sitter-nix
-                p.tree-sitter-bash
-                p.tree-sitter-lua
-                p.tree-sitter-json
-                p.tree-sitter-comment
-                p.tree-sitter-markdown
-                p.tree-sitter-markdown-inline
-                p.tree-sitter-c-sharp
-                p.tree-sitter-python
-                p.tree-sitter-yaml
-                p.tree-sitter-html
-                p.tree-sitter-tsx
-                p.tree-sitter-elixir
-                p.tree-sitter-heex
-                (pkgs.tree-sitter.buildGrammar {
-                  language = "bicep";
-                  version = "0092c7d";
-                  src = pkgs.fetchFromGitHub {
-                    owner = "tree-sitter-grammars";
-                    repo = "tree-sitter-bicep";
-                    rev = "0092c7d1bd6bb22ce0a6f78497d50ea2b87f19c0";
-                    hash = "sha256-jj1ccJQOX8oBx1XVKzI53B1sveq5kNADc2DB8bJhsf4=";
-                  };
-                })
-              ])
-            );
-            config = toLuaFile ./plugins/treesitter.lua;
+            type = "lua";
+            # plugin = nvim-treesitter.withAllGrammars;
+            plugin = nvim-treesitter.withPlugins (p: [
+              p.tree-sitter-nix
+              p.tree-sitter-bash
+              p.tree-sitter-lua
+              p.tree-sitter-json
+              p.tree-sitter-comment
+              p.tree-sitter-markdown
+              p.tree-sitter-markdown-inline
+              p.tree-sitter-c-sharp
+              p.tree-sitter-python
+              p.tree-sitter-yaml
+              p.tree-sitter-html
+              p.tree-sitter-tsx
+              p.tree-sitter-elixir
+              p.tree-sitter-heex
+              (pkgs.tree-sitter.buildGrammar {
+                language = "bicep";
+                version = "0092c7d";
+                src = pkgs.fetchFromGitHub {
+                  owner = "tree-sitter-grammars";
+                  repo = "tree-sitter-bicep";
+                  rev = "0092c7d1bd6bb22ce0a6f78497d50ea2b87f19c0";
+                  hash = "sha256-jj1ccJQOX8oBx1XVKzI53B1sveq5kNADc2DB8bJhsf4=";
+                };
+              })
+            ]);
           }
           {
+            type = "lua";
             plugin = nvim-lspconfig;
-            config = toLuaFile ./plugins/lsp.lua;
+            config = builtins.readFile ./plugins/lsp.lua;
           }
-          # (fromGitHub "HEAD" "lambdalisue/suda.vim")
         ];
       };
     home.sessionVariables.BICEP_LANGSERVER = "${bicepLanguageServer}/Bicep.LangServer.dll";

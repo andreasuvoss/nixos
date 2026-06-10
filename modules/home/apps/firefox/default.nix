@@ -36,6 +36,7 @@ in
       recursive = true;
     };
     programs.firefox = {
+      configPath = "/home/andreasvoss/.mozilla/firefox";
       enable = true;
       package = pkgs.wrapFirefox pkgs.firefox-esr-140-unwrapped {
         extraPolicies = {

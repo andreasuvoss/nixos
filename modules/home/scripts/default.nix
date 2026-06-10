@@ -1,9 +1,10 @@
 { lib, config, ... }:{
   imports = [
-    ./cheatsheet
-    ./clean-profiles
     ./az-creds
     ./az-function-runner
+    ./cheatsheet
+    ./clean-profiles
+    ./tailscale-exit
   ];
   options = {
     scripts.enable = lib.mkEnableOption "enable scripts";
@@ -13,5 +14,6 @@
     clean-profiles.enable = true;
     az-creds.enable = true;
     az-function-runner.enable = true;
+    tailscale-exit.enable = true;
   };
 }

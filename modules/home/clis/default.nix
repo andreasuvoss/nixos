@@ -12,7 +12,6 @@
     ./git
     ./gjs
     ./glow
-    ./glunch
     ./gum
     ./iperf
     ./btop
@@ -50,7 +49,6 @@
     git.enable = true;
     gjs.enable = true;
     glow.enable = true;
-    glunch.enable = true;
     gum.enable = true;
     iperf.enable = true;
     jq.enable = true;

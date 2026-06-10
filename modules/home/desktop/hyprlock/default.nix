@@ -10,15 +10,16 @@
     };
     programs.hyprlock = {
       enable = true;
-      package = pkgs.hyprlock.overrideAttrs(old: {
-        # patch to allow image to be loaded when using screenshot
-        patches = (old.patches or []) ++ [
-          (pkgs.fetchpatch {
-            url = "https://github.com/hyprwm/hyprlock/commit/98b86752fe4867bd14ef96a92ea788229af93130.patch";
-            hash = "sha256-QmT9WdX1Nh1vy6ybjRATqCt7UW0Byb4QQ2dAfP50c5o=";
-          })
-        ];
-      });
+      package = pkgs.hyprlock;
+      # package = pkgs.hyprlock.overrideAttrs(old: {
+      #   # patch to allow image to be loaded when using screenshot
+      #   patches = (old.patches or []) ++ [
+      #     (pkgs.fetchpatch {
+      #       url = "https://github.com/hyprwm/hyprlock/commit/98b86752fe4867bd14ef96a92ea788229af93130.patch";
+      #       hash = "sha256-QmT9WdX1Nh1vy6ybjRATqCt7UW0Byb4QQ2dAfP50c5o=";
+      #     })
+      #   ];
+      # });
       settings = {
         general = {
           hide_cursor = true;

@@ -58,9 +58,10 @@ in
 
   # Desktop
   desktop.enable = true;
-  swaync.enable = lib.mkForce false;
 
-  hyprland.startTeams = true;
+  wayle.module.battery.enable = true;
+
+  # hyprland.startTeams = true;
   hyprland.enableKanshi = true;
   hyprland.natural_scroll = true;
   hyprland.defaultOrientation = "left";

@@ -27,7 +27,6 @@ in
 
   # Desktop
   desktop.enable = true;
-  swaync.enable = lib.mkForce false;
 
   # CLIS
   clis.enable = true;
