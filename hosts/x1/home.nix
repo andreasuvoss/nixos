@@ -59,6 +59,7 @@ in
   # Desktop
   desktop.enable = true;
 
+  # Wayle
   wayle.module.battery.enable = true;
 
   # hyprland.startTeams = true;

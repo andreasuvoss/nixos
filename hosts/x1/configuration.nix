@@ -30,10 +30,13 @@
   };
   services.intune.enable = false;
 
+  services.fwupd.enable = true;
+
   environment.systemPackages = with pkgs; [
     modemmanager
     libmbim
     keyd
+    powertop
   ];
 
   systemd.services.modem-manager = {

@@ -92,6 +92,9 @@
           extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
+              config.permittedInsecurePackages = [
+                "electron-39.8.10"
+              ];
               inherit system;
             };
             inherit inputs;

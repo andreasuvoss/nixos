@@ -48,11 +48,8 @@
                 "separator"
                 "custom-tailscale"
               ]
-              ++ lib.optional config.wayle.module.battery.enable
-              [
-                "separator"
-                "battery"
-              ]
+              ++ lib.optional config.wayle.module.battery.enable "separator"
+              ++ lib.optional config.wayle.module.battery.enable "battery"
               ++
               [
                 "separator"
