@@ -7,10 +7,10 @@
 }:
 let
   pihole-image = "docker.io/pihole/pihole:2026.05.0"; # https://hub.docker.com/r/pihole/pihole/tags
-  homeassistant-image = "docker.io/homeassistant/home-assistant:2026.5.4";
+  homeassistant-image = "docker.io/homeassistant/home-assistant:2026.6.2";
   mosquitto-image = "docker.io/library/eclipse-mosquitto:2.1.2-alpine";
-  syncthing-image = "docker.io/syncthing/syncthing:2.1.0";
-  zigbee2mqtt-image = "docker.io/koenkk/zigbee2mqtt:2.10.1";
+  syncthing-image = "docker.io/syncthing/syncthing:2.1.1";
+  zigbee2mqtt-image = "docker.io/koenkk/zigbee2mqtt:2.12.0";
   filebrowser-image = "docker.io/gtstef/filebrowser:1.3.3-stable";
 in
 {

@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   shellAliases = {
     cat = "bat -p -n";
@@ -36,7 +41,16 @@ in
         #   commandline -b | wl-copy;
         #   commandline -f undo end-selection repaint
         # '
-      '';
+      ''
+      + (
+        if config.keychain.enable then
+          ''
+            #eval $(keychain --eval -q ${config.keychain.keyfile})
+            eval $(keychain --eval ${config.keychain.keyfile})
+          ''
+        else
+          ""
+      );
       inherit shellAliases;
     };
   };
