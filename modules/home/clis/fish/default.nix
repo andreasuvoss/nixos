@@ -33,6 +33,12 @@ in
         set fish_greeting
         carapace _carapace fish | source
         starship init fish | source
+
+        function last_history_item
+            echo $history[1]
+        end
+        abbr -a !! --position anywhere --function last_history_item
+
         # set -l fishconf (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo ~/.config)/fish
         # source $fishconf/sensitive.fish
 
