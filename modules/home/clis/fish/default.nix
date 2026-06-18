@@ -33,8 +33,8 @@ in
         set fish_greeting
         carapace _carapace fish | source
         starship init fish | source
-        set -l fishconf (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo ~/.config)/fish
-        source $fishconf/sensitive.fish
+        # set -l fishconf (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo ~/.config)/fish
+        # source $fishconf/sensitive.fish
 
         # bind -M visual y '
         #   commandline -f kill-selection;

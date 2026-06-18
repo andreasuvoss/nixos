@@ -4,8 +4,18 @@
     fastfetch.enable = lib.mkEnableOption "enable fastfetch";
   };
   config = lib.mkIf config.fastfetch.enable {
-    home.packages = with pkgs; [
-      fastfetch
-    ];
+    programs.fastfetch = {
+      enable = true;
+      package = pkgs.fastfetch;
+      # settings = {
+      #   logo = {
+      #     type = "builtin";
+      #     padding = {
+      #       right = 1;
+      #     };
+      #   };
+      #   modules = [];
+      # };
+    };
   };
 }

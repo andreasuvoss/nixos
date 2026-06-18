@@ -85,8 +85,8 @@
           "sleep 1; exec ${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
           "discord --start-minimized"
           "sleep 1; signal-desktop"
-          # "sleep 5; steam %U -nochatui -nofriendsui -silent"
-          "steam %U -nochatui -nofriendsui -silent"
+          "sleep 5; steam %U -nochatui -nofriendsui -silent"
+          # "steam %U -nochatui -nofriendsui -silent"
           # "hyprpolkitagent"
           # "systemctl --user start hyprpolkitagent.service"
           "sleep 1; bitwarden --autostart"
@@ -186,8 +186,8 @@
         "match:title ^(Create\: Directory)$, stay_focused on"
 
         # Steam
-        "match:title ^(Friends List)$, float on"
-        "match:class ^(steam)$, float on"
+        # "match:title ^(Friends List)$, float on"
+        # "match:class ^(steam)$, float on"
 
         # Volume control
         "match:title ^(Volume Control)$, float on"

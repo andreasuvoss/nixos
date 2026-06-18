@@ -20,9 +20,9 @@ in
   sops = {
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/secrets.yaml;
-    secrets."sensitive-abbrs" = {
-      path = "${config.home.homeDirectory}/.config/fish/sensitive.fish";
-    };
+    # secrets."sensitive-abbrs" = {
+    #   path = "${config.home.homeDirectory}/.config/fish/sensitive.fish";
+    # };
   };
 
   # Desktop
