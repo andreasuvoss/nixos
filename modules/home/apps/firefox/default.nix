@@ -22,6 +22,14 @@ in
     firefox.workExtensions = lib.mkEnableOption "enables extensions used for work";
   };
   config = lib.mkIf config.firefox.enable {
+    xdg.desktopEntries.teams = lib.mkIf (!config.firefox.workExtensions) {
+      name = "Workfox";
+      genericName = "";
+      exec = "firefox -profile /home/andreasvoss/.mozilla/firefox/work";
+      terminal = false;
+      categories = [ "Application" ];
+    };
+
     # Thanks https://github.com/scientiac/scifox !
     home.file.".mozilla/firefox/anvo/chrome" = {
       source = ./chrome;
@@ -36,6 +44,7 @@ in
       recursive = true;
     };
     programs.firefox = {
+      configPath = "/home/andreasvoss/.mozilla/firefox";
       enable = true;
       package = pkgs.wrapFirefox pkgs.firefox-esr-140-unwrapped {
         extraPolicies = {
@@ -86,6 +95,11 @@ in
               };
               "ATBC@EasonWong" = {
                 install_url = "https://addons.mozilla.org/firefox/downloads/latest/adaptive-tab-bar-colour/latest.xpi";
+                installation_mode = "force_installed";
+                default_area = "menupanel";
+              };
+              "leechblockng@proginosko.com" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/leechblock-ng/latest.xpi";
                 installation_mode = "force_installed";
                 default_area = "menupanel";
               };

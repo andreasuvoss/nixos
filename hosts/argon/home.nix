@@ -1,6 +1,7 @@
 { config, lib, pkgs, nixpkgs, inputs, ... }:
 let
   username = "andreasvoss";
+  ssh-key = "andreasvoss+2026@argon";
 in
 {
   imports = [
@@ -19,15 +20,25 @@ in
 
   sops = {
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-    defaultSopsFile = ../../secrets/secrets.yaml;
-    secrets."sensitive-abbrs" = {
-      path = "${config.home.homeDirectory}/.config/fish/sensitive.fish";
+    defaultSopsFile = ./secrets/secrets.yaml;
+
+    secrets."ssh-config" = {
+      path = "${config.home.homeDirectory}/.ssh/config";
+    };
+
+    secrets."ssh-keys/${ssh-key}" = {
+      path = "${config.home.homeDirectory}/.ssh/${ssh-key}";
+    };
+
+    secrets."ssh-keys/${ssh-key}.pub" = {
+      path = "${config.home.homeDirectory}/.ssh/${ssh-key}.pub";
     };
   };
 
+  git.signingkey = "${ssh-key}.pub";
+
   # Desktop
   desktop.enable = true;
-  swaync.enable = lib.mkForce false;
 
   # CLIS
   clis.enable = true;

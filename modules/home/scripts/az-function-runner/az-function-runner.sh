@@ -48,7 +48,7 @@ FUNCTION_ACCESS_RESTRICTIONS=$(gum spin --spinner dot --title "Getting access re
 # Check network access restrictions for the function
 MY_IP="$(curl 'https://ip.me' -s)"
 MY_IP_SEARCH="${MY_IP}/32"
-EXISTING_ACCESS_RESTRICTION=$(echo $FUNCTION_ACCESS_RESTRICTIONS | jq --arg IP $MY_IP_SEARCH '.ipSecurityRestrictions.[] | select(.ip_address==$IP)')
+EXISTING_ACCESS_RESTRICTION=$(echo $FUNCTION_ACCESS_RESTRICTIONS | jq --arg IP $MY_IP_SEARCH '.ipSecurityRestrictions.[] | select(.ipAddress==$IP)')
 
 # Ask to add IP to allow list if it is not there already
 if [[ -z "$EXISTING_ACCESS_RESTRICTION" ]]; then 

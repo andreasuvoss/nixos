@@ -4,18 +4,11 @@
   config,
   ...
 }:
-let
-  gtk4-layer-shell = pkgs.callPackage ./package.nix {};
-in
 {
   options = {
     gtk-theme.enable = lib.mkEnableOption "enable gtk-theme";
   };
   config = lib.mkIf config.gtk-theme.enable {
-
-    home.packages = [
-      gtk4-layer-shell
-    ];
 
     home.pointerCursor = {
       gtk.enable = true;
@@ -41,6 +34,11 @@ in
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = "1";
       };
+      gtk4.theme = null;
+      # gtk4.theme = {
+      #   name = "Dracula";
+      #   package = pkgs.dracula-theme;
+      # };
       # gtk4.extraConfig = {
       #   gtk-application-prefer-dark-theme = "1";
       # };

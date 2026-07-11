@@ -22,6 +22,8 @@
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
+  # The option below causes my laptop to only resume on when opening the lid (keyboard touches do not work) and looses network connection even after resume...
+  # boot.kernelParams = [ "mem_sleep_default=deep" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # Building ther kernel every time takes quite a while
   # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_17.override {

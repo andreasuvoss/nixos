@@ -13,6 +13,7 @@ in
     };
     programs.yazi = {
       enable = true;
+      shellWrapperName = "yy";
       theme = builtins.fromTOML theme;
       # TODO: https://github.com/sxyazi/yazi/blob/shipped/yazi-config/preset/yazi.toml
     #   settings = {
@@ -94,25 +95,25 @@ in
     #           name = "*.xcf";
     #           use = "gimp";
     #         }
-    #         { 
-    #           mime = "application/{,g}zip"; 
-    #           use = [ "extract" "reveal" ]; 
+    #         {
+    #           mime = "application/{,g}zip";
+    #           use = [ "extract" "reveal" ];
     #         }
-	   #        { 
-    #           mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}"; 
-    #           use = [ "extract" "reveal" ]; 
+	   #        {
+    #           mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}";
+    #           use = [ "extract" "reveal" ];
     #         }
-    #         { 
-    #           mime = "application/{json,x-ndjson}"; 
-    #           use = [ "edit" "reveal" ]; 
+    #         {
+    #           mime = "application/{json,x-ndjson}";
+    #           use = [ "edit" "reveal" ];
     #         }
-	   #        { 
-    #           mime = "*/javascript"; 
-    #           use = [ "edit" "reveal" ]; 
+	   #        {
+    #           mime = "*/javascript";
+    #           use = [ "edit" "reveal" ];
     #         }
-    #         { 
-    #           mime = "inode/x-empty"; 
-    #           use = [ "edit" "reveal" ]; 
+    #         {
+    #           mime = "inode/x-empty";
+    #           use = [ "edit" "reveal" ];
     #         }
     #         {
     #           name = "*";

@@ -17,16 +17,16 @@
     "flakes"
   ];
 
-  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
 
   sops.age.keyFile = "/home/andreasvoss/.config/sops/age/keys.txt";
 
-  sops.secrets.restic-key = {
+  sops.secrets."restic/key" = {
     owner = config.users.users.andreasvoss.name;
   };
 
-  sops.secrets."restic-repos/argon" = {
+  sops.secrets."restic/repo" = {
     owner = config.users.users.andreasvoss.name;
   };
 
@@ -78,6 +78,40 @@
     5353 # Spotify discovery
     22000 # Syncthing
   ];
+
+  # networking.useNetworkd = true;
+  # systemd.network = {
+  #   enable = true;
+  #   networks."50-wg0" = {
+  #     matchConfig.Name = "wg0";
+  #     address = [
+  #       # "fd31:bf08:57cb::7/128"
+  #       "10.10.10.2/24"
+  #     ];
+  #   };
+  #   netdevs."50-wg0" = {
+  #     netdevConfig = {
+  #       Kind = "wireguard";
+  #       Name = "wg0";
+  #     };
+  #     wireguardConfig = {
+  #       ListenPort = 51820;
+  #       PrivateKeyFile = config.sops.secrets.wg-private-key.path;
+  #       RouteTable = "main";
+  #       FirewallMark = 42;
+  #     };
+  #     wireguardPeers = [
+  #       {
+  #         # argon ?
+  #         Endpoint = "45.132.247.48:51820";
+  #         PublicKey = "kBZXeldBYFIn+3lCYdMHkv2KgYPKN0L/0yXmYeY5UGE=";
+  #         AllowedIPs = [ "10.10.10.0/0" ];
+  #         PersistentKeepalive = 25;
+  #       }
+  #     ];
+  #
+  #   };
+  # };
 
   # The configuration below might be needed for accessing the network on VMs
   # networking.interfaces.enp8s0.useDHCP = true;

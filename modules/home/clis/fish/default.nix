@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   shellAliases = {
     cat = "bat -p -n";
@@ -28,15 +33,30 @@ in
         set fish_greeting
         carapace _carapace fish | source
         starship init fish | source
-        set -l fishconf (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo ~/.config)/fish
-        source $fishconf/sensitive.fish
+
+        function last_history_item
+            echo $history[1]
+        end
+        abbr -a !! --position anywhere --function last_history_item
+
+        # set -l fishconf (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo ~/.config)/fish
+        # source $fishconf/sensitive.fish
 
         # bind -M visual y '
         #   commandline -f kill-selection;
         #   commandline -b | wl-copy;
         #   commandline -f undo end-selection repaint
         # '
-      '';
+      ''
+      + (
+        if config.keychain.enable then
+          ''
+            #eval $(keychain --eval -q ${config.keychain.keyfile})
+            eval $(keychain --eval ${config.keychain.keyfile})
+          ''
+        else
+          ""
+      );
       inherit shellAliases;
     };
   };

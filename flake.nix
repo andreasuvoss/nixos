@@ -2,17 +2,14 @@
   description = "My NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/release-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    gtk-shell.url = "git+ssh://git@github.com/andreasuvoss/gtk-shell.git?ref=ags3";
-    glunch.url = "github:andreasuvoss/glunch";
+    # gtk-shell.url = "git+ssh://git@github.com/andreasuvoss/gtk-shell.git?ref=powermenu";
+    gtk-power-menu.url = "github:andreasuvoss/gtk-power-menu";
     sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    ags = {
-      url = "github:aylur/ags";
     };
     nvim-autotag = {
       url = "github:windwp/nvim-ts-autotag";
@@ -25,9 +22,7 @@
       nixpkgs,
       home-manager,
       nixpkgs-unstable,
-      ags,
-      gtk-shell,
-      glunch,
+      gtk-power-menu,
       ...
     }@inputs:
     let
@@ -82,6 +77,9 @@
           extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
+              config.permittedInsecurePackages = [
+                "electron-39.8.10"
+              ];
               inherit system;
             };
             inherit inputs;
@@ -94,6 +92,9 @@
           extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
               config.allowUnfree = true;
+              config.permittedInsecurePackages = [
+                "electron-39.8.10"
+              ];
               inherit system;
             };
             inherit inputs;
