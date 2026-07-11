@@ -22,6 +22,14 @@ in
     firefox.workExtensions = lib.mkEnableOption "enables extensions used for work";
   };
   config = lib.mkIf config.firefox.enable {
+    xdg.desktopEntries.teams = lib.mkIf (!config.firefox.workExtensions) {
+      name = "Workfox";
+      genericName = "";
+      exec = "firefox -profile /home/andreasvoss/.mozilla/firefox/work";
+      terminal = false;
+      categories = [ "Application" ];
+    };
+
     # Thanks https://github.com/scientiac/scifox !
     home.file.".mozilla/firefox/anvo/chrome" = {
       source = ./chrome;

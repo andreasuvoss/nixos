@@ -8,6 +8,7 @@
 }:
 let
   username = "andreasvoss";
+  ssh-key = "andreasvoss@x1";
 in
 {
   imports = [
@@ -31,16 +32,10 @@ in
   # https://konradmalik.com/posts/2023/02/sops-nix-simple-secrets-management-for-nix/
   sops = {
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-    defaultSopsFile = ../../secrets/secrets.yaml;
-    # secrets.restic-key = {
-    #   path = "${config.home.homeDirectory}/restic2.txt";
-    # };
-    secrets."ssh-keys/x1" = {
+    defaultSopsFile = ./secrets/secrets.yaml;
+    secrets."ssh-keys/${ssh-key}" = {
       path = "${config.home.homeDirectory}/.ssh/id_rsa";
     };
-    # secrets."sensitive-abbrs" = {
-    #   path = "${config.home.homeDirectory}/.config/fish/sensitive.fish";
-    # };
   };
 
   services.easyeffects = {
